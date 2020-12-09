@@ -7,6 +7,7 @@ from fundamental import FundamentalData
 from account import Account
 from error import RequiredError
 from base import BasePyTradier
+from watchlist import WatchList
 
 
 class PyTradier(BasePyTradier):
@@ -15,6 +16,7 @@ class PyTradier(BasePyTradier):
         self.account = Account(self.accountId, self.token, self.url)
         self.positions = self.account.positions
         self.fundamental = FundamentalData()
+        self.watchlist = WatchList(self.accountId, self.token, self.url)
 
     def _params(
         self,
@@ -112,4 +114,9 @@ class PyTradier(BasePyTradier):
 
 
 if __name__ == "__main__":
-    pytrader = Tradier()
+    pytrader = PyTradier()
+    # resp = pytrader.watchlist.update("sample-watchlist", "Sample Watchlist", ["AAPL"])
+    resp = pytrader.watchlist.getwatchlist("saasfdist")
+    print(resp)
+    # print(pytrader.watchlist.watchlists)
+

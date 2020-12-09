@@ -1,2 +1,3 @@
 class RequiredError(Exception):
     pass
+
