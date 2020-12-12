@@ -8,10 +8,11 @@ def test_Response(randomTicker):
     resp = randomTicker
 
 
-def test_dividend():
+def test_dividend(randomTicker):
     """
     GIVEN "GE" stock ticker
     THEN 
+    WHEN there are dividends for the stock
     """
     data = FundamentalData()
     resp = data.dividends("GE")
@@ -21,8 +22,12 @@ def test_dividend():
     divs = resp.find(datetime(2020, 1, 1), datetime(2020, 12, 1))
     assert isinstance(divs, list), "should be a list -> datetimes should also work"
 
-
-def test_fundamental(randomTicker):
-    data = FundamentalData()
+    # random ticker
     resp = data.dividends(randomTicker)
 
+
+def test_fundamental(randomTicker):
+    """
+
+    """
+    pass

@@ -50,11 +50,15 @@ class DividendResponse(Response):
 
     def __init__(self, resp):
         super().__init__("Dividends", resp)
-        self.dividends = [
+        lst = [
             res["tables"]["cash_dividends"]
             for res in self.results
             if res["tables"]["cash_dividends"] is not None
-        ][0]
+        ]
+        if lst:
+            self.dividends = lst[0]
+        else:
+            self.dividends = lst
 
     def __getitem__(self, val):
         return self.dividends[val]

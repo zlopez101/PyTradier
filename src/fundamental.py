@@ -44,11 +44,12 @@ class FundamentalData:
         Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates
 
         Returns a DividendResponse Object
+
+        -> To Do: If there are no dividends for the stock, right now we get an error.
         """
         return DividendResponse(
             self.baseQuery(symbol, "beta/markets/fundamentals/dividends")[0]
         )
-        # return Response("dividends", r)
 
     def CorporateActionInformation(self, symbol):
         """

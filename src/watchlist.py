@@ -1,5 +1,4 @@
 import requests
-from base import BasePyTradier
 
 
 class WatchList:
