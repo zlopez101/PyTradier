@@ -1,6 +1,8 @@
 import pytest
 import requests
 import random
+from src.PyTradier import PyTradier
+
 
 S_and_P_500 = [
     "ABT",
@@ -516,4 +518,10 @@ def randomTicker():
     """
     Return a random ticker from the list of current S&P 500 members for testing.
     """
-    return random.sample(S_and_P_500, 1)
+    return random.sample(S_and_P_500, 2)
+
+
+@pytest.fixture(scope="module")
+def pytrader():
+    api = PyTradier(paper=True)
+    return api

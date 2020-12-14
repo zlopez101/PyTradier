@@ -7,16 +7,13 @@ class BasePyTradier:
     """
 
     def __init__(self, paper):
-        self.orders = []
 
-        # previewing orders
-        self.preview = True
         if paper:
-            self.accountId = "VA90702788"
+            self.accountId = os.environ.get("TRADIER_PAPERACCOUNTID")
             self.token = os.environ.get("TRADIER_SANDBOX_TOKEN")
             self.url = "https://sandbox.tradier.com/v1/"
         else:
-            self.accountId = "6YA14703"
+            self.accountId = os.environ.get("TRADIER_BROKERAGEACCOUNTID")
             self.token = os.environ.get("TRADIER_BROKERAGE_TOKEN")
             self.url = "https://api.tradier.com/v1/"
 

@@ -5,12 +5,17 @@ import json
 import src.error as e
 from src.fundamental import FundamentalData
 from src.account import Account
-
+from src.response import OrderResponse
 from src._base import BasePyTradier
 from src.watchlist import WatchList
 
 
 class PyTradier(BasePyTradier):
+
+    """
+    
+
+    """
 
     equitySide = ["buy", "buy_to_cover", "sell", "sell_short"]
     optionSide = ["buy_to_open", "buy_to_close", "sell_to_open", "sell_to_close"]
@@ -26,6 +31,7 @@ class PyTradier(BasePyTradier):
         self.positions = self.account.positions
         self.fundamental = FundamentalData()
         self.watchlist = WatchList(self.accountId, self.token, self.url)
+        self.orders = self.account.orders
 
     @staticmethod
     def _check(Error, *args) -> None:
@@ -61,7 +67,7 @@ class PyTradier(BasePyTradier):
         simple dictionary creation
         """
         # copy the dictionary, possibly could change the local variables -> might have unintended consequences
-        namespace = {k: str(v) for (k, v) in namespace.items()}
+        namespace = {k: str(v) for (k, v) in namespace.items() if v}
         # class is special, have to change manually
         namespace["class"] = namespace.pop("_class")
 
@@ -74,17 +80,33 @@ class PyTradier(BasePyTradier):
             for i, dct in enumerate(args[0]):
                 for key in dct.keys():
                     namespace[key + "[" + str(i) + "]"] = dct[key]
+
         return namespace
 
     def order(self, params):
         """
         Base method for placing orders
         """
-        return requests.post(
+        r = requests.post(
             self.url + f"accounts/{self.accountId}/orders",
-            params=params,
+            data=params,
             headers=self._headers(),
-        ).json()
+        )
+
+        if r.status_code == 200:
+            order = OrderResponse.from_order_conf(r.json())
+            self.account.order(order.id)
+            # if order is invalid
+            if order.status == "rejected":
+                raise e.OrderError(
+                    f"Unable to {params['side']} {params['quantity']} {params['symbol']}"
+                )
+
+            return order
+        else:
+            raise e.OrderError(
+                f"Unable to {params['side']} {params['quantity']} {params['symbol']}"
+            )
 
     def modifyOrder(self, orderId, **kwargs):
         """
@@ -112,12 +134,13 @@ class PyTradier(BasePyTradier):
         self,
         symbol,
         side,
-        qty,
+        quantity,
         type="market",
         duration="day",
         price=None,
         stop=None,
         preview=False,
+        track=True,
     ):
         """
         Place an order to trade an equity security.
@@ -129,6 +152,7 @@ class PyTradier(BasePyTradier):
         * duration: ['day', 'gtc', 'pre', 'post']
         """
         _class = "equity"
+        # return self.make_params(locals())
         return self.order(self.make_params(locals()))
 
     def Option(
@@ -149,7 +173,7 @@ class PyTradier(BasePyTradier):
 
         Parameters 
 
-        * side: ["buy_to_open", "buy_to_close", "sell_to_open", "sell_to_close"]
+        * side: ["buy_to_open", "buy_to_close", "sell_to_open", fghj."sell_to_close"]
         * type: ["market", "limit", "stop", "stop_limit"]
         * duration: ['day', 'gtc', 'pre', 'post']
         """
@@ -308,9 +332,30 @@ class PyTradier(BasePyTradier):
 
 if __name__ == "__main__":
     pytrader = PyTradier()
-    Option0 = {"side": "buy_to_close", "quantity": 1}
-    Option1 = {"option_symbol": "ThisIsATest", "side": "buy_to_close", "quantity": 1}
-    Option2 = {"option_symbol": "AnotherTest", "side": "sell_to_open", "quantity": 1}
-    print(pytrader.Combo("SYM", Option0, Option1, Option2))
+    # Option0 = {"side": "buy_to_close", "quantity": 1}
+    # Option1 = {"option_symbol": "ThisIsATest", "side": "buy_to_close", "quantity": 1}
+    # Option2 = {"option_symbol": "AnotherTest", "side": "sell_to_open", "quantity": 1}
+    print(pytrader.Equity("SPY", "buy", 1))
     # print(pytrader.Equity("SPY", "buy", 1))
 
+    # response = requests.post(
+    #     "https://sandbox.tradier.com/v1/accounts/VA90702788/orders",
+    #     data={
+    #         "class": "equity",
+    #         "symbol": "SPY",
+    #         "side": "buy",
+    #         "quantity": "10",
+    #         "type": "market",
+    #         "duration": "day",
+    #         "price": "1.00",
+    #         "stop": "1.00",
+    #         "tag": "my-tag-example-1",
+    #     },
+    #     headers={
+    #         "Authorization": "Bearer SWDb5WRVnsmSGTLplIvxtlGAEFcx",
+    #         "Accept": "application/json",
+    #     },
+    # )
+    # json_response = response.json()
+    # print(response.status_code)
+    # print(json_response)

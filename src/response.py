@@ -1,6 +1,35 @@
 from datetime import datetime, timedelta
 
 
+class OrderResponse:
+    """
+
+    """
+
+    def __init__(self, _orderResponse):
+        for key, value in _orderResponse.items():
+            setattr(self, key, value)
+
+    @classmethod
+    def from_order_conf(cls, _orderConf):
+        return cls(_orderConf["order"])
+
+    def __repr__(self):
+        return f"Order(id:{self.id}, status: {self.status})\n"
+
+    def modify(self, **kwargs):
+        """
+        modify the order
+        """
+        pass
+
+    def delete(self):
+        """
+        delete the order
+        """
+        pass
+
+
 class Response(object):
     """
     Response class for Fundamental Data Response

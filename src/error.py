@@ -9,3 +9,7 @@ class OrderError(Exception):
 class MultiLegKeyWordError(Exception):
     "This class is raised when the dictionar passed to multileg method doesn't have proper keys or values"
     pass
+
+
+class WatchListError(Exception):
+    pass
