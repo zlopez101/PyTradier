@@ -115,7 +115,11 @@ class Account:
             }
         }
         """
-        return self.get(f"accounts/{self.accountId}/positions")
+        return (
+            self.get(f"accounts/{self.accountId}/positions")
+            .get("positions")
+            .get("position")
+        )
 
     @property
     def orders(self):

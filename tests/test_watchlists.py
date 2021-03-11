@@ -28,7 +28,7 @@ def test_watchlist(pytrader, randomTicker):
 
     # delete a watchlist
     pytrader.watchlist.delete("New Watchlist")
-    assert (
-        pytrader.watchlist.watchlists.get("New Watchlist", "None") == "None"
-    ), "Watchlist was deleted"
+    assert not (
+        pytrader.watchlist.watchlists.get("New Watchlist")
+    ), "Watchlist should have been deleted"
 

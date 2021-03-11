@@ -88,25 +88,40 @@ class WatchList:
         """
         Update an existing watchlist. This request will override the existing watchlist information with the parameters sent in the body.
         """
-        _id = self.get_id(watchListName)
-        r = requests.put(
-            self.url + f"/watchlists/{_id}",
-            params={"name": watchListName, "symbols": ",".join(symbols)},
-            headers=self._headers(),
-        )
-        return self._updateLocal(r, watchListName, symbols)
+        try:
+            _id = self.get_id(watchListName)
+            r = requests.put(
+                self.url + f"/watchlists/{_id}",
+                params={"name": watchListName, "symbols": ",".join(symbols)},
+                headers=self._headers(),
+            )
+            return self._updateLocal(r, watchListName, symbols)
+        except KeyError as e:
+            print(f"there is no watchlist: {e}")
+
+        # _id = self.get_id(watchListName)
+        # r = requests.put(
+        #     self.url + f"/watchlists/{_id}",
+        #     params={"name": watchListName, "symbols": ",".join(symbols)},
+        #     headers=self._headers(),
+        # )
+        # return self._updateLocal(r, watchListName, symbols)
 
     def delete(self, watchListName):
         """
         Delete a specific watchlist.
         """
-        r = requests.delete(
-            self.url + f"/watchlists/{self.get_id(watchListName)}",
-            params={},
-            headers=self._headers(),
-        )
-        if r.status_code == 200:
-            del self.watchlists[watchListName]
+        try:
+            _id = self.get_id(watchListName)
+            r = requests.delete(
+                self.url + f"/watchlists/{self.get_id(watchListName)}",
+                params={},
+                headers=self._headers(),
+            )
+            if r.status_code == 200:
+                del self.watchlists[watchListName]
+        except KeyError as e:
+            print(f"there is no watchlist: {e}")
 
     def addSymbol(self, watchListName, *symbols):
         """
@@ -140,4 +155,5 @@ if __name__ == "__main__":
         os.environ.get("TRADIER_SANDBOX_TOKEN"),
         "https://sandbox.tradier.com/v1/",
     )
+    watcher.delete("New asdfsaf")
     print(watcher)

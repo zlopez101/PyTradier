@@ -32,6 +32,7 @@ class PyTradier(BasePyTradier):
         self.fundamental = FundamentalData()
         self.watchlist = WatchList(self.accountId, self.token, self.url)
         self.orders = self.account.orders
+        self.open_orders = []
 
     @staticmethod
     def _check(Error, *args) -> None:
@@ -83,6 +84,54 @@ class PyTradier(BasePyTradier):
 
         return namespace
 
+    def _valid_order(self, symbol, side, quantity, option=False):
+        """
+        Can the order be completed?
+        """
+
+        def get_position(symbol):
+            """
+
+            """
+            return [dct for dct in self.positions if dct["symbol"] == "symbol"][0]
+
+        def checkquantity(dct, quantity):
+            """
+            check the quantity
+            """
+            pos_amount = dct.get("quantity")
+
+        def checkside(dct, quantity):
+            """
+            check the side
+            """
+            pass
+
+        # options have different styles
+        if option:
+            # simple order?
+            if side in ["buy_to_open", "sell_to_open"]:
+                pass
+            else:
+                if symbol in [dct["symbol"] for dct in self.positions]:
+                    pass
+                else:
+                    raise e.OrderError()
+
+        # equities
+        else:
+            # simple order
+            if side in ["buy", "sell_short"]:
+                pass
+            # complex order ('sell', 'buy_to_cover)
+            else:
+                # valid order
+                if symbol in [dct["symbol"] for dct in self.positions]:
+                    pass
+                # invalid order
+                else:
+                    raise e.OrderError()
+
     def order(self, params):
         """
         Base method for placing orders
@@ -95,7 +144,6 @@ class PyTradier(BasePyTradier):
 
         if r.status_code == 200:
             order = OrderResponse.from_order_conf(r.json())
-            self.account.order(order.id)
             # if order is invalid
             if order.status == "rejected":
                 raise e.OrderError(
@@ -152,6 +200,7 @@ class PyTradier(BasePyTradier):
         * duration: ['day', 'gtc', 'pre', 'post']
         """
         _class = "equity"
+        # self._valid_order(symbol, side)
         # return self.make_params(locals())
         return self.order(self.make_params(locals()))
 
@@ -332,30 +381,4 @@ class PyTradier(BasePyTradier):
 
 if __name__ == "__main__":
     pytrader = PyTradier()
-    # Option0 = {"side": "buy_to_close", "quantity": 1}
-    # Option1 = {"option_symbol": "ThisIsATest", "side": "buy_to_close", "quantity": 1}
-    # Option2 = {"option_symbol": "AnotherTest", "side": "sell_to_open", "quantity": 1}
-    print(pytrader.Equity("SPY", "buy", 1))
-    # print(pytrader.Equity("SPY", "buy", 1))
 
-    # response = requests.post(
-    #     "https://sandbox.tradier.com/v1/accounts/VA90702788/orders",
-    #     data={
-    #         "class": "equity",
-    #         "symbol": "SPY",
-    #         "side": "buy",
-    #         "quantity": "10",
-    #         "type": "market",
-    #         "duration": "day",
-    #         "price": "1.00",
-    #         "stop": "1.00",
-    #         "tag": "my-tag-example-1",
-    #     },
-    #     headers={
-    #         "Authorization": "Bearer SWDb5WRVnsmSGTLplIvxtlGAEFcx",
-    #         "Accept": "application/json",
-    #     },
-    # )
-    # json_response = response.json()
-    # print(response.status_code)
-    # print(json_response)

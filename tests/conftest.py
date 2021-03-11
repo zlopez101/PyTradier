@@ -1,7 +1,7 @@
 import pytest
 import requests
 import random
-from src.PyTradier import PyTradier
+from src import PyTradier
 
 
 S_and_P_500 = [

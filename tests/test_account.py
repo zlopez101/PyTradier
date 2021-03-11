@@ -18,7 +18,6 @@ def test_properties(pytrader):
     balance = pytrader.account.balance
     assert balance["balances"]
     assert balance["balances"]["account_number"]
-    assert balance["balances"]["pending_cash"]
 
     # positions
     positions = pytrader.account.positions

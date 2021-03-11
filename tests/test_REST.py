@@ -7,6 +7,7 @@ from src.response import OrderResponse
 def test_invalid_orders(randomTicker, pytrader):
     """
     GIVEN faulty order placement
+    WHEN 
     THEN an orderError should be raised detailing the issues
     """
     # invalid symbol
@@ -23,6 +24,7 @@ def test_invalid_orders(randomTicker, pytrader):
         buy_to_cover_Order = pytrader.Equity(randomTicker[0], "buy_to_cover", 1)
         print(buy_to_cover_Order)
         assert f"Unable to buy_to_cover 1 {randomTicker[0]}"
+
     # invalid quantity
     with pytest.raises(OrderError):
         pass

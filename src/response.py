@@ -2,8 +2,9 @@ from datetime import datetime, timedelta
 
 
 class OrderResponse:
-    """
 
+    """
+    base class for interacting with order responses
     """
 
     def __init__(self, _orderResponse):
