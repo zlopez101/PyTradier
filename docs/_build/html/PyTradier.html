@@ -1,0 +1,987 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>PyTradier package &mdash; PyTradier 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> PyTradier
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">PyTradier package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-PyTradier.PyTradier">PyTradier.PyTradier module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.account">PyTradier.account module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.entity">PyTradier.entity module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.error">PyTradier.error module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.fundamental">PyTradier.fundamental module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.response">PyTradier.response module</a></li>
+<li><a class="reference internal" href="#pytradier-stream-module">PyTradier.stream module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.trade">PyTradier.trade module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.utils">PyTradier.utils module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.watchlist">PyTradier.watchlist module</a></li>
+<li><a class="reference internal" href="#module-PyTradier.working">PyTradier.working module</a></li>
+<li><a class="reference internal" href="#module-PyTradier">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">PyTradier</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>PyTradier package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/PyTradier.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pytradier-package">
+<h1>PyTradier package<a class="headerlink" href="#pytradier-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-PyTradier.PyTradier">
+<span id="pytradier-pytradier-module"></span><h2>PyTradier.PyTradier module<a class="headerlink" href="#module-PyTradier.PyTradier" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.PyTradier.PyTradier">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.PyTradier.</span></code><code class="sig-name descname"><span class="pre">PyTradier</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier._base.BasePyTradier</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.Combo">
+<code class="sig-name descname"><span class="pre">Combo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'market'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'day'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.Combo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies.</p>
+<p>The first dictionary doesn’t include an option_symbol key, just the side and quantity. There is no option, its an equity trade</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.Equity">
+<code class="sig-name descname"><span class="pre">Equity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'market'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'day'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preview</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.Equity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place an order to trade an equity security.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><p>side: [‘buy’, ‘buy_to_cover’, ‘sell’, ‘sell_short’]</p></li>
+<li><p>type: [‘market’, ‘limit’, ‘stop’, ‘stop_limit’]</p></li>
+<li><p>duration: [‘day’, ‘gtc’, ‘pre’, ‘post’]</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.Option">
+<code class="sig-name descname"><span class="pre">Option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optionSymbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'market'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'day'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preview</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.Option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place an order to trade a single option.</p>
+<p>Parameters</p>
+<ul class="simple">
+<li><p>side: [“buy_to_open”, “buy_to_close”, “sell_to_open”, fghj.”sell_to_close”]</p></li>
+<li><p>type: [“market”, “limit”, “stop”, “stop_limit”]</p></li>
+<li><p>duration: [‘day’, ‘gtc’, ‘pre’, ‘post’]</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.classes">
+<code class="sig-name descname"><span class="pre">classes</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['equity',</span> <span class="pre">'option',</span> <span class="pre">'multileg',</span> <span class="pre">'combo']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.classes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.comboleg">
+<code class="sig-name descname"><span class="pre">comboleg</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['option_symbol',</span> <span class="pre">'side',</span> <span class="pre">'quantity']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.comboleg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.complexTypes">
+<code class="sig-name descname"><span class="pre">complexTypes</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['market',</span> <span class="pre">'debit',</span> <span class="pre">'credit',</span> <span class="pre">'even']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.complexTypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.deleteOrder">
+<code class="sig-name descname"><span class="pre">deleteOrder</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orderId</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.deleteOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete order of id orderId</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.duration">
+<code class="sig-name descname"><span class="pre">duration</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['day',</span> <span class="pre">'gtc',</span> <span class="pre">'pre',</span> <span class="pre">'post']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.duration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.equitySide">
+<code class="sig-name descname"><span class="pre">equitySide</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['buy',</span> <span class="pre">'buy_to_cover',</span> <span class="pre">'sell',</span> <span class="pre">'sell_short']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.equitySide" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.equityTypes">
+<code class="sig-name descname"><span class="pre">equityTypes</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['market',</span> <span class="pre">'limit',</span> <span class="pre">'stop',</span> <span class="pre">'stop_limit']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.equityTypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.make_params">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">make_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.make_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>simple dictionary creation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.modifyOrder">
+<code class="sig-name descname"><span class="pre">modifyOrder</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orderId</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.modifyOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify order of id orderId by specifying the new parameter change with kwargs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.multileg">
+<code class="sig-name descname"><span class="pre">multileg</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preview</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.multileg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a multileg order with up to 4 legs. This order type allows for simple and complex option strategies.</p>
+<p>Parameters:</p>
+<ul>
+<li><p>type: [“market”, “debit”, “credit”, “even”]</p></li>
+<li><p>duration: [‘day’, ‘gtc’, ‘pre’, ‘post’]</p></li>
+<li><p>args: dictionary for each leg of form :</p>
+<blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>‘option_symbol’: OPTION_SYMBOL,
+‘side’: SIDE,
+‘quantity’: QTY,</p>
+</dd>
+</dl>
+<p>}</p>
+<p>parameters:</p>
+<ul class="simple">
+<li><p>side: [“buy_to_open”, “buy_to_close”, “sell_to_open”, “sell_to_close”]</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.oco">
+<code class="sig-name descname"><span class="pre">oco</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'day'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.oco" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-cancels-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.</p>
+<p>Parameters:</p>
+<ul>
+<li><p>duration: [‘day’, ‘gtc’, ‘pre’, ‘post’]</p></li>
+<li><p>args: dictionary for each leg of form :</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>‘symbol’: SYMBOL,
+‘quantity’: QTY,
+‘type’: [</p>
+<blockquote>
+<div><p>first order: [“limit”, “stop”, “stop_limit”],
+second order: [“market”,”limit”, “stop”, “stop_limit”]]
+<a href="#id1"><span class="problematic" id="id2">**</span></a><a href="#id3"><span class="problematic" id="id4">*</span></a>note: must be different for both legs</p>
+</div></blockquote>
+<p>]
+‘option_symbol’: OPTION_SYMBOL,
+‘side’: [</p>
+<blockquote>
+<div><p>equity orders: [‘buy’, ‘buy_to_cover’, ‘sell’, ‘sell_short’]
+option orders: [“buy_to_open”, “buy_to_close”, “sell_to_open”, “sell_to_close”]</p>
+</div></blockquote>
+<p>]
+‘quantity’: QTY,
+‘price’: PRICE,
+‘stop’: STOP</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="PyTradier.PyTradier.PyTradier.optionSide">
+<code class="sig-name descname"><span class="pre">optionSide</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['buy_to_open',</span> <span class="pre">'buy_to_close',</span> <span class="pre">'sell_to_open',</span> <span class="pre">'sell_to_close']</span></em><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.optionSide" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.order">
+<code class="sig-name descname"><span class="pre">order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base method for placing orders</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.oto">
+<code class="sig-name descname"><span class="pre">oto</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'day'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.oto" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-triggers-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.</p>
+<p>Parameters:</p>
+<ul>
+<li><p>duration: [‘day’, ‘gtc’, ‘pre’, ‘post’]</p></li>
+<li><p>args: dictionary for each leg of form :</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>‘symbol’: SYMBOL,
+‘quantity’: QTY,
+‘type’: [</p>
+<blockquote>
+<div><p>first order: [“limit”, “stop”, “stop_limit”],
+second order: [“market”,”limit”, “stop”, “stop_limit”]]</p>
+</div></blockquote>
+<p>]
+‘option_symbol’: OPTION_SYMBOL,
+‘side’: [</p>
+<blockquote>
+<div><p>equity orders: [‘buy’, ‘buy_to_cover’, ‘sell’, ‘sell_short’]
+option orders: [“buy_to_open”, “buy_to_close”, “sell_to_open”, “sell_to_close”]</p>
+</div></blockquote>
+<p>]
+‘quantity’: QTY,
+‘price’: PRICE,
+‘stop’: STOP</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.PyTradier.PyTradier.otoco">
+<code class="sig-name descname"><span class="pre">otoco</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.PyTradier.PyTradier.otoco" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed.</p>
+<p>Parameters: 
+args: dictionary for each leg of form :</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>‘duration’: [‘day’, ‘gtc’, ‘pre’, ‘post’] 
+‘symbol’: SYMBOL,
+‘quantity’: QTY,
+‘type’: [</p>
+<blockquote>
+<div><p>first order: [“limit”, “stop”, “stop_limit”],
+second order:[“limit”, “stop”, “stop_limit”],
+third order: [“limit”, “stop”, “stop_limit”],</p>
+</div></blockquote>
+<p>]
+‘option_symbol’: OPTION_SYMBOL,
+‘side’: [</p>
+<blockquote>
+<div><p>equity orders: [‘buy’, ‘buy_to_cover’, ‘sell’, ‘sell_short’]
+option orders: [“buy_to_open”, “buy_to_close”, “sell_to_open”, “sell_to_close”]</p>
+</div></blockquote>
+<p>]
+‘quantity’: QTY,
+‘price’: PRICE,
+‘stop’: STOP</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.account">
+<span id="pytradier-account-module"></span><h2>PyTradier.account module<a class="headerlink" href="#module-PyTradier.account" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.account.Account">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.account.</span></code><code class="sig-name descname"><span class="pre">Account</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.account.Account.account">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">account</span></code><a class="headerlink" href="#PyTradier.account.Account.account" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>{</dt><dd><dl>
+<dt>“profile”: {</dt><dd><dl>
+<dt>“account”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“account_number”: “VA000001”,
+“classification”: “individual”,
+“date_created”: “2016-08-01T21:08:55.000Z”,
+“day_trader”: false,
+“option_level”: 6,
+“status”: “active”,
+“type”: “margin”,
+“last_update_date”: “2016-08-01T21:08:55.000Z”</p>
+</dd>
+</dl>
+<p>},</p>
+</dd>
+</dl>
+<p>“id”: “id-gcostanza”,
+“name”: “George Costanza”</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.balance">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">balance</span></code><a class="headerlink" href="#PyTradier.account.Account.balance" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><blockquote>
+<div><p>{
+“balances”: {</p>
+<blockquote>
+<div><p>“option_short_value”: 0,
+“total_equity”: 17798.360000000000000000000000,
+“account_number”: “VA00000000”,
+“account_type”: “margin”,
+“close_pl”: -4813.000000000000000000,
+“current_requirement”: 2557.00000000000000000000,
+“equity”: 0,
+“long_market_value”: 11434.50000000000000000000,
+“market_value”: 11434.50000000000000000000,
+“open_pl”: 546.900000000000000000000000,
+“option_long_value”: 8877.5000000000000000000,
+“option_requirement”: 0,
+“pending_orders_count”: 0,
+“short_market_value”: 0,
+“stock_long_value”: 2557.00000000000000000000,
+“total_cash”: 6363.860000000000000000000000,
+“uncleared_funds”: 0,
+“pending_cash”: 0,</p>
+</div></blockquote>
+<p>}   
+“margin”: {</p>
+<blockquote>
+<div><p>“fed_call”: 0,
+“maintenance_call”: 0,
+“option_buying_power”: 6363.860000000000000000000000,
+“stock_buying_power”: 12727.7200000000000000,
+“stock_short_value”: 0,
+“sweep”: 0</p>
+</div></blockquote>
+<p>},
+“cash”: {</p>
+<blockquote>
+<div><p>“cash_available”: 4343.38000000,
+“sweep”: 0,
+“unsettled_funds”: 1310.00000000</p>
+</div></blockquote>
+<p>},
+“pdt”: {</p>
+<blockquote>
+<div><p>“fed_call”: 0,
+“maintenance_call”: 0,
+“option_buying_power”: 6363.860000000000000000000000,
+“stock_buying_power”: 12727.7200000000000000,
+“stock_short_value”: 0</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.gainloss">
+<code class="sig-name descname"><span class="pre">gainloss</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortby</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'closedate'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'desc'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account.gainloss" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><blockquote>
+<div><p>Get cost basis information for a specific user account. This includes information for all closed positions. Cost basis information is updated through a nightly batch reconciliation process with our clearing firm.</p>
+<p>Parameter:</p>
+<p>page:       Used for paginated results. Page to start results.</p>
+<p>limit:      Number of results to return per page.</p>
+<p>sortBy:     Field to sort the results. One of: openDate,closeDate</p>
+<p>sort:       Sort direction. One of: asc,desc</p>
+<p>start:      yyyy-mm-dd      Account opening date</p>
+<p>end:            yyyy-mm-dd          End of current day
+{</p>
+</div></blockquote>
+<dl>
+<dt>“gainloss”: {</dt><dd><dl>
+<dt>“closed_position”: [</dt><dd><dl class="simple">
+<dt>{</dt><dd><p>“close_date”: “2018-10-31T00:00:00.000Z”,
+“cost”: 12.7,
+“gain_loss”: -2.64,
+“gain_loss_percent”: -20.7874,
+“open_date”: “2018-06-19T00:00:00.000Z”,
+“proceeds”: 10.06,
+“quantity”: 1.0,
+“symbol”: “GE”,
+“term”: 134</p>
+</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><p>“close_date”: “2018-09-21T00:00:00.000Z”,
+“cost”: 3.05,
+“gain_loss”: -3.05,
+“gain_loss_percent”: -100.0,
+“open_date”: “2018-09-18T00:00:00.000Z”,
+“proceeds”: 0.0,
+“quantity”: 1.0,
+“symbol”: “SNAP180921P00008500”,
+“term”: 3</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“close_date”: “2018-09-19T00:00:00.000Z”,
+“cost”: 913.95,
+“gain_loss”: 6.05,
+“gain_loss_percent”: 0.662,
+“open_date”: “2018-09-18T00:00:00.000Z”,
+“proceeds”: 920.0,
+“quantity”: 100.0,
+“symbol”: “SNAP”,
+“term”: 1</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“close_date”: “2018-06-25T00:00:00.000Z”,
+“cost”: 25.05,
+“gain_loss”: -25.05,
+“gain_loss_percent”: -100.0,
+“open_date”: “2018-06-22T00:00:00.000Z”,
+“proceeds”: 0.0,
+“quantity”: 1.0,
+“symbol”: “SPY180625C00276000”,
+“term”: 3</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base method for interacting with Tradier</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.history">
+<code class="sig-name descname"><span class="pre">history</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">page</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account.history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get historical activity for an account. This data originates with our clearing firm and inherently has a few limitations:</p>
+<p>Updated nightly (not intraday)
+Will not include specific time (hours/minutes) a position or order was created or closed
+Will not include order numbers</p>
+<p>Parameter:</p>
+<p>page:           Used for paginated results. Page to start results.</p>
+<p>limit:          Number of results to return per page.</p>
+<p>activity_type:  trade, option, ach, wire, dividend, fee, tax, journal, check, transfer, adjustment, interest</p>
+<p>startDate:          yyyy-mm-dd</p>
+<p>endDate:            yyyy-mm-dd</p>
+<p>symbol:         SPY</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.order">
+<code class="sig-name descname"><span class="pre">order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orderId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeTags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get detailed information about a previously placed order.</p>
+<p>Parameters:</p>
+<p>includeTags: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.orders">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">orders</span></code><a class="headerlink" href="#PyTradier.account.Account.orders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve orders placed within an account. This API will return orders placed for the market session of the present calendar day.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.account.Account.positions">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">positions</span></code><a class="headerlink" href="#PyTradier.account.Account.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>{
+“positions”: {</p>
+<blockquote>
+<div><dl>
+<dt>“position”: [</dt><dd><blockquote>
+<div><dl class="simple">
+<dt>{</dt><dd><p>“cost_basis”: 207.01,
+“date_acquired”: “2018-08-08T14:41:11.405Z”,
+“id”: 130089,
+“quantity”: 1.00000000,
+“symbol”: “AAPL”</p>
+</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cost_basis”: 1870.70,
+“date_acquired”: “2018-08-08T14:42:00.774Z”,
+“id”: 130090,
+“quantity”: 1.00000000,
+“symbol”: “AMZN”</p>
+</div></blockquote>
+<p>},</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>}</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.entity">
+<span id="pytradier-entity-module"></span><h2>PyTradier.entity module<a class="headerlink" href="#module-PyTradier.entity" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-PyTradier.error">
+<span id="pytradier-error-module"></span><h2>PyTradier.error module<a class="headerlink" href="#module-PyTradier.error" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="PyTradier.error.MultiLegKeyWordError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">MultiLegKeyWordError</span></code><a class="headerlink" href="#PyTradier.error.MultiLegKeyWordError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>This class is raised when the dictionar passed to multileg method doesn’t have proper keys or values</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="PyTradier.error.OrderError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">OrderError</span></code><a class="headerlink" href="#PyTradier.error.OrderError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="PyTradier.error.RequiredError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">RequiredError</span></code><a class="headerlink" href="#PyTradier.error.RequiredError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="PyTradier.error.WatchListError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">WatchListError</span></code><a class="headerlink" href="#PyTradier.error.WatchListError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.fundamental">
+<span id="pytradier-fundamental-module"></span><h2>PyTradier.fundamental module<a class="headerlink" href="#module-PyTradier.fundamental" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.fundamental.FundamentalData">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.fundamental.</span></code><code class="sig-name descname"><span class="pre">FundamentalData</span></code><a class="headerlink" href="#PyTradier.fundamental.FundamentalData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.CorporateActionInformation">
+<code class="sig-name descname"><span class="pre">CorporateActionInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.CorporateActionInformation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve corporate action information. This will include both historical and scheduled future actions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.baseQuery">
+<code class="sig-name descname"><span class="pre">baseQuery</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apiEndpoint</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.baseQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>build the base query for all fundamental data requests</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.corporateCalendar">
+<code class="sig-name descname"><span class="pre">corporateCalendar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporateCalendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Corporate calendar information for securities. Does not include dividend information</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.dividends">
+<code class="sig-name descname"><span class="pre">dividends</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#PyTradier.response.DividendResponse" title="PyTradier.response.DividendResponse"><span class="pre">PyTradier.response.DividendResponse</span></a><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.dividends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates</p>
+<p>Returns a DividendResponse Object</p>
+<p>-&gt; To Do: If there are no dividends for the stock, right now we get an error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.financialInfo">
+<code class="sig-name descname"><span class="pre">financialInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve corporate financial information and statements</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.financialRatios">
+<code class="sig-name descname"><span class="pre">financialRatios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialRatios" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get standard financial ratios for a company</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.fundamentals">
+<code class="sig-name descname"><span class="pre">fundamentals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.fundamentals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the company fundamental information</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.fundamental.FundamentalData.priceStatistics">
+<code class="sig-name descname"><span class="pre">priceStatistics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.priceStatistics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve price statistic Information</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.response">
+<span id="pytradier-response-module"></span><h2>PyTradier.response module<a class="headerlink" href="#module-PyTradier.response" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.response.DividendResponse">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.response.</span></code><code class="sig-name descname"><span class="pre">DividendResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.DividendResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.response.Response" title="PyTradier.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.response.Response</span></code></a></p>
+<p>Class for parsing the dividend.
+Usually the ‘key’ contains two values and one is empty for some reason. __init__ method tries to remove this value</p>
+<p>Example Object from dividends list:</p>
+<dl class="simple">
+<dt>{   </dt><dd><p>‘share_class_id’: ‘0P000002DO’, 
+‘dividend_type’: ‘CD’, 
+‘ex_date’: ‘2020-09-25’, 
+‘cash_amount’: 0.01, 
+‘currency_i_d’: ‘USD’, 
+‘declaration_date’: ‘2020-09-03’,
+‘frequency’: 4,
+‘pay_date’: ‘2020-10-26’,
+‘record_date’: ‘2020-09-28’</p>
+</dd>
+</dl>
+<p>}</p>
+<dl class="py method">
+<dt id="PyTradier.response.DividendResponse.count">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">count</span></code><a class="headerlink" href="#PyTradier.response.DividendResponse.count" title="Permalink to this definition">¶</a></dt>
+<dd><p>return the length of the dividend list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.response.DividendResponse.dividendAmounts">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dividendAmounts</span></code><a class="headerlink" href="#PyTradier.response.DividendResponse.dividendAmounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>return list of dividend amounts per share</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.response.DividendResponse.find">
+<code class="sig-name descname"><span class="pre">find</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_from</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_to</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#PyTradier.response.DividendResponse.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>find all dividends in date range defined by _from and _to</p>
+<p>Parameters:
+_from: a datetime.datetime or a string of format ‘YYYY-MM-DD’
+_to: a datetime.datetime or a string of format ‘YYYY-MM-DD’</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PyTradier.response.FundamentalResponse">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.response.</span></code><code class="sig-name descname"><span class="pre">FundamentalResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.FundamentalResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.response.Response" title="PyTradier.response.Response"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.response.Response</span></code></a></p>
+<p>Response class of Fundamental Data</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="PyTradier.response.OrderResponse">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.response.</span></code><code class="sig-name descname"><span class="pre">OrderResponse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_orderResponse</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.OrderResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>base class for interacting with order responses</p>
+<dl class="py method">
+<dt id="PyTradier.response.OrderResponse.delete">
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.OrderResponse.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete the order</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.response.OrderResponse.from_order_conf">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">from_order_conf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_orderConf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.OrderResponse.from_order_conf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.response.OrderResponse.modify">
+<code class="sig-name descname"><span class="pre">modify</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.OrderResponse.modify" title="Permalink to this definition">¶</a></dt>
+<dd><p>modify the order</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="PyTradier.response.Response">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.response.</span></code><code class="sig-name descname"><span class="pre">Response</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resp</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.response.Response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Response class for Fundamental Data Response</p>
+</dd></dl>
+
+</div>
+<div class="section" id="pytradier-stream-module">
+<h2>PyTradier.stream module<a class="headerlink" href="#pytradier-stream-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-PyTradier.trade">
+<span id="pytradier-trade-module"></span><h2>PyTradier.trade module<a class="headerlink" href="#module-PyTradier.trade" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.trade.Trade">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.trade.</span></code><code class="sig-name descname"><span class="pre">Trade</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.trade.Trade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="PyTradier.trade.TradePacket">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.trade.</span></code><code class="sig-name descname"><span class="pre">TradePacket</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lst</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.trade.TradePacket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.utils">
+<span id="pytradier-utils-module"></span><h2>PyTradier.utils module<a class="headerlink" href="#module-PyTradier.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="PyTradier.utils.checkRequirements">
+<code class="sig-prename descclassname"><span class="pre">PyTradier.utils.</span></code><code class="sig-name descname"><span class="pre">checkRequirements</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChooseFrom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Error</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.utils.checkRequirements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether <cite>choice</cite> is in <cite>ChooseFrom</cite> -&gt; raise error if necessary</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="PyTradier.utils.make">
+<code class="sig-prename descclassname"><span class="pre">PyTradier.utils.</span></code><code class="sig-name descname"><span class="pre">make</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.utils.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>docstring</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.watchlist">
+<span id="pytradier-watchlist-module"></span><h2>PyTradier.watchlist module<a class="headerlink" href="#module-PyTradier.watchlist" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.watchlist.WatchList">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.watchlist.</span></code><code class="sig-name descname"><span class="pre">WatchList</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Currently the watchlists property only contains names and values. Considerations for changing
+__init__ so that watchlist is populated</p>
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.addSymbol">
+<code class="sig-name descname"><span class="pre">addSymbol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListName</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.addSymbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add symbols to an existing watchlist. If the symbol exists, it will be over-written.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.create">
+<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListName</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new watchlist. The new watchlist created will use the specified name and optional symbols upon creation.
+#</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.delete">
+<code class="sig-name descname"><span class="pre">delete</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListName</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete a specific watchlist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.get_id">
+<code class="sig-name descname"><span class="pre">get_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.get_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the ID of the watchlist</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.getwatchlist">
+<code class="sig-name descname"><span class="pre">getwatchlist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListId</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.getwatchlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a specific watchlist by id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.remove">
+<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a symbol from a specific watchlist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.watchlist.WatchList.update">
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListName</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.watchlist.WatchList.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update an existing watchlist. This request will override the existing watchlist information with the parameters sent in the body.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.working">
+<span id="pytradier-working-module"></span><h2>PyTradier.working module<a class="headerlink" href="#module-PyTradier.working" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.working.Something">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.working.</span></code><code class="sig-name descname"><span class="pre">Something</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accountId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.working.Something" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.working.Something.getwatchlist">
+<code class="sig-name descname"><span class="pre">getwatchlist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">watchListId</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.working.Something.getwatchlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a specific watchlist by id.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.working.Something.watchlists">
+<code class="sig-name descname"><span class="pre">watchlists</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.working.Something.watchlists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all of a users watchlists as dictionary with key name: id value</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyTradier" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Zach Lopez.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

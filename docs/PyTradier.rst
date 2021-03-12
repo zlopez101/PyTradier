@@ -1,0 +1,94 @@
+PyTradier package
+=================
+
+Submodules
+----------
+
+PyTradier.PyTradier module
+--------------------------
+
+.. automodule:: PyTradier.PyTradier
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.account module
+------------------------
+
+.. automodule:: PyTradier.account
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.entity module
+-----------------------
+
+.. automodule:: PyTradier.entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.error module
+----------------------
+
+.. automodule:: PyTradier.error
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.fundamental module
+----------------------------
+
+.. automodule:: PyTradier.fundamental
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.response module
+-------------------------
+
+.. automodule:: PyTradier.response
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+PyTradier.trade module
+----------------------
+
+.. automodule:: PyTradier.trade
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.utils module
+----------------------
+
+.. automodule:: PyTradier.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.watchlist module
+--------------------------
+
+.. automodule:: PyTradier.watchlist
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.working module
+------------------------
+
+.. automodule:: PyTradier.working
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: PyTradier
+   :members:
+   :undoc-members:
+   :show-inheritance:

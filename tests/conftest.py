@@ -1,7 +1,8 @@
 import pytest
 import requests
 import random
-from src import PyTradier
+
+# from PyTradier import PyTradier
 
 
 S_and_P_500 = [
@@ -521,7 +522,7 @@ def randomTicker():
     return random.sample(S_and_P_500, 2)
 
 
-@pytest.fixture(scope="module")
-def pytrader():
-    api = PyTradier(paper=True)
-    return api
+# @pytest.fixture(scope="module")
+# def pytrader():
+#     api = PyTradier(paper=True)
+#     return api
