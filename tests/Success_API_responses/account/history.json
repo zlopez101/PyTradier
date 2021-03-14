@@ -1,0 +1,153 @@
+{
+    "history": {
+      "event": [
+        {
+          "amount": 10.06,
+          "date": "2018-10-31T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "GENERAL ELECTRIC COMPANY",
+            "price": 10.060000,
+            "quantity": -1.00000000,
+            "symbol": "GE",
+            "trade_type": "Equity"
+          }
+        },
+        {
+          "amount": 0.12,
+          "date": "2018-10-25T00:00:00Z",
+          "type": "dividend",
+          "adjustment": {
+            "description": "GENERAL ELECTRIC COMPANY",
+            "quantity": 0.00000000
+          }
+        },
+        {
+          "amount": 0,
+          "date": "2018-09-21T00:00:00Z",
+          "type": "option",
+          "option": {
+            "option_type": "OPTEXP",
+            "description": "Expired",
+            "quantity": -1.00000000
+          }
+        },
+        {
+          "amount": -13.05,
+          "date": "2018-06-19T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "GENERAL ELECTRIC COMPANY",
+            "price": 13.050000,
+            "quantity": 1.00000000,
+            "symbol": "GE",
+            "trade_type": "Equity"
+          }
+        },
+        {
+          "amount": -129.05,
+          "date": "2018-05-23T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "CALL GE     06\/22\/18    14",
+            "price": 1.290000,
+            "quantity": 1.00000000,
+            "symbol": "GE180622C00014000",
+            "trade_type": "Option"
+          }
+        },
+        {
+          "amount": -51.05,
+          "date": "2018-05-23T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "CALL GE     06\/22\/18    15",
+            "price": 0.510000,
+            "quantity": 1.00000000,
+            "symbol": "GE180622C00015000",
+            "trade_type": "Option"
+          }
+        },
+        {
+          "amount": 99.95,
+          "date": "2018-05-23T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "CALL GE     06\/22\/18    14",
+            "price": 1.000000,
+            "quantity": -1.00000000,
+            "symbol": "GE180622C00014000",
+            "trade_type": "Option"
+          }
+        },
+        {
+          "amount": -3000.00,
+          "date": "2018-05-23T00:00:00Z",
+          "type": "journal",
+          "journal": {
+            "description": "6YA-00005 TO 6YA-00102",
+            "quantity": 0.00000000
+          }
+        },
+        {
+          "amount": 187.82,
+          "date": "2018-05-21T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "APPLE INC",
+            "price": 187.820100,
+            "quantity": -1.00000000,
+            "symbol": "AAPL",
+            "trade_type": "Equity"
+          }
+        },
+        {
+          "amount": 0.73,
+          "date": "2018-05-17T00:00:00Z",
+          "type": "DIVADJ",
+          "adjustment": {
+            "description": "APPLE INC",
+            "quantity": 0.00000000
+          }
+        },
+        {
+          "amount": 2500.00,
+          "date": "2018-05-11T00:00:00Z",
+          "type": "journal",
+          "journal": {
+            "description": "TFR FROM ACCT VA-00000-0",
+            "quantity": 0.00000000
+          }
+        },
+        {
+          "amount": -79.09,
+          "date": "2018-04-19T00:00:00Z",
+          "type": "trade",
+          "trade": {
+            "commission": 0.0000000000,
+            "description": "EXXON MOBIL CORP",
+            "price": 79.090000,
+            "quantity": 1.00000000,
+            "symbol": "XOM",
+            "trade_type": "Equity"
+          }
+        },
+        {
+          "amount": 0,
+          "date": "2017-07-19T00:00:00Z",
+          "type": "option",
+          "option": {
+            "option_type": "expiration",
+            "description": "Expired",
+            "quantity": -2.00000000
+          }
+        }
+      ]
+    }
+  }

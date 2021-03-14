@@ -1,0 +1,56 @@
+{
+    "positions": {
+      "position": [
+        {
+          "cost_basis": 207.01,
+          "date_acquired": "2018-08-08T14:41:11.405Z",
+          "id": 130089,
+          "quantity": 1.00000000,
+          "symbol": "AAPL"
+        },
+        {
+          "cost_basis": 1870.70,
+          "date_acquired": "2018-08-08T14:42:00.774Z",
+          "id": 130090,
+          "quantity": 1.00000000,
+          "symbol": "AMZN"
+        },
+        {
+          "cost_basis": 50.41,
+          "date_acquired": "2019-01-31T17:05:44.674Z",
+          "id": 133590,
+          "quantity": 1.00000000,
+          "symbol": "CAH"
+        },
+        {
+          "cost_basis": 173.04,
+          "date_acquired": "2019-03-11T16:51:51.987Z",
+          "id": 134134,
+          "quantity": 1.00000000,
+          "symbol": "FB"
+        },
+        {
+          "cost_basis": 9.87,
+          "date_acquired": "2019-03-11T16:50:33.156Z",
+          "id": 134132,
+          "quantity": 1.00000000,
+          "symbol": "GE"
+        },
+        {
+          "cost_basis": 1772.54,
+          "date_acquired": "2018-06-05T13:45:12.385Z",
+          "id": 129298,
+          "quantity": 13.00000000,
+          "symbol": "IBM"
+        },
+        {
+          "cost_basis": 338.64,
+          "date_acquired": "2019-03-11T16:50:55.774Z",
+          "id": 134133,
+          "quantity": 3.00000000,
+          "symbol": "MSFT"
+        }
+      ]
+    }
+  }
+  

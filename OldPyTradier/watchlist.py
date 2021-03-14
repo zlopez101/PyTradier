@@ -1,20 +1,10 @@
-import requests
+from PyTradier.base import BasePyTradier
 from PyTradier.error import WatchListError
 
 
-class WatchList:
-
+class WatchList(BasePyTradier):
+    """Create and update custom watchlists
     """
-    Currently the watchlists property only contains names and values. Considerations for changing
-    __init__ so that watchlist is populated 
-    """
-
-    def __init__(self, accountId, token, url):
-        self.accountId = accountId
-        self.token = token
-        self.url = url
-        self.watchlists = {}
-        self._watchlists()
 
     def __repr__(self):
         return str(self.watchlists)
@@ -25,9 +15,6 @@ class WatchList:
     def get_id(self, name):
         """Return the ID of the watchlist"""
         return self.watchlists[name]["id"]
-
-    def _headers(self):
-        return {"Authorization": f"Bearer {self.token}", "Accept": "application/json"}
 
     def _updateLocal(self, resp, key, value):
         """
@@ -151,7 +138,7 @@ if __name__ == "__main__":
     import os
 
     watcher = WatchList(
-        os.environ.get("TRADIER_PAPERACCOUNTID"),
+        os.environ.get("TRADIER_PAPERaccount_id"),
         os.environ.get("TRADIER_SANDBOX_TOKEN"),
         "https://sandbox.tradier.com/v1/",
     )

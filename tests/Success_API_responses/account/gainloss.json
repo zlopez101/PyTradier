@@ -1,0 +1,50 @@
+{
+    "gainloss": {
+      "closed_position": [
+        {
+          "close_date": "2018-10-31T00:00:00.000Z",
+          "cost": 12.7,
+          "gain_loss": -2.64,
+          "gain_loss_percent": -20.7874,
+          "open_date": "2018-06-19T00:00:00.000Z",
+          "proceeds": 10.06,
+          "quantity": 1.0,
+          "symbol": "GE",
+          "term": 134
+        },
+        {
+          "close_date": "2018-09-21T00:00:00.000Z",
+          "cost": 3.05,
+          "gain_loss": -3.05,
+          "gain_loss_percent": -100.0,
+          "open_date": "2018-09-18T00:00:00.000Z",
+          "proceeds": 0.0,
+          "quantity": 1.0,
+          "symbol": "SNAP180921P00008500",
+          "term": 3
+        },
+        {
+          "close_date": "2018-09-19T00:00:00.000Z",
+          "cost": 913.95,
+          "gain_loss": 6.05,
+          "gain_loss_percent": 0.662,
+          "open_date": "2018-09-18T00:00:00.000Z",
+          "proceeds": 920.0,
+          "quantity": 100.0,
+          "symbol": "SNAP",
+          "term": 1
+        },
+        {
+          "close_date": "2018-06-25T00:00:00.000Z",
+          "cost": 25.05,
+          "gain_loss": -25.05,
+          "gain_loss_percent": -100.0,
+          "open_date": "2018-06-22T00:00:00.000Z",
+          "proceeds": 0.0,
+          "quantity": 1.0,
+          "symbol": "SPY180625C00276000",
+          "term": 3
+        }
+      ]
+    }
+  }

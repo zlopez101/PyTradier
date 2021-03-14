@@ -6,7 +6,7 @@ import PyTradier.error as e
 from PyTradier.fundamental import FundamentalData
 from PyTradier.account import Account
 from PyTradier.response import OrderResponse
-from PyTradier._base import BasePyTradier
+from PyTradier.base import BasePyTradier
 from PyTradier.watchlist import WatchList
 
 
@@ -26,6 +26,7 @@ class PyTradier(BasePyTradier):
     :return: [description]
     :rtype: [type]
     """
+
     equitySide = ["buy", "buy_to_cover", "sell", "sell_short"]
     optionSide = ["buy_to_open", "buy_to_close", "sell_to_open", "sell_to_close"]
     complexTypes = ["market", "debit", "credit", "even"]
@@ -36,10 +37,10 @@ class PyTradier(BasePyTradier):
 
     def __init__(self, paper=True):
         super().__init__(paper)
-        self.account = Account(self.accountId, self.token, self.url)
+        self.account = Account(self.account_id, self.token, self.url)
         self.positions = self.account.positions
         self.fundamental = FundamentalData()
-        self.watchlist = WatchList(self.accountId, self.token, self.url)
+        self.watchlist = WatchList(self.account_id, self.token, self.url)
         self.orders = self.account.orders
         self.open_orders = []
 
@@ -146,7 +147,7 @@ class PyTradier(BasePyTradier):
         Base method for placing orders
         """
         r = requests.post(
-            self.url + f"accounts/{self.accountId}/orders",
+            self.url + f"accounts/{self.account_id}/orders",
             data=params,
             headers=self._headers(),
         )
@@ -170,7 +171,7 @@ class PyTradier(BasePyTradier):
         Modify order of id orderId by specifying the new parameter change with kwargs
         """
         r = requests.put(
-            self.url + f"accounts/{self.accountId}/orders/{orderId}",
+            self.url + f"accounts/{self.account_id}/orders/{orderId}",
             params=kwargs,
             headers=self._headers(),
         )
@@ -181,7 +182,7 @@ class PyTradier(BasePyTradier):
         Delete order of id orderId
         """
         r = requests.delete(
-            self.url + f"accounts/{self.accountId}/orders/{orderId}",
+            self.url + f"accounts/{self.account_id}/orders/{orderId}",
             params={},
             headers=self._headers(),
         )

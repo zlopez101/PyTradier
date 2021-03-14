@@ -1,6 +1,7 @@
 import pytest
 import requests
 import random
+import json
 
 # from PyTradier import PyTradier
 
@@ -522,7 +523,52 @@ def randomTicker():
     return random.sample(S_and_P_500, 2)
 
 
-# @pytest.fixture(scope="module")
-# def pytrader():
-#     api = PyTradier(paper=True)
-#     return api
+@pytest.fixture(scope="module")
+def accountResponse():
+    api = PyTradier(paper=True)
+    return api
+
+
+@pytest.fixture
+def mockresponse():
+    class MockResponse:
+        def __init__(self, status, response_json_path):
+            self.status_code = status
+            with open(response_json_path, "r") as f:
+                self.response = json.load(f)
+
+        def raise_for_status(self):
+            """need to implement a raise for status test
+            """
+            pass
+
+        def json(self):
+            return self.response
+
+    yield MockResponse
+
+
+@pytest.fixture
+def patch_get(monkeypatch, mockresponse):
+    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
+
+    :param mockresponse: [description]
+    :type mockresponse: [type]
+    :return: [description]
+    :rtype: [type]
+    :yield: [description]
+    :rtype: [type]
+    """
+
+    class PatchGet:
+        def __init__(self, status, response_json_path):
+            self.mocked = mockresponse(status, response_json_path)
+            self.setter()
+
+        def mock_get(self, url, params, headers):
+            return self.mocked
+
+        def setter(self):
+            monkeypatch.setattr(requests, "get", self.mock_get)
+
+    yield PatchGet

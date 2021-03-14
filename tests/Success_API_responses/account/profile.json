@@ -1,0 +1,16 @@
+{
+    "profile": {
+        "account": {
+            "account_number": "VA000001",
+            "classification": "individual",
+            "date_created": "2016-08-01T21:08:55.000Z",
+            "day_trader": false,
+            "option_level": 6,
+            "status": "active",
+            "type": "margin",
+            "last_update_date": "2016-08-01T21:08:55.000Z"
+        },
+        "id": "id-gcostanza",
+        "name": "George Costanza"
+    }
+}

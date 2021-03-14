@@ -1,0 +1,44 @@
+{
+    "balances": {
+        "option_short_value": 0,
+        "total_equity": 17798.360000000000000000000000,
+        "account_number": "VA00000000",
+        "account_type": "margin",
+        "close_pl": -4813.000000000000000000,
+        "current_requirement": 2557.00000000000000000000,
+        "equity": 0,
+        "long_market_value": 11434.50000000000000000000,
+        "market_value": 11434.50000000000000000000,
+        "open_pl": 546.900000000000000000000000,
+        "option_long_value": 8877.5000000000000000000,
+        "option_requirement": 0,
+        "pending_orders_count": 0,
+        "short_market_value": 0,
+        "stock_long_value": 2557.00000000000000000000,
+        "total_cash": 6363.860000000000000000000000,
+        "uncleared_funds": 0,
+        "pending_cash": 0,
+
+        "margin": {
+            "fed_call": 0,
+            "maintenance_call": 0,
+            "option_buying_power": 6363.860000000000000000000000,
+            "stock_buying_power": 12727.7200000000000000,
+            "stock_short_value": 0,
+            "sweep": 0
+        },
+        "cash": {
+            "cash_available": 4343.38000000,
+            "sweep": 0,
+            "unsettled_funds": 1310.00000000
+        },
+
+        "pdt": {
+            "fed_call": 0,
+            "maintenance_call": 0,
+            "option_buying_power": 6363.860000000000000000000000,
+            "stock_buying_power": 12727.7200000000000000,
+            "stock_short_value": 0
+        }
+    }
+}

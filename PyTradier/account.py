@@ -1,248 +1,159 @@
 import requests
-from PyTradier.response import OrderResponse
-from ._base import BasePyTradier
+from PyTradier.base import BasePyTradier
+from PyTradier.utils import process_response
+from functools import wraps
+from typing import Union
+from datetime import datetime
+
+
+def selectArgs(func):
+    @wraps(func)
+    def wrapper(self, *args):
+        result = func(self, *args)
+        try:
+            result.raise_for_status()
+            if args:
+                return {
+                    key: value for key, value in result.json().items() if key in args
+                }
+            else:
+                return result.json()
+        except requests.exceptions.HTTPError as requesterror:
+            print(
+                f"there was an {response.status_code} error handling this response: {response.text}"
+            )
+        except KeyError as keyerror:
+            print("key")
+            print(keyerror)
+        except TypeError as typerror:
+            print(
+                f"there was a TypeError handling this response, check function parameters {args[1:]} are compatible with {func.__annotations__}"
+            )
+
+    return wrapper
 
 
 class Account(BasePyTradier):
-    def profile(self):
-        """ 
-        {
-            "profile": {
-                "account": 
-                    {
-                        "account_number": "VA000001",
-                        "classification": "individual",
-                        "date_created": "2016-08-01T21:08:55.000Z",
-                        "day_trader": false,
-                        "option_level": 6,
-                        "status": "active",
-                        "type": "margin",
-                        "last_update_date": "2016-08-01T21:08:55.000Z"
-                    },
-                "id": "id-gcostanza",
-                "name": "George Costanza"
-            }
-        }
-        """
-        return self._get("user/profile")
+    def profile(self, *args) -> dict:
+        """returns requested information about a user's account
 
-    def balance(self):
+        :param keys: The keys to include in the response, defaults to ["profile", "id", "name"]
+        :type keys: list, optional
+        :return: Information requested, either a string or dict
+        :rtype: Union[dict, str]
         """
-        {
-        "balances": {
-            "option_short_value": 0,
-            "total_equity": 17798.360000000000000000000000,
-            "account_number": "VA00000000",
-            "account_type": "margin",
-            "close_pl": -4813.000000000000000000,
-            "current_requirement": 2557.00000000000000000000,
-            "equity": 0,
-            "long_market_value": 11434.50000000000000000000,
-            "market_value": 11434.50000000000000000000,
-            "open_pl": 546.900000000000000000000000,
-            "option_long_value": 8877.5000000000000000000,
-            "option_requirement": 0,
-            "pending_orders_count": 0,
-            "short_market_value": 0,
-            "stock_long_value": 2557.00000000000000000000,
-            "total_cash": 6363.860000000000000000000000,
-            "uncleared_funds": 0,
-            "pending_cash": 0,
-        }   
-        "margin": {
-            "fed_call": 0,
-            "maintenance_call": 0,
-            "option_buying_power": 6363.860000000000000000000000,
-            "stock_buying_power": 12727.7200000000000000,
-            "stock_short_value": 0,
-            "sweep": 0
-        },
-        "cash": {
-            "cash_available": 4343.38000000,
-            "sweep": 0,
-            "unsettled_funds": 1310.00000000
-        },
-        "pdt": {
-            "fed_call": 0,
-            "maintenance_call": 0,
-            "option_buying_power": 6363.860000000000000000000000,
-            "stock_buying_power": 12727.7200000000000000,
-            "stock_short_value": 0
-        }
-    }
-}
-        """
-        return self._get(f"accounts/{self.accountId}/balances")
+        return self._get("/v1/user/profile")
 
-    def positions(self):
-        """
-        {
-        "positions": {
-            "position": [
-                    {
-                        "cost_basis": 207.01,
-                        "date_acquired": "2018-08-08T14:41:11.405Z",
-                        "id": 130089,
-                        "quantity": 1.00000000,
-                        "symbol": "AAPL"
-                    },
-                    {
-                      "cost_basis": 1870.70,
-                      "date_acquired": "2018-08-08T14:42:00.774Z",
-                      "id": 130090,
-                      "quantity": 1.00000000,
-                      "symbol": "AMZN"
-                    },
-                ]
-            }
-        }
-        """
-        return (
-            self.get(f"accounts/{self.accountId}/positions")
-            .get("positions")
-            .get("position")
-        )
+    def balances(self) -> dict:
+        """Get balances information for a specific user account. Account balances are calculated on each request during market hours. Each night, balance figures are reconciled with our clearing firm and used as starting point for the following market session.
 
-    def orders(self):
+        see more at https://documentation.tradier.com/brokerage-api/reference/response/balances
+
+        :return: Balance dict
+        :rtype: dict
         """
-        Retrieve orders placed within an account. This API will return orders placed for the market session of the present calendar day.
+        return self._get(f"/v1/accounts/{self.account_id}/balances")
+
+    def positions(self) -> list:
+        """Return the positions of the account
+
+        :return: list of position objects
+        :rtype: list
         """
-        r = self.get(f"accounts/{self.accountId}/orders")
-        return [OrderResponse(order) for order in r.get("orders", []).get("order")]
+        return self._get(f"/v1/accounts/{self.account_id}/positions")
+
+    def orders(self) -> list:
+        """Retrieve orders placed within an account. This API will return orders placed for the market session of the present calendar day.
+        """
+        return self._get(f"/v1/accounts/{self.account_id}/orders")
 
     def history(
-        self, symbol=None, page=1, limit=25, activity_type=None, start=None, end=None
-    ):
-        """
-        Get historical activity for an account. This data originates with our clearing firm and inherently has a few limitations:
+        self,
+        page: int = 1,
+        limit: int = 25,
+        activity_type: list = [],
+        start: str = "",
+        end: str = "",
+        symbol: str = "",
+    ) -> list:
+        """Get historical activity for an account. This data originates with our clearing firm and inherently has a few limitations:
 
         Updated nightly (not intraday)
         Will not include specific time (hours/minutes) a position or order was created or closed
         Will not include order numbers
 
-        Parameter:
-        
-        page:           Used for paginated results. Page to start results.
-
-        limit:          Number of results to return per page.
-
-        activity_type:  trade, option, ach, wire, dividend, fee, tax, journal, check, transfer, adjustment, interest
-
-        startDate:	    yyyy-mm-dd
-
-        endDate:	    yyyy-mm-dd
-
-        symbol:	    	SPY
+        :param page: Used for paginated results. Page to start results, defaults to 1
+        :type page: int, optional
+        :param limit: Number of results to return per page, defaults to 25
+        :type limit: int, optional
+        :param activity_type: Activity type, defaults to []
+        :type activity_type: list, optional
+        :param start: start date, empty string will default to account opening date, defaults to ""
+        :type start: str, optional
+        :param end: end date, empty string will default to end of current day, defaults to ""
+        :type end: str, optional
+        :param symbol: Filter by security symbol, defaults to ""
+        :type symbol: str, optional
+        :return: list of events
+        :rtype: list
         """
-        return self.get(
-            f"accounts/{self.accountId}/history",
-            symbol=symbol,
-            page=page,
-            limit=limit,
-            type=activity_type,
-            start=start,
-            end=end,
+        return self._get(
+            f"/v1/accounts/{self.account_id}/history",
+            params=self.create_params(locals()),
         )
 
     def gainloss(
         self,
-        symbol=None,
-        page=1,
-        limit=100,
-        sortby="closedate",
-        sort="desc",
-        start=None,
-        end=None,
-    ):
+        symbol: str = None,
+        page: int = 1,
+        limit: int = 100,
+        sortby: str = "closedate",
+        sort: str = "desc",
+        start: Union[str, datetime] = None,
+        end: Union[str, datetime] = None,
+    ) -> dict:
+        """Get cost basis information for a specific user account. This includes information for all closed positions. Cost basis information is updated through a nightly batch reconciliation process with our clearing firm.
+
+        :param symbol: Filter by security symbol, defaults to None
+        :type symbol: str, optional
+        :param page: Used for paginated results - Page to start results, defaults to 1
+        :type page: int, optional
+        :param limit: Number of results to return per page, defaults to 100
+        :type limit: int, optional
+        :param sortby: Field to sort the results. One of ['openDate', 'closeDate'], defaults to "closedate"
+        :type sortby: str, optional
+        :param sort: Sort directions, One of ['asc', 'desc'], defaults to "desc"
+        :type sort: str, optional
+        :param start: Start Date, defaults to None
+        :type start: Union[str, datetime], optional
+        :param end: End Date, defaults to None
+        :type end: Union[str, datetime], optional
+        :return: list of positions
+        :rtype: dict
         """
-        Get cost basis information for a specific user account. This includes information for all closed positions. Cost basis information is updated through a nightly batch reconciliation process with our clearing firm.
 
-        Parameter:
-        
-        page:       Used for paginated results. Page to start results. 
+        return self._get(
+            self.url + f"/v1/accounts/{self.account_id}/gainloss",
+            params=self.create_params(locals()),
+        )
 
-        limit:      Number of results to return per page.
+    def order(self, orderId: str, includeTags=False) -> dict:
+        """Get detailed information about a previously placed order.
 
-        sortBy:     Field to sort the results. One of: openDate,closeDate
-
-        sort:	    Sort direction. One of: asc,desc
-
-        start:	    yyyy-mm-dd	    Account opening date
-
-        end:      	yyyy-mm-dd	    End of current day
-        {
-  "gainloss": {
-    "closed_position": [
-      {
-        "close_date": "2018-10-31T00:00:00.000Z",
-        "cost": 12.7,
-        "gain_loss": -2.64,
-        "gain_loss_percent": -20.7874,
-        "open_date": "2018-06-19T00:00:00.000Z",
-        "proceeds": 10.06,
-        "quantity": 1.0,
-        "symbol": "GE",
-        "term": 134
-      },
-      {
-        "close_date": "2018-09-21T00:00:00.000Z",
-        "cost": 3.05,
-        "gain_loss": -3.05,
-        "gain_loss_percent": -100.0,
-        "open_date": "2018-09-18T00:00:00.000Z",
-        "proceeds": 0.0,
-        "quantity": 1.0,
-        "symbol": "SNAP180921P00008500",
-        "term": 3
-      },
-      {
-        "close_date": "2018-09-19T00:00:00.000Z",
-        "cost": 913.95,
-        "gain_loss": 6.05,
-        "gain_loss_percent": 0.662,
-        "open_date": "2018-09-18T00:00:00.000Z",
-        "proceeds": 920.0,
-        "quantity": 100.0,
-        "symbol": "SNAP",
-        "term": 1
-      },
-      {
-        "close_date": "2018-06-25T00:00:00.000Z",
-        "cost": 25.05,
-        "gain_loss": -25.05,
-        "gain_loss_percent": -100.0,
-        "open_date": "2018-06-22T00:00:00.000Z",
-        "proceeds": 0.0,
-        "quantity": 1.0,
-        "symbol": "SPY180625C00276000",
-        "term": 3
-      }
-    ]
-  }
-}
+        :param orderId: OrderId of the order you want more information on
+        :type orderId: str
+        :param includeTags: Include order tag on response, defaults to False
+        :type includeTags: bool, optional
+        :return: dict with detailed information
+        :rtype: dict
         """
-        return requests.get(
-            self.url + f"accounts/{self.accountId}/gainloss",
-            params={
-                "symbol": str(symbol),
-                "page": str(page),
-                "limit": str(limit),
-                "sortBy": str(sortby),
-                "sort": str(sort),
-                "start": str(start),
-                "end": str(end),
-            },
-            headers=self._headers(),
-        ).json()
 
-    def order(self, orderId, includeTags=False):
-        """
-        Get detailed information about a previously placed order.
+        return self._get(f"/v1/accounts/{self.account_id}/orders/{str(orderId)}")
 
-        Parameters:
 
-        includeTags: bool
-        """
-        r = self.get(f"accounts/{self.accountId}/orders/{str(orderId)}")
-        return OrderResponse.from_order_conf(r)
+if __name__ == "__main__":
+    from utils import printer
 
+    account = Account()
+    profile = account.profile("account")
+    printer(profile)

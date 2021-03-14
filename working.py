@@ -1,13 +1,6 @@
-import requests
-import os
+import json
 
-response = requests.get(
-    "https://api.tradier.com/v1/user/profile",
-    params={},
-    headers={
-        "Authorization": f'Bearer {os.environ.get("TRADIER_BROKERAGE_TOKEN")}',
-        "Accept": "application/json",
-    },
-)
-print(response.status_code)
-print(response.headers)
+with open("tests\Success_API_responses\dct.json", "r") as f:
+    # data = json.loads(f.read())/
+    data = json.load(f)
+    print(data)

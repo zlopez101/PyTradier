@@ -1,89 +1,104 @@
-import requests
-import os
-from PyTradier.response import *
+from PyTradier.base import BasePyTradier
+from typing import Union
 
 
-class FundamentalData:
-    def __init__(self):
-        self.accountId = "6YA14703"
-        self.token = os.environ.get("TRADIER_BROKERAGE_TOKEN")
-        self.url = "https://api.tradier.com/v1/"
+class FundamentalData(BasePyTradier):
+    """This API is presently in Beta. It is only available to Tradier Brokerage account holders and should only be used in production applications with caution
+    """
 
-    def _createHeaders(self):
-        return {"Authorization": f"Bearer {self.token}", "Accept": "application/json"}
+    def fundamentals(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Get the company fundamental information
 
-    def baseQuery(self, symbol, apiEndpoint) -> list:
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
         """
-        build the base query for all fundamental data requests
-        """
-        return requests.get(
-            "https://api.tradier.com/" + apiEndpoint,
-            params={"symbols": symbol},
-            headers=self._createHeaders(),
-        ).json()
-
-    def fundamentals(self, symbol):
-        """
-        Get the company fundamental information
-        """
-        return FundamentalResponse(
-            "Fundamental Data",
-            self.baseQuery(symbol, "beta/markets/fundamentals/company")[0],
+        print(locals())
+        return self._get(
+            "/beta/markets/fundamentals/company",
+            params={"symbols": self._symbol_prep(symbol)},
         )
-        # return Response("fundamentals", r)
 
-    def corporateCalendar(self, symbol):
+    def corporateCalendar(self, symbol: Union[str, list]) -> Union[dict, list]:
         """
         Get Corporate calendar information for securities. Does not include dividend information
         """
-        return self.baseQuery(symbol, "beta/markets/fundamentals/calendars")[0]
+        return self._get(
+            "/beta/markets/fundamentals/calendars",
+            params={"symbols": self._symbol_prep(symbol)},
+        )
         # return Response("corporateCalendar", r)
 
-    def dividends(self, symbol) -> DividendResponse:
-        """
-        Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates
+    def dividend(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates.
 
-        Returns a DividendResponse Object
-
-        -> To Do: If there are no dividends for the stock, right now we get an error.
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
         """
-        return DividendResponse(
-            self.baseQuery(symbol, "beta/markets/fundamentals/dividends")[0]
+        return self._get(
+            "/beta/markets/fundamentals/dividends",
+            params={"symbols": self._symbol_prep(symbol)},
         )
 
-    def CorporateActionInformation(self, symbol):
-        """
-        Retrieve corporate action information. This will include both historical and scheduled future actions.
-        """
-        return self.baseQuery(symbol, "beta/markets/fundamentals/corporate_actions")[0]
-        # return Response("CorporateActionInformation", r)
+    def CorporateActionInformation(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Retrieve corporate action information. This will include both historical and scheduled future actions.
 
-    def financialRatios(self, symbol):
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
         """
-        Get standard financial ratios for a company 
-        """
-        return self.baseQuery(symbol, "beta/markets/fundamentals/ratios")[0]
-        # return Response("financialRatios", r)
+        return self._get(
+            "/beta/markets/fundamentals/corporate_actions",
+            params={"symbols": self._symbol_prep(symbol)},
+        )
 
-    def financialInfo(self, symbol):
-        """
-        Retrieve corporate financial information and statements
-        """
-        return self.baseQuery(symbol, "beta/markets/fundamentals/financials")[0]
-        # return Response("financialInfo", r)
+    def financialRatios(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Get standard financial ratios for a company.
 
-    def priceStatistics(self, symbol):
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
         """
-        Retrieve price statistic Information
+        return self._get(
+            "/beta/markets/fundamentals/ratios",
+            params={"symbols": self._symbol_prep(symbol)},
+        )
+
+    def financialInfo(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Retrieve corporate financial information and statements.
+
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
         """
-        return self.baseQuery(symbol, "beta/markets/fundamentals/statistics")[0]
-        # return Response("priceStatistics", r)
+        return self._get(
+            "/beta/markets/fundamentals/financials",
+            params={"symbols": self._symbol_prep(symbol)},
+        )
+
+    def priceStatistics(self, symbol: Union[str, list]) -> Union[dict, list]:
+        """Retrieve price statistic Information.
+
+        :param symbol: single symbol or list of symbols to retrieve information on
+        :type symbol: Union[str, list]
+        :return: either a dict with single symbol response or list of dictionaries
+        :rtype: Union[dict, list]
+        """
+        return self._get(
+            "/beta/markets/fundamentals/statistics",
+            params={"symbols": self._symbol_prep(symbol)},
+        )
 
 
 if __name__ == "__main__":
-    import pprint
+    from utils import printer
 
-    dt = FundamentalData()
-    resp = dt.dividends("GE")
-    print(resp.find("2020-01-01", "2020-12-01"))
+    fundamentals = FundamentalData()
+    response = fundamentals.fundamentalss("AAPL")
 

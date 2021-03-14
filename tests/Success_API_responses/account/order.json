@@ -1,0 +1,19 @@
+{
+    "order": {
+      "id": 228176,
+      "type": "market",
+      "symbol": "AAPL",
+      "side": "buy",
+      "quantity": 50.00000000,
+      "status": "filled",
+      "duration": "pre",
+      "avg_fill_price": 187.93000000,
+      "exec_quantity": 50.00000000,
+      "last_fill_price": 187.93000000,
+      "last_fill_quantity": 50.00000000,
+      "remaining_quantity": 0.00000000,
+      "create_date": "2018-06-01T12:02:37.377Z",
+      "transaction_date": "2018-06-01T13:45:13.340Z",
+      "class": "equity"
+    }
+  }
