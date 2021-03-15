@@ -1,6 +1,5 @@
 import requests
 from PyTradier.base import BasePyTradier
-from PyTradier.utils import process_response
 from functools import wraps
 from typing import Union
 from datetime import datetime
@@ -34,6 +33,9 @@ def selectArgs(func):
 
 
 class Account(BasePyTradier):
+    """class for gathering all account related API calls
+    """
+
     def profile(self, *args) -> dict:
         """returns requested information about a user's account
 
@@ -42,7 +44,7 @@ class Account(BasePyTradier):
         :return: Information requested, either a string or dict
         :rtype: Union[dict, str]
         """
-        return self._get("/v1/user/profile")
+        return self._get("/v1/user/profile", dict_args=("profile",))
 
     def balances(self) -> dict:
         """Get balances information for a specific user account. Account balances are calculated on each request during market hours. Each night, balance figures are reconciled with our clearing firm and used as starting point for the following market session.
@@ -52,7 +54,9 @@ class Account(BasePyTradier):
         :return: Balance dict
         :rtype: dict
         """
-        return self._get(f"/v1/accounts/{self.account_id}/balances")
+        return self._get(
+            f"/v1/accounts/{self.account_id}/balances", dict_args=("balances",)
+        )
 
     def positions(self) -> list:
         """Return the positions of the account
@@ -60,12 +64,17 @@ class Account(BasePyTradier):
         :return: list of position objects
         :rtype: list
         """
-        return self._get(f"/v1/accounts/{self.account_id}/positions")
+        return self._get(
+            f"/v1/accounts/{self.account_id}/positions",
+            dict_args=("positions", "position"),
+        )
 
     def orders(self) -> list:
         """Retrieve orders placed within an account. This API will return orders placed for the market session of the present calendar day.
         """
-        return self._get(f"/v1/accounts/{self.account_id}/orders")
+        return self._get(
+            f"/v1/accounts/{self.account_id}/orders", dict_args=("orders", "order")
+        )
 
     def history(
         self,
@@ -100,6 +109,7 @@ class Account(BasePyTradier):
         return self._get(
             f"/v1/accounts/{self.account_id}/history",
             params=self.create_params(locals()),
+            dict_args=("history", "event"),
         )
 
     def gainloss(
@@ -135,6 +145,7 @@ class Account(BasePyTradier):
         return self._get(
             self.url + f"/v1/accounts/{self.account_id}/gainloss",
             params=self.create_params(locals()),
+            dict_args=("gainloss", "closed_position"),
         )
 
     def order(self, orderId: str, includeTags=False) -> dict:
@@ -148,7 +159,10 @@ class Account(BasePyTradier):
         :rtype: dict
         """
 
-        return self._get(f"/v1/accounts/{self.account_id}/orders/{str(orderId)}")
+        return self._get(
+            f"/v1/accounts/{self.account_id}/orders/{str(orderId)}",
+            dict_args=("order",),
+        )
 
 
 if __name__ == "__main__":

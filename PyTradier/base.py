@@ -11,7 +11,8 @@ class BasePyTradier:
         self, token: str = "TRADIER_SANDBOX_TOKEN", paper: bool = True,
     ):
         self.token = os.environ.get(token)
-        if paper:
+        self.paper = paper
+        if self.paper:
             self.url = "https://sandbox.tradier.com"
         else:
             self.url = "https://api.tradier.com"
@@ -62,36 +63,67 @@ class BasePyTradier:
         :return: account ID number
         :rtype: str
         """
-        response = self._get("/v1/user/profile")
-        if response.status_code == 200:
-            json_response = response.json()
-            return json_response["profile"]["account"]["account_number"]
-        else:
-            return response
+        return self._get(
+            "/v1/user/profile", dict_args=("profile", "account", "account_number")
+        )
 
-    # @process_response()
-    def _get(self, endpoint: str, params: dict = {}) -> requests.Response:
+    def process_response(
+        self, response: requests.Response, dict_args: tuple
+    ) -> Union[dict, list]:
+        """Process the response for GET, POST, PUT, DELETE methods
+
+        :param response: raw response object
+        :type response: requests.Response
+        :param dict_args: keys to parse successful response object, defaults to ()
+        :type dict_args: tuple, optional
+        :return: Processed response, either dict or list of dicts depending on endpoint
+        :rtype: Union[dict, list]
+        """
+        try:
+            response.raise_for_status()
+            requested_data = response.json()
+            for arg in dict_args:
+                # return an empty dictionary if key doesn't exist
+                # this could occur if account is new - no history
+                requested_data = requested_data.get(arg, {})
+            return requested_data
+        except requests.exceptions.HTTPError as requesterror:
+            print(
+                f"there was an {response.status_code} error handling this response: {response.text}"
+            )
+        except KeyError as keyerror:
+            print("key")
+            print(keyerror)
+
+    def _get(
+        self, endpoint: str, params: dict = {}, dict_args: tuple = ()
+    ) -> Union[dict, list]:
         """base GET requests method for all subsequent API calls
 
-        :param endpoint: the endpoint being requested. No need to add a prefix "/"
+        :param endpoint: the endpoint being requested
         :type endpoint: str
         :param params: dictionary with parameters to be sent
         :type params: dict
+        :param dict_args: dictionary keys for parsing the response
+        :type dict_args: tuple
         :return: API response
-        :rtype: request.Response
+        :rtype: Union[dict, list]
         """
-        return requests.get(self.url + endpoint, params=params, headers=self._headers())
+        response = requests.get(
+            self.url + endpoint, params=params, headers=self._headers()
+        )
+        return self.process_response(response, dict_args)
 
     # @process_response([201])
-    def _post(self, endpoint: str, params: dict = {}):
+    def _post(self, endpoint: str, params: dict = {}) -> Union[dict, list]:
         """base POST requests method for all subsequent API calls
 
-        :param endpoint: the endpoint being requested. No need to add a prefix "/"
+        :param endpoint: the endpoint being requested
         :type endpoint: str
         :param params: dictionary with parameters to be sent
         :type params: dict
         :return: API response
-        :rtype: request.Response
+        :rtype: Union[dict, list]
         """
         return requests.post(
             self.url + endpoint, params=params, headers=self._headers()

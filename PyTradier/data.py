@@ -1,7 +1,6 @@
 from PyTradier.base import BasePyTradier
 from typing import Union
 from datetime import datetime
-from utils import process_response
 
 
 class MarketData(BasePyTradier):
@@ -21,7 +20,7 @@ class MarketData(BasePyTradier):
         symbols = self._symbol_prep(symbols)
         return self._get("/v1/markets/quotes", params=self.create_params(locals()))
 
-    def options(
+    def option_chain(
         self,
         symbol: str,
         expiration: Union[str, datetime],
@@ -42,7 +41,6 @@ class MarketData(BasePyTradier):
             "/v1/markets/options/chains", params=self.create_params(locals())
         )
 
-    @process_response("strikes", "strike")
     def option_strike(self, symbol: str, expiration: Union[str, datetime]) -> list:
         """Get an options strike prices for a specified expiration date.
 
@@ -68,9 +66,8 @@ class MarketData(BasePyTradier):
         """
         return self._get(
             "/v1/markets/options/lookup", params=self.create_params(locals())
-        ).json()
+        )
 
-    @process_response("expirations", "date")
     def option_expirations(
         self,
         symbol: str,

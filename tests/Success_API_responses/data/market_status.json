@@ -1,0 +1,10 @@
+{
+    "clock": {
+      "date": "2019-05-06",
+      "description": "Market is open from 09:30 to 16:00",
+      "state": "open",
+      "timestamp": 1557156988,
+      "next_change": "16:00",
+      "next_state": "postmarket"
+    }
+  }
