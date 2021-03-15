@@ -89,11 +89,13 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">PyTradier package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.account">PyTradier.account module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.base">PyTradier.base module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.data">PyTradier.data module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.error">PyTradier.error module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.exceptions">PyTradier.exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.fundamental">PyTradier.fundamental module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.rest">PyTradier.rest module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.utils">PyTradier.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-PyTradier.websocket">PyTradier.websocket module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-PyTradier">Module contents</a></li>
 </ul>
 </li>
@@ -178,7 +180,8 @@
 <dl class="py class">
 <dt id="PyTradier.account.Account">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.account.</span></code><code class="sig-name descname"><span class="pre">Account</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.account.Account" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier._base.BasePyTradier</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
+<p>class for gathering all account related API calls</p>
 <dl class="py method">
 <dt id="PyTradier.account.Account.balances">
 <code class="sig-name descname"><span class="pre">balances</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.account.Account.balances" title="Permalink to this definition">¶</a></dt>
@@ -311,12 +314,119 @@ Will not include order numbers</p>
 <dd></dd></dl>
 
 </div>
+<div class="section" id="module-PyTradier.base">
+<span id="pytradier-base-module"></span><h2>PyTradier.base module<a class="headerlink" href="#module-PyTradier.base" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.base.BasePyTradier">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.base.</span></code><code class="sig-name descname"><span class="pre">BasePyTradier</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.base.BasePyTradier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.base.BasePyTradier.create_params">
+<code class="sig-name descname"><span class="pre">create_params</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.base.BasePyTradier.create_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the parameter dictionary for API calls</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – The locally defined variables</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary of values that is not None nor self</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.base.BasePyTradier.process_response">
+<code class="sig-name descname"><span class="pre">process_response</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">requests.models.Response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.base.BasePyTradier.process_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the response for GET, POST, PUT, DELETE methods</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>requests.Response</em>) – raw response object</p></li>
+<li><p><strong>dict_args</strong> (<em>tuple</em><em>, </em><em>optional</em>) – keys to parse successful response object, defaults to ()</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Processed response, either dict or list of dicts depending on endpoint</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[dict, list]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-PyTradier.data">
 <span id="pytradier-data-module"></span><h2>PyTradier.data module<a class="headerlink" href="#module-PyTradier.data" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PyTradier.data.MarketData">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.data.</span></code><code class="sig-name descname"><span class="pre">MarketData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.data.MarketData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier._base.BasePyTradier</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
+<p>All Methods currently only support string API calls, no datetime, bools, etc</p>
+<dl class="py method">
+<dt id="PyTradier.data.MarketData.option_chain">
+<code class="sig-name descname"><span class="pre">option_chain</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greeks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'false'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.data.MarketData.option_chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all quotes in an option chain. Greek and IV data is included courtesy of ORATS. Please check out their APIs for more in-depth options data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> (<em>str</em>) – Underlying symbol of the chain</p></li>
+<li><p><strong>expiration</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>datetime</em><em>]</em>) – Expiration for the chain</p></li>
+<li><p><strong>greeks</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – Add greeks and volatility information, defaults to “false”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Get all quotes in an option chain</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.data.MarketData.option_expirations">
+<code class="sig-name descname"><span class="pre">option_expirations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeAllRoots</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strikes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#PyTradier.data.MarketData.option_expirations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get expiration dates for a particular underlying.</p>
+<p>Note that some underlying securities use a different symbol for their weekly options (RUT/RUTW, SPX/SPXW). To make sure you see all expirations, make sure to send the includeAllRoots parameter. This will also ensure any unique options due to corporate actions (AAPL1) are returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> (<em>str</em>) – Underlying symbol of the chain</p></li>
+<li><p><strong>includeAllRoots</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – Send expirations related to all option roots, defaults to ‘’</p></li>
+<li><p><strong>strikes</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – Add strike prices to each expiration, defaults to ‘’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of expiration dates as str %Y-%m-%d</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.data.MarketData.option_lookup">
+<code class="sig-name descname"><span class="pre">option_lookup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">underlying</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.data.MarketData.option_lookup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all options symbols for the given underlying. This will include additional option roots (ex. SPXW, RUTW) if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>underlying</strong> (<em>str</em>) – Underlying symbol of the chain</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict {“rootSymbol”: underlying, “options”: [list of option symbols]}</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="PyTradier.data.MarketData.option_strike">
 <code class="sig-name descname"><span class="pre">option_strike</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="headerlink" href="#PyTradier.data.MarketData.option_strike" title="Permalink to this definition">¶</a></dt>
@@ -333,27 +443,6 @@ Will not include order numbers</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="PyTradier.data.MarketData.options">
-<code class="sig-name descname"><span class="pre">options</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">datetime.datetime</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">greeks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'false'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.data.MarketData.options" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get all quotes in an option chain. Greek and IV data is included courtesy of ORATS. Please check out their APIs for more in-depth options data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>symbol</strong> (<em>str</em>) – Underlying symbol of the chain</p></li>
-<li><p><strong>expiration</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>datetime</em><em>]</em>) – Expiration for the chain</p></li>
-<li><p><strong>greeks</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>bool</em><em>]</em><em>, </em><em>optional</em>) – Add greeks and volatility information, defaults to “false”</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Get all quotes in an option chain</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -381,36 +470,36 @@ Will not include order numbers</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-PyTradier.error">
-<span id="pytradier-error-module"></span><h2>PyTradier.error module<a class="headerlink" href="#module-PyTradier.error" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-PyTradier.exceptions">
+<span id="pytradier-exceptions-module"></span><h2>PyTradier.exceptions module<a class="headerlink" href="#module-PyTradier.exceptions" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
-<dt id="PyTradier.error.MultiLegKeyWordError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">MultiLegKeyWordError</span></code><a class="headerlink" href="#PyTradier.error.MultiLegKeyWordError" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.exceptions.MultiLegKeyWordError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">MultiLegKeyWordError</span></code><a class="headerlink" href="#PyTradier.exceptions.MultiLegKeyWordError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>This class is raised when the dictionar passed to multileg method doesn’t have proper keys or values</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="PyTradier.error.OrderError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">OrderError</span></code><a class="headerlink" href="#PyTradier.error.OrderError" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.exceptions.OrderError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">OrderError</span></code><a class="headerlink" href="#PyTradier.exceptions.OrderError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="PyTradier.error.RequestError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">RequestError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">faultString</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.error.RequestError" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.exceptions.RequestError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">RequestError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_code</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.exceptions.RequestError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="PyTradier.error.RequiredError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">RequiredError</span></code><a class="headerlink" href="#PyTradier.error.RequiredError" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.exceptions.RequiredError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">RequiredError</span></code><a class="headerlink" href="#PyTradier.exceptions.RequiredError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="PyTradier.error.WatchListError">
-<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.error.</span></code><code class="sig-name descname"><span class="pre">WatchListError</span></code><a class="headerlink" href="#PyTradier.error.WatchListError" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.exceptions.WatchListError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">WatchListError</span></code><a class="headerlink" href="#PyTradier.exceptions.WatchListError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
@@ -420,117 +509,49 @@ Will not include order numbers</p>
 <dl class="py class">
 <dt id="PyTradier.fundamental.FundamentalData">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.fundamental.</span></code><code class="sig-name descname"><span class="pre">FundamentalData</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier._base.BasePyTradier</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
 <p>This API is presently in Beta. It is only available to Tradier Brokerage account holders and should only be used in production applications with caution</p>
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.CorporateActionInformation">
-<code class="sig-name descname"><span class="pre">CorporateActionInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.CorporateActionInformation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve corporate action information. This will include both historical and scheduled future actions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">CorporateActionInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.CorporateActionInformation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.corporateCalendar">
-<code class="sig-name descname"><span class="pre">corporateCalendar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporateCalendar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get Corporate calendar information for securities. Does not include dividend information</p>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">corporateCalendar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporateCalendar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.dividend">
-<code class="sig-name descname"><span class="pre">dividend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.dividend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">dividend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.dividend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.financialInfo">
-<code class="sig-name descname"><span class="pre">financialInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialInfo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve corporate financial information and statements.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">financialInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialInfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.financialRatios">
-<code class="sig-name descname"><span class="pre">financialRatios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialRatios" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get standard financial ratios for a company.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">financialRatios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialRatios" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.fundamentals">
-<code class="sig-name descname"><span class="pre">fundamentals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.fundamentals" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the company fundamental information</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">fundamentals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.fundamentals" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="PyTradier.fundamental.FundamentalData.priceStatistics">
-<code class="sig-name descname"><span class="pre">priceStatistics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.priceStatistics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve price statistic Information.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>symbol</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>list</em><em>]</em>) – single symbol or list of symbols to retrieve information on</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>either a dict with single symbol response or list of dictionaries</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Union[dict, list]</p>
-</dd>
-</dl>
-</dd></dl>
+<code class="sig-name descname"><span class="pre">priceStatistics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.priceStatistics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt id="PyTradier.fundamental.paperCheck">
+<code class="sig-prename descclassname"><span class="pre">PyTradier.fundamental.</span></code><code class="sig-name descname"><span class="pre">paperCheck</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.paperCheck" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-PyTradier.rest">
@@ -538,7 +559,7 @@ Will not include order numbers</p>
 <dl class="py class">
 <dt id="PyTradier.rest.REST">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.rest.</span></code><code class="sig-name descname"><span class="pre">REST</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier._base.BasePyTradier</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
 <p>Place equity and complex option trades including advanced orders.</p>
 <dl class="py attribute">
 <dt id="PyTradier.rest.REST.duration">
@@ -608,6 +629,32 @@ Will not include order numbers</p>
 </div>
 <div class="section" id="module-PyTradier.utils">
 <span id="pytradier-utils-module"></span><h2>PyTradier.utils module<a class="headerlink" href="#module-PyTradier.utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="PyTradier.utils.printer">
+<code class="sig-prename descclassname"><span class="pre">PyTradier.utils.</span></code><code class="sig-name descname"><span class="pre">printer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">requests.models.Response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.utils.printer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for testing endpoints</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>response</strong> (<em>Response</em>) – the response from API call</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-PyTradier.websocket">
+<span id="pytradier-websocket-module"></span><h2>PyTradier.websocket module<a class="headerlink" href="#module-PyTradier.websocket" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="PyTradier.websocket.STREAM">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.websocket.</span></code><code class="sig-name descname"><span class="pre">STREAM</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token_env</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.websocket.STREAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="PyTradier.websocket.STREAM.create_market_session">
+<code class="sig-name descname"><span class="pre">create_market_session</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#PyTradier.websocket.STREAM.create_market_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>POST request to API that returns the wss_url of the streaming session and a token. Valid for 5 minutes</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-PyTradier">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-PyTradier" title="Permalink to this headline">¶</a></h2>

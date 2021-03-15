@@ -185,6 +185,10 @@
       <li><a href="PyTradier.html#PyTradier.account.Account.balances">balances() (PyTradier.account.Account method)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="PyTradier.html#PyTradier.base.BasePyTradier">BasePyTradier (class in PyTradier.base)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="C">C</h2>
@@ -192,9 +196,13 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="PyTradier.html#PyTradier.fundamental.FundamentalData.CorporateActionInformation">CorporateActionInformation() (PyTradier.fundamental.FundamentalData method)</a>
 </li>
+      <li><a href="PyTradier.html#PyTradier.fundamental.FundamentalData.corporateCalendar">corporateCalendar() (PyTradier.fundamental.FundamentalData method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="PyTradier.html#PyTradier.fundamental.FundamentalData.corporateCalendar">corporateCalendar() (PyTradier.fundamental.FundamentalData method)</a>
+      <li><a href="PyTradier.html#PyTradier.websocket.STREAM.create_market_session">create_market_session() (PyTradier.websocket.STREAM method)</a>
+</li>
+      <li><a href="PyTradier.html#PyTradier.base.BasePyTradier.create_params">create_params() (PyTradier.base.BasePyTradier method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -264,9 +272,11 @@
 </li>
         <li><a href="PyTradier.html#module-PyTradier.account">PyTradier.account</a>
 </li>
+        <li><a href="PyTradier.html#module-PyTradier.base">PyTradier.base</a>
+</li>
         <li><a href="PyTradier.html#module-PyTradier.data">PyTradier.data</a>
 </li>
-        <li><a href="PyTradier.html#module-PyTradier.error">PyTradier.error</a>
+        <li><a href="PyTradier.html#module-PyTradier.exceptions">PyTradier.exceptions</a>
 </li>
         <li><a href="PyTradier.html#module-PyTradier.fundamental">PyTradier.fundamental</a>
 </li>
@@ -274,12 +284,14 @@
 </li>
         <li><a href="PyTradier.html#module-PyTradier.utils">PyTradier.utils</a>
 </li>
+        <li><a href="PyTradier.html#module-PyTradier.websocket">PyTradier.websocket</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="PyTradier.html#PyTradier.rest.REST.multileg">multileg (PyTradier.rest.REST attribute)</a>
 </li>
-      <li><a href="PyTradier.html#PyTradier.error.MultiLegKeyWordError">MultiLegKeyWordError</a>
+      <li><a href="PyTradier.html#PyTradier.exceptions.MultiLegKeyWordError">MultiLegKeyWordError</a>
 </li>
   </ul></td>
 </tr></table>
@@ -289,15 +301,19 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="PyTradier.html#PyTradier.rest.REST.option">option (PyTradier.rest.REST attribute)</a>
 </li>
-      <li><a href="PyTradier.html#PyTradier.data.MarketData.option_strike">option_strike() (PyTradier.data.MarketData method)</a>
+      <li><a href="PyTradier.html#PyTradier.data.MarketData.option_chain">option_chain() (PyTradier.data.MarketData method)</a>
 </li>
-      <li><a href="PyTradier.html#PyTradier.data.MarketData.options">options() (PyTradier.data.MarketData method)</a>
+      <li><a href="PyTradier.html#PyTradier.data.MarketData.option_expirations">option_expirations() (PyTradier.data.MarketData method)</a>
+</li>
+      <li><a href="PyTradier.html#PyTradier.data.MarketData.option_lookup">option_lookup() (PyTradier.data.MarketData method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="PyTradier.html#PyTradier.data.MarketData.option_strike">option_strike() (PyTradier.data.MarketData method)</a>
+</li>
       <li><a href="PyTradier.html#PyTradier.account.Account.order">order() (PyTradier.account.Account method)</a>
 </li>
-      <li><a href="PyTradier.html#PyTradier.error.OrderError">OrderError</a>
+      <li><a href="PyTradier.html#PyTradier.exceptions.OrderError">OrderError</a>
 </li>
       <li><a href="PyTradier.html#PyTradier.account.Account.orders">orders() (PyTradier.account.Account method)</a>
 </li>
@@ -307,6 +323,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="PyTradier.html#PyTradier.fundamental.paperCheck">paperCheck() (in module PyTradier.fundamental)</a>
+</li>
       <li><a href="PyTradier.html#PyTradier.rest.REST.place_equity_order">place_equity_order() (PyTradier.rest.REST method)</a>
 </li>
       <li><a href="PyTradier.html#PyTradier.account.Account.positions">positions() (PyTradier.account.Account method)</a>
@@ -314,6 +332,10 @@
       <li><a href="PyTradier.html#PyTradier.rest.REST.prepare_order">prepare_order() (PyTradier.rest.REST method)</a>
 </li>
       <li><a href="PyTradier.html#PyTradier.fundamental.FundamentalData.priceStatistics">priceStatistics() (PyTradier.fundamental.FundamentalData method)</a>
+</li>
+      <li><a href="PyTradier.html#PyTradier.utils.printer">printer() (in module PyTradier.utils)</a>
+</li>
+      <li><a href="PyTradier.html#PyTradier.base.BasePyTradier.process_response">process_response() (PyTradier.base.BasePyTradier method)</a>
 </li>
       <li><a href="PyTradier.html#PyTradier.account.Account.profile">profile() (PyTradier.account.Account method)</a>
 </li>
@@ -331,6 +353,13 @@
         <li><a href="PyTradier.html#module-PyTradier.account">module</a>
 </li>
       </ul></li>
+      <li>
+    PyTradier.base
+
+      <ul>
+        <li><a href="PyTradier.html#module-PyTradier.base">module</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
@@ -341,10 +370,10 @@
 </li>
       </ul></li>
       <li>
-    PyTradier.error
+    PyTradier.exceptions
 
       <ul>
-        <li><a href="PyTradier.html#module-PyTradier.error">module</a>
+        <li><a href="PyTradier.html#module-PyTradier.exceptions">module</a>
 </li>
       </ul></li>
       <li>
@@ -368,6 +397,13 @@
         <li><a href="PyTradier.html#module-PyTradier.utils">module</a>
 </li>
       </ul></li>
+      <li>
+    PyTradier.websocket
+
+      <ul>
+        <li><a href="PyTradier.html#module-PyTradier.websocket">module</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -382,11 +418,11 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="PyTradier.html#PyTradier.error.RequestError">RequestError</a>
+      <li><a href="PyTradier.html#PyTradier.exceptions.RequestError">RequestError</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="PyTradier.html#PyTradier.error.RequiredError">RequiredError</a>
+      <li><a href="PyTradier.html#PyTradier.exceptions.RequiredError">RequiredError</a>
 </li>
       <li><a href="PyTradier.html#PyTradier.rest.REST">REST (class in PyTradier.rest)</a>
 </li>
@@ -399,12 +435,16 @@
       <li><a href="PyTradier.html#PyTradier.account.selectArgs">selectArgs() (in module PyTradier.account)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="PyTradier.html#PyTradier.websocket.STREAM">STREAM (class in PyTradier.websocket)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="PyTradier.html#PyTradier.error.WatchListError">WatchListError</a>
+      <li><a href="PyTradier.html#PyTradier.exceptions.WatchListError">WatchListError</a>
 </li>
   </ul></td>
 </tr></table>

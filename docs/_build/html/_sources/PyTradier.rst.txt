@@ -12,6 +12,14 @@ PyTradier.account module
    :undoc-members:
    :show-inheritance:
 
+PyTradier.base module
+---------------------
+
+.. automodule:: PyTradier.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 PyTradier.data module
 ---------------------
 
@@ -20,10 +28,10 @@ PyTradier.data module
    :undoc-members:
    :show-inheritance:
 
-PyTradier.error module
-----------------------
+PyTradier.exceptions module
+---------------------------
 
-.. automodule:: PyTradier.error
+.. automodule:: PyTradier.exceptions
    :members:
    :undoc-members:
    :show-inheritance:
@@ -48,6 +56,14 @@ PyTradier.utils module
 ----------------------
 
 .. automodule:: PyTradier.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.websocket module
+--------------------------
+
+.. automodule:: PyTradier.websocket
    :members:
    :undoc-members:
    :show-inheritance:

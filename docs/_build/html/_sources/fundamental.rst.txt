@@ -1,0 +1,7 @@
+fundamental module
+==================
+
+.. automodule:: fundamental
+   :members:
+   :undoc-members:
+   :show-inheritance:
