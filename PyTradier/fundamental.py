@@ -1,4 +1,5 @@
 from PyTradier.base import BasePyTradier
+from PyTradier.exceptions import AuthError
 from typing import Union
 
 
@@ -7,7 +8,9 @@ def paperCheck(func):
         if args[0].paper == False:
             return func(*args, **kwargs)
         else:
-            print("Fundamental data is only possible with a Brokerage account")
+            raise AuthError(
+                f"Fundamental Data requires a brokerage account. Please use brokerage credentials and initialize with `paper=False`"
+            )
 
     return _check
 
@@ -17,7 +20,7 @@ class FundamentalData(BasePyTradier):
     """
 
     @paperCheck
-    def fundamentals(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def company_info(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Get the company fundamental information. This will print a massive list
 
         :param symbol: single symbol or list of symbols to retrieve information on
@@ -31,7 +34,7 @@ class FundamentalData(BasePyTradier):
         )
 
     @paperCheck
-    def corporateCalendar(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def corporate_calendar(self, symbol: Union[str, list]) -> Union[dict, list]:
         """
         Get Corporate calendar information for securities. Does not include dividend information
         """
@@ -42,7 +45,7 @@ class FundamentalData(BasePyTradier):
         # return Response("corporateCalendar", r)
 
     @paperCheck
-    def dividend(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def dividends(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Get dividend information for a security. This will include previous dividends as well as formally announced future dividend dates.
 
         :param symbol: single symbol or list of symbols to retrieve information on
@@ -56,7 +59,7 @@ class FundamentalData(BasePyTradier):
         )
 
     @paperCheck
-    def CorporateActionInformation(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def corporate_actions(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Retrieve corporate action information. This will include both historical and scheduled future actions.
 
         :param symbol: single symbol or list of symbols to retrieve information on
@@ -70,7 +73,7 @@ class FundamentalData(BasePyTradier):
         )
 
     @paperCheck
-    def financialRatios(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def ratios(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Get standard financial ratios for a company.
 
         :param symbol: single symbol or list of symbols to retrieve information on
@@ -84,7 +87,7 @@ class FundamentalData(BasePyTradier):
         )
 
     @paperCheck
-    def financialInfo(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def financial_reports(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Retrieve corporate financial information and statements.
 
         :param symbol: single symbol or list of symbols to retrieve information on
@@ -98,7 +101,7 @@ class FundamentalData(BasePyTradier):
         )
 
     @paperCheck
-    def priceStatistics(self, symbol: Union[str, list]) -> Union[dict, list]:
+    def price_statistics(self, symbol: Union[str, list]) -> Union[dict, list]:
         """Retrieve price statistic Information.
 
         :param symbol: single symbol or list of symbols to retrieve information on

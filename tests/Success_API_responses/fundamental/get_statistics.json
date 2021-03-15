@@ -1,0 +1,286 @@
+[
+    {
+      "request": "MSFT",
+      "type": "Symbol",
+      "results": [
+        {
+          "type": "Stock",
+          "id": "0P000003MH",
+          "tables": {
+            "price_statistics": {
+              "period_5d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "5D",
+                "close_price_to_moving_average": 0.990404,
+                "moving_average_price": 126.716
+              },
+              "period_1w": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1W",
+                "average_volume": 2.7955174E7,
+                "high_price": 129.43,
+                "low_price": 123.57,
+                "percentage_below_high_price": 3.04,
+                "total_volume": 1.67731047E8
+              },
+              "period_10d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "10D",
+                "close_price_to_moving_average": 0.982057,
+                "moving_average_price": 127.793
+              },
+              "period_13d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "13D",
+                "close_price_to_moving_average": 0.984296,
+                "moving_average_price": 127.502308
+              },
+              "period_2w": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "2W",
+                "average_volume": 2.6975659E7,
+                "high_price": 131.37,
+                "low_price": 123.57,
+                "percentage_below_high_price": 4.47,
+                "total_volume": 2.9673225E8
+              },
+              "period_20d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "20D",
+                "close_price_to_moving_average": 0.998977,
+                "moving_average_price": 125.6285
+              },
+              "period_30d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "30D",
+                "close_price_to_moving_average": 1.015463,
+                "moving_average_price": 123.589
+              },
+              "period_1m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1M",
+                "average_volume": 2.3311962E7,
+                "high_price": 131.37,
+                "low_price": 118.58,
+                "percentage_below_high_price": 4.47,
+                "total_volume": 5.12863184E8
+              },
+              "period_50d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "50D",
+                "close_price_to_moving_average": 1.044521,
+                "moving_average_price": 120.1508
+              },
+              "period_60d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "60D",
+                "close_price_to_moving_average": 1.059395,
+                "moving_average_price": 118.463833
+              },
+              "period_90d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "90D",
+                "close_price_to_moving_average": 1.100618,
+                "moving_average_price": 114.026889
+              },
+              "period_3m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "3M",
+                "average_volume": 2.4513613E7,
+                "high_price": 131.37,
+                "low_price": 104.965,
+                "percentage_below_high_price": 4.47,
+                "total_volume": 1.519844032E9
+              },
+              "period_6m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "6M",
+                "average_volume": 3.1526019E7,
+                "high_price": 131.37,
+                "low_price": 93.96,
+                "percentage_below_high_price": 4.47,
+                "total_volume": 3.877700387E9
+              },
+              "period_200d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "200D",
+                "close_price_to_moving_average": 1.13331,
+                "moving_average_price": 110.7376
+              },
+              "period_30w": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "30W",
+                "close_price_to_moving_average": 1.13363,
+                "moving_average_price": 110.706358
+              },
+              "period_9m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "9M",
+                "average_volume": 3.0897771E7,
+                "high_price": 131.37,
+                "low_price": 93.96,
+                "percentage_below_high_price": 4.47,
+                "total_volume": 5.808781116E9
+              },
+              "period_1y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1Y",
+                "arithmetic_mean": 3.1136,
+                "average_volume": 2.9537553E7,
+                "best3_month_total_return": 25.5734,
+                "close_price_to_moving_average": 1.156486,
+                "high_price": 131.37,
+                "low_price": 93.96,
+                "moving_average_price": 108.518359,
+                "percentage_below_high_price": 4.47,
+                "standard_deviation": 19.9425,
+                "total_volume": 7.443463541E9,
+                "worst3_month_total_return": -10.8233
+              },
+              "period_3y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "3Y",
+                "arithmetic_mean": 2.9874,
+                "average_volume": 2.6803689E7,
+                "best3_month_total_return": 25.5734,
+                "high_price": 131.37,
+                "low_price": 48.035,
+                "percentage_below_high_price": 4.47,
+                "standard_deviation": 15.8931,
+                "total_volume": 2.0558429757E10,
+                "worst3_month_total_return": -10.8233
+              },
+              "period_5y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "5Y",
+                "arithmetic_mean": 2.3512,
+                "average_volume": 2.940971E7,
+                "best3_month_total_return": 26.1805,
+                "close_price_to_moving_average": 1.824532,
+                "high_price": 131.37,
+                "low_price": 39.27,
+                "moving_average_price": 68.78478,
+                "percentage_below_high_price": 4.47,
+                "standard_deviation": 21.1905,
+                "total_volume": 3.7879707447E10,
+                "worst3_month_total_return": -13.3931
+              },
+              "period_10y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "10Y",
+                "arithmetic_mean": 1.9584,
+                "average_volume": 4.0787319E7,
+                "best3_month_total_return": 26.3669,
+                "high_price": 131.37,
+                "low_price": 19.01,
+                "percentage_below_high_price": 4.47,
+                "standard_deviation": 21.4302,
+                "total_volume": 1.05720731581E11,
+                "worst3_month_total_return": -21.0382
+              }
+            },
+            "trailing_returns": {
+              "period_1d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1D",
+                "total_return": -0.007967
+              },
+              "period_5d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "5D",
+                "total_return": -0.562554
+              },
+              "period_1m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1M",
+                "total_return": 5.214621
+              },
+              "period_3m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "3M",
+                "total_return": 19.201287
+              },
+              "period_6m": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "6M",
+                "total_return": 15.378297
+              },
+              "period_1y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "1Y",
+                "total_return": 31.277079
+              },
+              "period_3y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "3Y",
+                "total_return": 37.576565
+              },
+              "period_5y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "5Y",
+                "total_return": 27.437623
+              },
+              "period_10y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "10Y",
+                "total_return": 21.540256
+              },
+              "period_15y": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "15Y",
+                "total_return": 11.99373
+              },
+              "m_t_d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "MTD",
+                "total_return": -3.905054
+              },
+              "q_t_d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "QTD",
+                "total_return": 6.410039
+              },
+              "y_t_d": {
+                "share_class_id": "0P000003MH",
+                "as_of_date": "2019-05-09",
+                "period": "YTD",
+                "total_return": 24.012996
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]

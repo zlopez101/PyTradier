@@ -1,0 +1,16 @@
+{
+    "watchlists":{
+       "watchlist":[
+          {
+             "name":"default",
+             "id":"default",
+             "public_id":"public-atea42pd"
+          },
+          {
+             "name":"a c d",
+             "id":"a-c-d",
+             "public_id":"public-5672lg0a"
+          }
+       ]
+    }
+ }

@@ -1,0 +1,11 @@
+{
+    "watchlists":{
+       "watchlist":[
+          {
+             "name":"My Watchlist",
+             "id":"my_watchlist",
+             "public_id":"public-atea42pd"
+          }
+       ]
+    }
+ }

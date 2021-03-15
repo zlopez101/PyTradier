@@ -1,0 +1,38 @@
+[
+    {
+      "request": "MSFT",
+      "type": "Symbol",
+      "results": [
+        {
+          "type": "Company",
+          "id": "0C000008EC",
+          "tables": {
+            "corporate_calendars": [
+              {
+                "company_id": "0C000008EC",
+                "begin_date_time": "2013-01-24",
+                "end_date_time": "2013-01-24",
+                "event_type": 8,
+                "estimated_date_for_next_event": "1970-01-01",
+                "event": "Microsoft Fiscal Year 2013 Second Quarter Earnings",
+                "event_fiscal_year": 2013,
+                "event_status": "Confirmed",
+                "time_zone": "1970-01-01"
+              },
+              {
+                "company_id": "0C000008EC",
+                "begin_date_time": "2015-01-26",
+                "end_date_time": "2015-01-26",
+                "event_type": 13,
+                "estimated_date_for_next_event": "1970-01-01",
+                "event": "Microsoft Corp Second quarter earnings Conference Call in 2015",
+                "event_fiscal_year": 2015,
+                "event_status": "Confirmed",
+                "time_zone": "1969-12-31"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]

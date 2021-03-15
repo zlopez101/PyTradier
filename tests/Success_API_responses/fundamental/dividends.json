@@ -1,0 +1,49 @@
+[
+    {
+      "request": "MSFT",
+      "type": "Symbol",
+      "results": [
+        {
+          "type": "Stock",
+          "id": "0P000003MH",
+          "tables": {
+            "cash_dividends": [
+              {
+                "share_class_id": "0P000003MH",
+                "dividend_type": "CD",
+                "ex_date": "2014-02-18",
+                "cash_amount": 0.28,
+                "currency_i_d": "USD",
+                "declaration_date": "2013-11-19",
+                "frequency": 4,
+                "pay_date": "2014-03-13",
+                "record_date": "2014-02-20"
+              },
+              {
+                "share_class_id": "0P000003MH",
+                "dividend_type": "CD",
+                "ex_date": "2015-11-17",
+                "cash_amount": 0.36,
+                "currency_i_d": "USD",
+                "declaration_date": "2015-09-15",
+                "frequency": 4,
+                "pay_date": "2015-12-10",
+                "record_date": "2015-11-19"
+              },
+              {
+                "share_class_id": "0P000003MH",
+                "dividend_type": "CD",
+                "ex_date": "2010-02-16",
+                "cash_amount": 0.13,
+                "currency_i_d": "USD",
+                "declaration_date": "2009-12-10",
+                "frequency": 4,
+                "pay_date": "2010-03-11",
+                "record_date": "2010-02-18"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]

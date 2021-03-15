@@ -1,0 +1,102 @@
+[
+    {
+      "request": "MSFT",
+      "type": "Symbol",
+      "results": [
+        {
+          "type": "Company",
+          "id": "0C000008EC",
+          "tables": {
+            "mergers_and_acquisitions": {
+              "acquired_company_id": "0C00008KGV",
+              "parent_company_id": "0C000008EC",
+              "cash_amount": 196.0,
+              "currency_id": "USD",
+              "effective_date": "2016-12-08",
+              "notes": "http://blogs.microsoft.com/blog/2016/12/08/microsoft-and-linkedin-begin-journey-to-empower-professionals-around-the-world-to-achieve-more/#sm.000424kd7jadd7a11se14ljr6qdp6"
+            }
+          }
+        },
+        {
+          "type": "Stock",
+          "id": "0P000003MH",
+          "tables": {
+            "stock_splits": {
+              "1987-09-21": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1987-09-21",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "1990-04-16": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1990-04-16",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "1991-06-27": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1991-06-27",
+                "adjustment_factor": 1.5,
+                "split_from": 2.0,
+                "split_to": 3.0,
+                "split_type": "SS"
+              },
+              "1992-06-15": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1992-06-15",
+                "adjustment_factor": 1.5,
+                "split_from": 2.0,
+                "split_to": 3.0,
+                "split_type": "SS"
+              },
+              "1994-05-23": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1994-05-23",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "1996-12-09": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1996-12-09",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "1998-02-23": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1998-02-23",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "1999-03-29": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "1999-03-29",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              },
+              "2003-02-18": {
+                "share_class_id": "0P000003MH",
+                "ex_date": "2003-02-18",
+                "adjustment_factor": 2.0,
+                "split_from": 1.0,
+                "split_to": 2.0,
+                "split_type": "SS"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]

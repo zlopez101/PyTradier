@@ -20,3 +20,10 @@ class RequestError(Exception):
         self.message = message
         self.error_code = error_code
         super().__init__(self.message)
+
+
+class AuthError(Exception):
+    """Class for notifying user that some endpoints are for brokerage accounts only, must use live credentials
+    """
+
+    pass

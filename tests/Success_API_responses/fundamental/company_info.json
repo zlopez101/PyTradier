@@ -1,0 +1,74 @@
+[
+    {
+      "request": "MSFT",
+      "type": "Symbol",
+      "results": [
+        {
+          "type": "Company",
+          "id": "0C000008EC",
+          "tables": {
+            "company_profile": {
+              "company_id": "0C000008EC",
+              "average_employee_number": 0,
+              "contact_email": "msft@microsoft.com",
+              "headquarter": {
+                "address_line1": "One Microsoft Way",
+                "city": "Redmond",
+                "country": "USA",
+                "fax": "+1 425 706-7329",
+                "homepage": "http://www.microsoft.com",
+                "phone": "+1 425 882-8080",
+                "postal_code": "98052-6399",
+                "province": "WA"
+              },
+              "is_head_office_same_with_registered_office_flag": false,
+              "total_employee_number": 131000,
+              "TotalEmployeeNumber.asOfDate": "2018-06-30"
+            },
+            "asset_classification": {
+              "company_id": "0C000008EC",
+              "c_a_n_n_a_i_c_s": 0,
+              "financial_health_grade": "A",
+              "FinancialHealthGrade.asOfDate": "2019-05-08",
+              "growth_grade": "C",
+              "GrowthGrade.asOfDate": "2019-04-30",
+              "growth_score": 60.55918,
+              "morningstar_economy_sphere_code": 3,
+              "morningstar_industry_code": 31165134,
+              "morningstar_industry_group_code": 31165,
+              "morningstar_sector_code": 311,
+              "n_a_c_e": 62.09,
+              "n_a_i_c_s": 511210,
+              "profitability_grade": "C",
+              "ProfitabilityGrade.asOfDate": "2019-04-30",
+              "s_i_c": 7372,
+              "size_score": 398.87,
+              "stock_type": 2,
+              "StockType.asOfDate": "2019-04-30",
+              "style_box": 3,
+              "StyleBox.asOfDate": "2019-04-30",
+              "style_score": 317.62,
+              "value_score": 48.75043
+            },
+            "historical_asset_classification": {
+              "company_id": "0C000008EC",
+              "as_of_date": "2019-05-01",
+              "financial_health_grade": "A",
+              "growth_score": 60.55918,
+              "morningstar_economy_sphere_code": 3,
+              "morningstar_industry_code": 31165134,
+              "morningstar_industry_group_code": 31165,
+              "morningstar_sector_code": 311,
+              "profitability_grade": "A+",
+              "size_score": 398.87,
+              "stock_type": 0,
+              "style_box": 0,
+              "style_score": 317.62,
+              "value_score": 48.75043
+            },
+            "long_descriptions": "Microsoft develops and licenses consumer and enterprise software. It is known for its Windows operating systems and Office productivity suite. The company is organized into three overarching segments: productivity and business processes (legacy Microsoft Office, cloud-based Office 365, Exchange, SharePoint, Skype, LinkedIn, Dynamics), intelligence cloud (infrastructure- and platform-as-a-service offerings Azure, Windows Server OS, SQL Server), and more personal computing (Windows Client, Xbox, Bing search, display advertising, and Surface laptops, tablets, and desktops). Through acquisitions, Microsoft owns Xamarin, LinkedIn, and GitHub. It reports revenue in product and service and other revenue on its income statement."
+          }
+        }
+      ]
+    }
+  ]

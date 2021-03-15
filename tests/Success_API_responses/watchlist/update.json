@@ -1,0 +1,23 @@
+{
+    "watchlist":{
+       "name":"My Updated Watchlist",
+       "id":"my_watchlist",
+       "public_id":"public-6f8f625wti",
+       "items":{
+          "item":[
+             {
+                "symbol":"AAPL",
+                "id":"aapl"
+             },
+             {
+                "symbol":"IBM",
+                "id":"ibm"
+             },
+             {
+                "symbol":"NFLX",
+                "id":"nflx"
+             }
+          ]
+       }
+    }
+ }

@@ -1,0 +1,19 @@
+{
+    "watchlist":{
+       "name":"default",
+       "id":"default",
+       "public_id":"public-atea42pd",
+       "items":{
+          "item":[
+             {
+                "symbol":"AAPL",
+                "id":"aapl"
+             },
+             {
+                "symbol":"AMZN",
+                "id":"amzn"
+             }
+          ]
+       }
+    }
+ }
