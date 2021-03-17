@@ -11,7 +11,7 @@ def randomTicker():
     """
     with open(r"tests\Data\S_and_P_500.json", "r") as f:
         s_and_p = json.load(f)
-        yield random.sample(s_and_p, 2)
+        yield random.sample(s_and_p["S_and_P_500"], 2)
 
 
 @pytest.fixture
@@ -135,6 +135,7 @@ def patch_get(monkeypatch, mockresponse):
             monkeypatch.setattr(requests, "get", self.mock_get)
 
     yield PatchGet
+
 
 @pytest.fixture
 def patch_get(monkeypatch, mockresponse):
