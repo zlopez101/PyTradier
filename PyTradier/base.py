@@ -6,6 +6,7 @@ from typing import Union
 import json
 from datetime import datetime
 
+
 class BasePyTradier:
     def __init__(
         self, token: str = "TRADIER_SANDBOX_TOKEN", paper: bool = True,
@@ -35,7 +36,7 @@ class BasePyTradier:
             # raise some error
             print("this don't work!")
 
-     def _bool_prep(self, boolean: Union[str, bool]) -> str:
+    def _bool_prep(self, boolean: Union[str, bool]) -> str:
         """allow user to input etierh a str or list and automatically converts to str       
 
         :param boolean: [description]
@@ -44,9 +45,9 @@ class BasePyTradier:
         :rtype: str
         """
         if isinstance(boolean, str):
-            return eval(boolean.capitalize())
-        elif isinstance(boolean, bool):
             return boolean
+        elif isinstance(boolean, bool):
+            return str(boolean).lower()
         else:
             # raise some error
             print("this don't work!")
@@ -76,7 +77,6 @@ class BasePyTradier:
         :rtype: dict
         """
         return {k: v for k, v in params.items() if v and k != "self"}
-
 
     def _headers(self):
         return {

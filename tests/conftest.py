@@ -15,6 +15,21 @@ def randomTicker():
 
 
 @pytest.fixture
+def randomOption(randomTicker):
+    """create a random option symbol based on random tickers selected from `randomTicker`
+
+    Option Tickers contain ROOT + Expiration (yymmdd) + Side (C for call or P for put) + Strike (ddddd.ddd -> dddddddd)
+
+
+    :yield: [description]
+    :rtype: [type]
+    """
+    yield [
+        ticker + "211005C00200000" for ticker in randomTicker
+    ]  # 10-05-2021 $200 Strike Call
+
+
+@pytest.fixture
 def mockresponse():
     class MockResponse:
         def __init__(self, status, response_json_path):

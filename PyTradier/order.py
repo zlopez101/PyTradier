@@ -9,16 +9,19 @@ The program ought to evaluate its own trades
 
 from typing import Union
 from PyTradier.exceptions import RequiredError
+import re
 
 
 class baseOrder:
 
     accepted_durations = ["day", "gtc", "pre", "post"]
+    option_sides = ["buy_to_open", "buy_to_close", "sell_to_open", "sell_to_close"]
+    equity_sides = ["buy", "buy_to_cover", "sell", "sell_short"]
 
     def __init__(
         self,
         symbol: str,
-        quantity: int,
+        side,
         duration: str,
         preview: Union[str, bool] = "",
         tag: str = "",
@@ -27,27 +30,73 @@ class baseOrder:
             raise RequiredError(
                 f'duration "{duration}" not one of {baseOrder.accepted_durations}'
             )
-        self.symbol = symbol
-        self.quantity = quantity
+
+        self.symbol_process(symbol)
         self.duration = duration
+        if self.option_symbol:
+            if side not in baseOrder.option_sides:
+                raise RequiredError(
+                    f"side {side} is not accepted side for option orders. Please choose from {baseOrder.option_sides}"
+                )
+        else:
+            if side not in baseOrder.equity_sides:
+                raise RequiredError(
+                    f"side {side} is not accepted side for equity orders. Please choose from {baseOrder.equity_sides}"
+                )
+        self.side = side
         self.preview = preview
         self.tag = tag
 
-    def __repr__(self):
-        return f"Order(Symbol: {self.symbol})"
+    def symbol_process(self, symbol: str):
+        if len(symbol) > 10:
+            # we got an option
+            self.option_symbol = symbol
+            self.symbol = next(filter(None, re.split(r"(\d+)", symbol)))
+        else:
+            self.symbol = symbol
+            self.option_symbol = None
 
-    def params(self):
-        params = {}
+    def __repr__(self):
+        return f"order(Symbol: {self.symbol})"
+
+    def params(self) -> dict:
+        """create the order parameter details in a form that Tradier API will understand
+
+        :return: order details dictionary dictionary
+        :rtype: dict
+        """
+        details = {}
         for key, value in {
             key: value for key, value in self.__dict__.items() if value
         }.items():
             if key.startswith("_"):
-                params[key[1:]] = value
+                details[key[1:]] = value
             else:
-                params[key] = value
-        return params
+                details[key] = value
+        return details
 
-    def make_legs(self, index: str) -> dict:
+    def make_legs(self, index: int) -> dict:
+        """[summary]
+
+        don't include duration, tags, preview, 
+
+        :param index: index of the order dictionary
+        :type index: int
+        :return: dictionary reference for the order
+        :rtype: dict
+        """
+        leg = {}
+        for key, value in {
+            key: value
+            for key, value in self.__dict__.items()
+            if value and key != "duration"
+        }.items():
+            if key.startswith("_"):
+                leg[key[1:] + f"[{index}]"] = value
+            else:
+                leg[key + f"[{index}]"] = value
+        return leg
+
         return {
             f"option_symbol[{index}]": "option_symbol",
             f"side[{index}]": "side",
@@ -55,82 +104,80 @@ class baseOrder:
         }
 
 
-class MarketOrder(baseOrder):
+class SpecialOrder(baseOrder):
+    """Special Orders for combo and multileg styles
+    """
+
     pass
 
 
-class Stop:
-    """requires stop price
-
-    Stop, Stop Limit, 
+class LimitOrder(baseOrder):
+    """A limit order is an order to buy or sell a stock at a specific price or better.
     """
 
-    def __init__(self, stop_price):
-        self.stop_price = stop_price
-
-
-class StopLimit:
-    """requires stop and limit price
-    """
-
-    def __init__(self, stop_price, limit_price):
-        self.stop_price = stop_price
-        self.limit_price = limit_price
-
-
-class Limit:
-    """requires limit price
-
-    Limit, Stop Limit, Debit, Credit
-    """
-
-    def __init__(self, limit_price):
-        self.limit_price = limit_price
-
-
-class LimitOrder(baseOrder, Limit):
     _type = "limit"
 
     def __init__(
         self,
-        _class: str,
         symbol: str,
+        side: str,
         quantity: int,
         limit_price: float,
         duration: str,
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        baseOrder.__init__(self, symbol, quantity, duration, preview=preview, tag=tag)
-        Limit.__init__(self, limit_price)
-        self._class = _class
+        super().__init__(symbol, side, duration, preview=preview, tag=tag)
         self._type = "limit"
+        self.limit_price = limit_price
 
 
-class StopOrder(baseOrder, Stop):
+class StopOrder(baseOrder):
+    """A stop order, also referred to as a stop-loss order, is an order to buy or sell a stock once the price of the stock reaches a specified price, known as the stop price.
+    """
+
     def __init__(
         self,
-        _class: str,
         symbol: str,
+        side: str,
         quantity: int,
         stop_price: float,
         duration: str,
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        self._class = _class
+        super().__init__(symbol, side, duration, preview=preview, tag=tag)
         self.type = "stop"
-        baseOrder.__init__(self, symbol, quantity, duration, preview=preview, tag=tag)
-        Stop.__init__(self, stop_price)
+        self.stop_price = stop_price
 
 
-class StopLimitOrder(baseOrder, StopLimit):
-    _type = "stop_limit"
+class StopLimitOrder(baseOrder):
+    """A stop-limit order is an order to buy or sell a stock that combines the features of a stop order and a limit order
+    """
 
     def __init__(
         self,
-        _class: str,
         symbol: str,
+        side: str,
+        quantity: int,
+        stop_price: float,
+        limit_price: float,
+        duration: str,
+        preview: Union[str, bool] = "",
+        tag: str = "",
+    ):
+        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+
+        self.type = "stop_limit"
+        self.stop_price = stop_price
+        self.limit_price = limit_price
+
+
+class MarketOrder(baseOrder):
+    def __init__(
+        self,
+        symbol: str,
+        side: str,
         quantity: int,
         limit_price: float,
         stop_price: float,
@@ -138,13 +185,10 @@ class StopLimitOrder(baseOrder, StopLimit):
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        self._class = _class
-        self.type = "stop_limit"
-        baseOrder.__init__(self, symbol, quantity, duration, preview=preview, tag=tag)
-        StopLimit.__init__(self, stop_price, limit_price)
+        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+        self.type = "market"
 
 
 if __name__ == "__main__":
-
-    l = LimitOrder("equitys", "hello", 1, 2, "sdfs")
-    print(l.params())
+    order = LimitOrder("AAPL210605C000123000", "buy", 1, 2, "gtc")
+    print(order.params())
