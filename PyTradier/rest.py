@@ -1,5 +1,6 @@
 from PyTradier.base import BasePyTradier
 from typing import Union
+from itertools import groupby
 from datetime import datetime
 from PyTradier.exceptions import RequiredError
 from PyTradier.order import LimitOrder, StopLimitOrder, StopOrder, MarketOrder
@@ -11,6 +12,8 @@ limitOrder_stopOrder_stopLimitOrder = Union[LimitOrder, StopOrder, StopLimitOrde
 
 class REST(BasePyTradier):
     """Place equity and complex option trades including advanced orders. kwarg arguments passed to class initialization will define default values including preview, tag, and durations settings
+
+    Order requirements are rather bespoke and I have no found a common pattern to unite them -> self validation is difficult, respond and adjust to error message where they arise
     """
 
     def __init__(
@@ -20,37 +23,97 @@ class REST(BasePyTradier):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    def check_types(self, attr: str, *args) -> str:
+        """confirm all durations are the same, or use default, or use one specified by specific order
+
+        :return: duration of order
+        :rtype: str
+        """
+
+        attributes = [
+            getattr(order, attr) for order in args if getattr(order, attr, None)
+        ]
+        if attributes:
+            grouped = groupby(attributes)
+            if next(grouped, True) and not next(grouped, False):
+                return attributes[0]
+            else:
+                raise RequiredError(
+                    f"All the attributes {attr} need to be the same for this type"
+                )
+        elif getattr(self, attr, None):
+            return getattr(self, attr, None)
+        else:
+            raise RequiredError("Duration was never specified")
+
+    def order_details(self, *args, **kwargs) -> dict:
+        """create the order details dictionary based on supplied orders (args) and specified keywords (duration, tags)
+
+        :return: [description]
+        :rtype: dict
+        """
+        pass
+
+    def create_order_legs(self, *args) -> dict:
+        """create the order legs
+
+        :return: [description]
+        :rtype: dict
+        """
+        legs = {}
+        for i, order in enumerate(args):
+            dct = order.make_legs(i)
+            legs = {**legs, **dct}
+        return legs
+
     def place_order(self, params) -> dict:
         """base order method for all trades
 
         :return: API response
         :rtype: dict
         """
-        params = self.prepare_order(params)
-        if params["preview"]:
-            print("here")
-            return self._post(f"/v1/accounts/{self.account_id}/orders", params=params)
-        else:
-            print("there")
-            self._check_parameters(params)
-            return self._post(f"/v1/accounts/{self.account_id}/orders", params=params)
+        return self._post(f"/v1/accounts/{self.account_id}/orders", params=params)
 
-    def trade(self, order: anyOrder) -> dict:
-        """Place an order to trade an equity or option security.
+    def equity(self, order: anyOrder) -> dict:
+        """Place an order to trade an equity security.
 
-        :param order: Market, Limit, Stop, or Stop-Limit order
-        :type order: Any_Order_Type
+        :param order: Order to place
+        :type order: MarketOrder, LimitOrder, StopOrder, StopLimitOrder
         :return: Order Response dict
         :rtype: dict
         """
-        return self.place_order(order.params())
+        params = order.params("equity")
+        params["duration"] = self.check_types("duration", order)
+        return self.place_order(params)
 
-    def one_trigger_other(self, index_order: limitOrder_stopOrder_stopLimitOrder, triggered_order: anyOrder):
+    def option(self, order: anyOrder) -> dict:
+        """Place an order to trade an option security
+
+        :param order: Order to place
+        :type order: MarketOrder, LimitOrder, StopOrder, StopLimitOrder
+        :return: order response dict
+        :rtype: dict
+        """
+        params = order.params("option")
+        params["duration"] = self.check_types("duration", order)
+
+        return self.place_order(params)
+
+    def one_trigger_other(
+        self,
+        index_order: limitOrder_stopOrder_stopLimitOrder,
+        triggered_order: anyOrder,
+    ):
         """Place a one-triggers-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.
         """
-        pass
+        params = self.create_order_legs(index_order, triggered_order)
+        params["duration"] = self.check_types("duration", index_order, triggered_order)
+        params["class"] = "oto"
+        return self.place_order(params)
 
-    def one_cancels_other(self, order1: limitOrder_stopOrder_stopLimitOrder, order2: anyOrder):
+    def one_cancels_other(
+        self, order1: limitOrder_stopOrder_stopLimitOrder, order2: anyOrder, **kwargs
+    ):
         """Place a one-cancels-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.
 
         type must be different for both legs.
@@ -58,33 +121,75 @@ class REST(BasePyTradier):
         If both orders are options, the option_symbol must be the same.
         If sending duration per leg, both orders must have the same duration.
         """
-        pass
+        params = self.create_order_legs(order1, order2)
+        params["class"] = "oco"
+        # duration check
+        params["duration"] = self.check_types("duration", order1, order2)
+
+        # equity symbol check
+        # some code
+
+        # option symbol check
+        # some code
+
+        return self.place_order(params)
 
     def one_triggers_one_cancels_other(
-        self, index_order: limitOrder_stopOrder_stopLimitOrder, triggered_order: limitOrder_stopOrder_stopLimitOrder, cancelled_order: limitOrder_stopOrder_stopLimitOrder
+        self,
+        index_order: limitOrder_stopOrder_stopLimitOrder,
+        triggered_order: limitOrder_stopOrder_stopLimitOrder,
+        cancelled_order: limitOrder_stopOrder_stopLimitOrder,
     ):
-        """Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed.
+        """Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed. duration
 
         If all equity orders, second and third orders must have the same symbol.
         If all option orders, second and third orders must have the same option_symbol.
         Second and third orders must always have a different type.
         If sending duration per leg, second and third orders must have the same duration.
         """
-        pass
+        params = self.create_order_legs(index_order, triggered_order, cancelled_order)
+        params["class"] = "otoco"
+        # duration check
+        params["duration"] = self.check_types(
+            "duration", triggered_order, cancelled_order
+        )
 
-    def combo_order(self, equity_order, *args):
+        # equity symbol check
+        # some code
+
+        # option symbol check
+        # some code
+
+        return self.place_order(params)
+
+    def combo_order(self, equity_order, option_order, *order):
         """Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies.
         """
-        pass
+        params = self.create_order_legs(equity_order, option_order)
+        params["class"] = "combo"
 
-    def multileg_order(self, *args):
+        params["duration"] = self.check_types(equity_order, option_order)
+        return self.place_order(params)
+
+    def multileg_order(self, *orders):
         """Place a multileg order with up to 4 legs. This order type allows for simple and complex option strategies.      
         """
-        pass
+        params = self.create_order_legs(orders)
+        params["class"] = "multileg"
+
+        params["duration"] = self.check_types(orders)
+
+        return self.place_order(params)
+
 
 if __name__ == "__main__":
     from utils import printer
 
     rest = REST()
+    print(
+        rest.one_cancels_other(
+            LimitOrder("AAPL", "buy", 1, 10, duration="gtc"),
+            MarketOrder("AAPL", "buy", 1),
+        )
+    )
     # rest.one_cancels_other("asdf")
-    response = rest.trade(MarketOrder('equity', 'SPY', )

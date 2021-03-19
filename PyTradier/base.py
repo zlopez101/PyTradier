@@ -116,7 +116,7 @@ class BasePyTradier:
             return requested_data
         except requests.exceptions.HTTPError as requesterror:
             print(
-                f"there was an {response.status_code} error handling this response: {response.text}"
+                f"there was an {response.status_code} error handling this response: {response.text}."
             )
         except KeyError as keyerror:
             print("key")

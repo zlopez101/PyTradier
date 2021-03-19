@@ -75,131 +75,23 @@ def patch_get(monkeypatch, mockresponse):
 
 
 @pytest.fixture
-def patch_get(monkeypatch, mockresponse):
-    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
+def post_return_parameters(monkeypatch):
+    """monkeypatch the requests.post function to return response dict for API calls.
 
-    :param mockresponse: [description]
-    :type mockresponse: [type]
-    :return: [description]
-    :rtype: [type]
+    This a factory style method allows code re-use by defining the mockPost class once, and specifying a function to instantiate
+    it when the mock_post method is called. The pytest monkeypatch module allows fixture to overwrite the requests.post function, 
+    preventing a real API call, and resulting in any calls to requests.post returning a mockPost Object 
     :yield: [description]
     :rtype: [type]
     """
 
-    class PatchGet:
-        def __init__(self, status, response_json_path):
-            self.mocked = mockresponse(status, response_json_path)
-            self.setter()
+    class mockPost:
+        def __init__(self, url, params, headers):
+            self.url = url
+            self.params = params
+            self.headers = headers
 
-        def mock_get(self, url, params, headers):
-            return self.mocked
+    def mock_post(url, params, headers):
+        return mockPost(url, params, headers)
 
-        def setter(self):
-            monkeypatch.setattr(requests, "get", self.mock_get)
-
-    yield PatchGet
-
-
-@pytest.fixture
-def patch_get(monkeypatch, mockresponse):
-    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
-
-    :param mockresponse: [description]
-    :type mockresponse: [type]
-    :return: [description]
-    :rtype: [type]
-    :yield: [description]
-    :rtype: [type]
-    """
-
-    class PatchGet:
-        def __init__(self, status, response_json_path):
-            self.mocked = mockresponse(status, response_json_path)
-            self.setter()
-
-        def mock_get(self, url, params, headers):
-            return self.mocked
-
-        def setter(self):
-            monkeypatch.setattr(requests, "get", self.mock_get)
-
-    yield PatchGet
-
-
-@pytest.fixture
-def patch_get(monkeypatch, mockresponse):
-    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
-
-    :param mockresponse: [description]
-    :type mockresponse: [type]
-    :return: [description]
-    :rtype: [type]
-    :yield: [description]
-    :rtype: [type]
-    """
-
-    class PatchGet:
-        def __init__(self, status, response_json_path):
-            self.mocked = mockresponse(status, response_json_path)
-            self.setter()
-
-        def mock_get(self, url, params, headers):
-            return self.mocked
-
-        def setter(self):
-            monkeypatch.setattr(requests, "get", self.mock_get)
-
-    yield PatchGet
-
-
-@pytest.fixture
-def patch_get(monkeypatch, mockresponse):
-    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
-
-    :param mockresponse: [description]
-    :type mockresponse: [type]
-    :return: [description]
-    :rtype: [type]
-    :yield: [description]
-    :rtype: [type]
-    """
-
-    class PatchGet:
-        def __init__(self, status, response_json_path):
-            self.mocked = mockresponse(status, response_json_path)
-            self.setter()
-
-        def mock_get(self, url, params, headers):
-            return self.mocked
-
-        def setter(self):
-            monkeypatch.setattr(requests, "get", self.mock_get)
-
-    yield PatchGet
-
-
-@pytest.fixture
-def patch_get(monkeypatch, mockresponse):
-    """monkeypatch the requests.get function to return response dict for API calls. succesful API responses come from Tradier website.
-
-    :param mockresponse: [description]
-    :type mockresponse: [type]
-    :return: [description]
-    :rtype: [type]
-    :yield: [description]
-    :rtype: [type]
-    """
-
-    class PatchGet:
-        def __init__(self, status, response_json_path):
-            self.mocked = mockresponse(status, response_json_path)
-            self.setter()
-
-        def mock_get(self, url, params, headers):
-            return self.mocked
-
-        def setter(self):
-            monkeypatch.setattr(requests, "get", self.mock_get)
-
-    yield PatchGet
-
+    monkeypatch.setattr(requests, "post", mock_post)

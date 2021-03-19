@@ -22,11 +22,11 @@ class baseOrder:
         self,
         symbol: str,
         side,
-        duration: str,
+        duration: str = "",
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        if duration not in baseOrder.accepted_durations:
+        if duration and duration not in baseOrder.accepted_durations:
             raise RequiredError(
                 f'duration "{duration}" not one of {baseOrder.accepted_durations}'
             )
@@ -59,9 +59,11 @@ class baseOrder:
     def __repr__(self):
         return f"order(Symbol: {self.symbol})"
 
-    def params(self) -> dict:
+    def params(self, _class: str) -> dict:
         """create the order parameter details in a form that Tradier API will understand
 
+        :param _class: the class of the order. Ex equity 
+        :type _class: str
         :return: order details dictionary dictionary
         :rtype: dict
         """
@@ -73,6 +75,7 @@ class baseOrder:
                 details[key[1:]] = value
             else:
                 details[key] = value
+        details["class"] = _class
         return details
 
     def make_legs(self, index: int) -> dict:
@@ -123,11 +126,11 @@ class LimitOrder(baseOrder):
         side: str,
         quantity: int,
         limit_price: float,
-        duration: str,
+        duration: str = "",
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
         self._type = "limit"
         self.limit_price = limit_price
 
@@ -142,11 +145,11 @@ class StopOrder(baseOrder):
         side: str,
         quantity: int,
         stop_price: float,
-        duration: str,
+        duration: str = "",
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
         self.type = "stop"
         self.stop_price = stop_price
 
@@ -162,11 +165,11 @@ class StopLimitOrder(baseOrder):
         quantity: int,
         stop_price: float,
         limit_price: float,
-        duration: str,
+        duration: str = "",
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
 
         self.type = "stop_limit"
         self.stop_price = stop_price
@@ -179,13 +182,11 @@ class MarketOrder(baseOrder):
         symbol: str,
         side: str,
         quantity: int,
-        limit_price: float,
-        stop_price: float,
-        duration: str,
+        duration: str = "",
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration, preview=preview, tag=tag)
+        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
         self.type = "market"
 
 

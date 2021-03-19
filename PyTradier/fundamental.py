@@ -115,12 +115,12 @@ class FundamentalData(BasePyTradier):
         )
 
 
-if __name__ == "__main__":
-    from utils import printer
+# if __name__ == "__main__":
+#     from utils import printer
 
-    fundamentals = FundamentalData(token="TRADIER_BROKERAGE_TOKEN", paper=False)
-    response = fundamentals.fundamentals("AAPL")
-    print("success\n\n")
+#     fundamentals = FundamentalData(token="TRADIER_BROKERAGE_TOKEN", paper=False)
+#     response = fundamentals.fundamentals("AAPL")
+#     print("success\n\n")
 
-    paper = FundamentalData()
-    response = paper.fundamentals("AAPL")
+#     paper = FundamentalData()
+#     response = paper.fundamentals("AAPL")
