@@ -13,4 +13,5 @@ def printer(response: requests.Response):
 
     pprint.pprint(response.status_code)
     pprint.pprint(response.headers)
+    pprint.pprint(response.text)
     pprint.pprint(response.json())

@@ -21,6 +21,7 @@ class baseOrder:
     def __init__(
         self,
         symbol: str,
+        quantity: int,
         side,
         duration: str = "",
         preview: Union[str, bool] = "",
@@ -32,6 +33,7 @@ class baseOrder:
             )
 
         self.symbol_process(symbol)
+        self.quantity = quantity
         self.duration = duration
         if self.option_symbol:
             if side not in baseOrder.option_sides:
@@ -130,9 +132,11 @@ class LimitOrder(baseOrder):
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
+        super().__init__(
+            symbol, quantity, side, duration=duration, preview=preview, tag=tag
+        )
         self._type = "limit"
-        self.limit_price = limit_price
+        self.price = limit_price
 
 
 class StopOrder(baseOrder):
@@ -149,9 +153,11 @@ class StopOrder(baseOrder):
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
+        super().__init__(
+            symbol, quantity, side, duration=duration, preview=preview, tag=tag
+        )
         self.type = "stop"
-        self.stop_price = stop_price
+        self.stop = stop_price
 
 
 class StopLimitOrder(baseOrder):
@@ -169,11 +175,13 @@ class StopLimitOrder(baseOrder):
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
+        super().__init__(
+            symbol, quantity, side, duration=duration, preview=preview, tag=tag
+        )
 
         self.type = "stop_limit"
-        self.stop_price = stop_price
-        self.limit_price = limit_price
+        self.stop = stop_price
+        self.price = limit_price
 
 
 class MarketOrder(baseOrder):
@@ -186,7 +194,9 @@ class MarketOrder(baseOrder):
         preview: Union[str, bool] = "",
         tag: str = "",
     ):
-        super().__init__(symbol, side, duration=duration, preview=preview, tag=tag)
+        super().__init__(
+            symbol, quantity, side, duration=duration, preview=preview, tag=tag
+        )
         self.type = "market"
 
 

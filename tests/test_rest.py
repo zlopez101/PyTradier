@@ -66,33 +66,38 @@ class TestRest:
         assert oco.params.get("option_symbol[0]") == oco.params.get("option_symbol[1]")
         assert oco.params.get("duration") == "day"
         assert oco.params.get("class") == "oco"
+
         """
         GIVEN a rest client with no defaults
         WHEN the user submits improperly formatted request
         THEN a useful error should be raised altering user of the issue
         """
-        with pytest.raise(RequiredError) as excInfo:
+
+        # not the the same symbol error
+        with pytest.raises(RequiredError) as excInfo:
             oco = self.rest.one_cancels_other(
                 LimitOrder(randomOption[0], "buy_to_open", 1, 10.0),
-                MarketOrder(randomOption[0], "buy_to_open", 1, duration="day"),
+                MarketOrder(randomOption[1], "buy_to_open", 1, duration="day"),
             )
-            assert oco.params.get("symbol[0]") == oco.params.get("symbol[1]")
-            assert oco.params.get("option_symbol[0]") == oco.params.get("option_symbol[1]")
-            assert oco.params.get("duration") == "day"
-            assert oco.params.get("class") == "oco"
+        assert ""
+
+        # not the same option symbol
+
+        # not the same duration error
+
+        # no duration specified
 
         """
         GIVEN a rest client with some default settings
         WHEN the user submits a properly formatted request
         THEN the correct order_details dictionary should be created and sent to trade endpoint        
         """
-        
+
         """
         GIVEN a rest client with some default settings
         WHEN the user submits an improperly formatted request
         THEN a useful error should be raised altering user of the issue 
         """
-        
 
     def test_one_triggers_other(
         self, randomTicker, randomOption, post_return_parameters

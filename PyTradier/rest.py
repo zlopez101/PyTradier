@@ -44,7 +44,7 @@ class REST(BasePyTradier):
         elif getattr(self, attr, None):
             return getattr(self, attr, None)
         else:
-            raise RequiredError("Duration was never specified")
+            raise RequiredError(f"attribute {attr} was never specified")
 
     def order_details(self, *args, **kwargs) -> dict:
         """create the order details dictionary based on supplied orders (args) and specified keywords (duration, tags)
@@ -66,9 +66,11 @@ class REST(BasePyTradier):
             legs = {**legs, **dct}
         return legs
 
-    def place_order(self, params) -> dict:
+    def place_order(self, params: dict) -> dict:
         """base order method for all trades
 
+        :param params: parameters determining the class, types, sides, symbols etc of the other
+        :type params: dict
         :return: API response
         :rtype: dict
         """
@@ -112,7 +114,10 @@ class REST(BasePyTradier):
         return self.place_order(params)
 
     def one_cancels_other(
-        self, order1: limitOrder_stopOrder_stopLimitOrder, order2: anyOrder, **kwargs
+        self,
+        order1: limitOrder_stopOrder_stopLimitOrder,
+        order2: limitOrder_stopOrder_stopLimitOrder,
+        **kwargs,
     ):
         """Place a one-cancels-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.
 
@@ -127,10 +132,16 @@ class REST(BasePyTradier):
         params["duration"] = self.check_types("duration", order1, order2)
 
         # equity symbol check
-        # some code
+        # check if they are both equity orders (no option_symbol attr) then run check_types
+        if not hasattr(order1, "option_symbol") and not hasattr(
+            order2, "option_symbol"
+        ):
+            self.check_types("symbol", order1, order2)
 
         # option symbol check
         # some code
+        if hasattr(order1, "option_symbol") and hasattr(order2, "option_symbol"):
+            self.check_types("option_symbol", order1, order2)
 
         return self.place_order(params)
 
@@ -186,10 +197,10 @@ if __name__ == "__main__":
     from utils import printer
 
     rest = REST()
-    print(
-        rest.one_cancels_other(
-            LimitOrder("AAPL", "buy", 1, 10, duration="gtc"),
-            MarketOrder("AAPL", "buy", 1),
-        )
+    response = rest.one_cancels_other(
+        LimitOrder("AAPL", "buy", 1, 10, duration="gtc"),
+        StopOrder("AAPL", "buy", 1, 12.0),
     )
+
+    printer(response)
     # rest.one_cancels_other("asdf")
