@@ -5,6 +5,8 @@ from PyTradier.order import *
 
 
 class TestRest:
+    """All tests accept the post_return_parameters fixture to replace requests.post with a mocked response that just returns the submitted parameters
+    """
 
     rest = REST()
     # create a rest with various defaults
@@ -18,18 +20,18 @@ class TestRest:
         """
         # equity
         equity = self.rest.equity(LimitOrder(randomTicker[0], "buy", 1, 10.0, "gtc"))
-        assert equity.params.get("symbol") == randomTicker[0]
-        assert not equity.params.get("option_symbol"), "no option symbol"
-        assert equity.params.get("class") == "equity"
+        assert equity.get("symbol") == randomTicker[0]
+        assert not equity.get("option_symbol"), "no option symbol"
+        assert equity.get("class") == "equity"
 
         # option
         option = self.rest.option(
             StopOrder(randomOption[1], "sell_to_open", 1, 1000.00, "gtc")
         )
         assert (
-            option.params.get("symbol") == randomTicker[1]
+            option.get("symbol") == randomTicker[1]
         ), "the underlying symbol should match"
-        assert option.params.get("option_symbol") == randomOption[1]
+        assert option.get("option_symbol") == randomOption[1]
 
         """
         GIVEN a rest client with no defaults
@@ -62,10 +64,10 @@ class TestRest:
             LimitOrder(randomOption[0], "buy_to_open", 1, 10.0),
             MarketOrder(randomOption[0], "buy_to_open", 1, duration="day"),
         )
-        assert oco.params.get("symbol[0]") == oco.params.get("symbol[1]")
-        assert oco.params.get("option_symbol[0]") == oco.params.get("option_symbol[1]")
-        assert oco.params.get("duration") == "day"
-        assert oco.params.get("class") == "oco"
+        assert oco.get("symbol[0]") == oco.get("symbol[1]")
+        assert oco.get("option_symbol[0]") == oco.get("option_symbol[1]")
+        assert oco.get("duration") == "day"
+        assert oco.get("class") == "oco"
 
         """
         GIVEN a rest client with no defaults
@@ -73,19 +75,39 @@ class TestRest:
         THEN a useful error should be raised altering user of the issue
         """
 
+        # check not the same type error
+
         # not the the same symbol error
+        with pytest.raises(RequiredError) as excInfo:
+            oco = self.rest.one_cancels_other(
+                LimitOrder(randomTicker[0], "buy", 1, 10.0),
+                MarketOrder(randomTicker[1], "buy", 1, duration="day"),
+            )
+        assert "attributes symbol need to be the same" in str(excInfo.value)
+
+        # not the same option symbol
         with pytest.raises(RequiredError) as excInfo:
             oco = self.rest.one_cancels_other(
                 LimitOrder(randomOption[0], "buy_to_open", 1, 10.0),
                 MarketOrder(randomOption[1], "buy_to_open", 1, duration="day"),
             )
-        assert ""
-
-        # not the same option symbol
+        assert "attributes option_symbol need to be the same" in str(excInfo.value)
 
         # not the same duration error
+        with pytest.raises(RequiredError) as excInfo:
+            oco = self.rest.one_cancels_other(
+                LimitOrder(randomTicker[0], "buy", 1, 10.0, duration="gtc"),
+                MarketOrder(randomTicker[1], "buy", 1, duration="day"),
+            )
+        assert "attributes duration need to be the same" in str(excInfo.value)
 
         # no duration specified
+        with pytest.raises(RequiredError) as excInfo:
+            oco = self.rest.one_cancels_other(
+                LimitOrder(randomTicker[0], "buy", 1, 10.0),
+                MarketOrder(randomTicker[1], "buy", 1),
+            )
+        assert "attribute duration was never specified" in str(excInfo.value)
 
         """
         GIVEN a rest client with some default settings
@@ -102,12 +124,20 @@ class TestRest:
     def test_one_triggers_other(
         self, randomTicker, randomOption, post_return_parameters
     ):
+        # this one, the API documentation doesn't include any
         """
         GIVEN a rest client with no defaults
         WHEN the user submits a properly formatted request
         THEN the correct order_details dictionary should be created
         """
-
+        oto = self.rest.one_trigger_other(
+            LimitOrder(randomTicker[0], "sell", 100, 100.00, duration="day"),
+            StopOrder(randomTicker[1], "buy", 100, 100.00),
+        )
+        assert oto.get("class") == "oto"
+        assert oto.get("quantity[1]") == 100
+        assert oto.get("duration") == "day"
+        assert not oto.get("duration[0]"), "there should be no indexed duration"
         """
         GIVEN a rest client with no defaults
         WHEN the user submits improperly formatted request
@@ -135,6 +165,11 @@ class TestRest:
         WHEN the user submits a properly formatted request
         THEN the correct order_details dictionary should be created
         """
+        otoco = self.rest.one_triggers_one_cancels_other(
+            LimitOrder("AAPL", "buy", 1, 10.0),
+            StopOrder("AAPL", "sell", 1, 10),
+            LimitOrder("AAPL", "sell_short", 1, 10, duration="day"),
+        )
 
         """
         GIVEN a rest client with no defaults

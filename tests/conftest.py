@@ -85,13 +85,20 @@ def post_return_parameters(monkeypatch):
     :rtype: [type]
     """
 
-    class mockPost:
+    class mockOrderPost:
         def __init__(self, url, params, headers):
             self.url = url
-            self.params = params
+            self.params = {}
+            self.params["order"] = params
             self.headers = headers
 
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return self.params
+
     def mock_post(url, params, headers):
-        return mockPost(url, params, headers)
+        return mockOrderPost(url, params, headers)
 
     monkeypatch.setattr(requests, "post", mock_post)

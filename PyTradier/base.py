@@ -1,7 +1,7 @@
 import os
 import requests
 from functools import wraps
-from PyTradier.exceptions import RequestError
+from PyTradier.exceptions import RequestError, OrderError
 from typing import Union
 import json
 from datetime import datetime
@@ -112,15 +112,21 @@ class BasePyTradier:
             for arg in dict_args:
                 # return an empty dictionary if key doesn't exist
                 # this could occur if account is new - no history
-                requested_data = requested_data.get(arg, {})
+                requested_data = requested_data[arg]
             return requested_data
         except requests.exceptions.HTTPError as requesterror:
             print(
                 f"there was an {response.status_code} error handling this response: {response.text}."
             )
         except KeyError as keyerror:
-            print("key")
-            print(keyerror)
+
+            # handle error exception
+            try:
+                requested = requested_data["errors"]["error"]
+                raise OrderError(requested)
+            except KeyError as stillwrong:
+                print("something unexpected happened...")
+                print(f"{requested} was the json response for this call")
 
     def _get(
         self, endpoint: str, params: dict = {}, dict_args: tuple = ()
@@ -142,7 +148,7 @@ class BasePyTradier:
         return self.process_response(response, dict_args)
 
     def _post(
-        self, endpoint: str, params: dict = {}, dict_arg: tuple = ()
+        self, endpoint: str, params: dict = {}, dict_args: tuple = ()
     ) -> Union[dict, list]:
         """base POST requests method for all subsequent API calls
 
@@ -153,9 +159,10 @@ class BasePyTradier:
         :return: API response
         :rtype: Union[dict, list]
         """
-        return requests.post(
+        response = requests.post(
             self.url + endpoint, params=params, headers=self._headers()
         )
+        return self.process_response(response, dict_args)
 
     def _put(
         self, endpoint: str, params: dict = {}, dict_arg: tuple = ()

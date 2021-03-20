@@ -109,13 +109,6 @@ class baseOrder:
         }
 
 
-class SpecialOrder(baseOrder):
-    """Special Orders for combo and multileg styles
-    """
-
-    pass
-
-
 class LimitOrder(baseOrder):
     """A limit order is an order to buy or sell a stock at a specific price or better.
     """

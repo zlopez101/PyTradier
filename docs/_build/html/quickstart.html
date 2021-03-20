@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Welcome to PyTradier’s documentation! &mdash; PyTradier 0.1.0 documentation</title>
+  <title>QuickStart &mdash; PyTradier 0.1.0 documentation</title>
   
 
   
@@ -38,7 +38,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="QuickStart" href="quickstart.html" /> 
+    <link rel="next" title="PyTradier" href="modules.html" />
+    <link rel="prev" title="Welcome to PyTradier’s documentation!" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +53,7 @@
           
 
           
-            <a href="#" class="icon icon-home"> PyTradier
+            <a href="index.html" class="icon icon-home"> PyTradier
           
 
           
@@ -84,8 +85,12 @@
             
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">QuickStart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#disclaimer">Disclaimer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">PyTradier</a></li>
 </ul>
 
@@ -102,7 +107,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PyTradier</a>
+          <a href="index.html">PyTradier</a>
         
       </nav>
 
@@ -133,15 +138,15 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Welcome to PyTradier’s documentation!</li>
+      <li>QuickStart</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -154,30 +159,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="welcome-to-pytradier-s-documentation">
-<h1>Welcome to PyTradier’s documentation!<a class="headerlink" href="#welcome-to-pytradier-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">QuickStart</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#disclaimer">Disclaimer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quickstart.html#getting-started">Getting Started</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">PyTradier</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="PyTradier.html">PyTradier package</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="quickstart">
+<h1>QuickStart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="disclaimer">
+<h2>Disclaimer<a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h2>
+<p>This package helps python interact with the Tradier Platform to execute algorithmic trading
+strategies.  Use at your own discretion, and thoroughly test before using in production.</p>
 </div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Install the package with pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pip</span> <span class="n">install</span> <span class="n">pytradier</span>
+</pre></div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
+<p>The pytradier package uses environment variables to access the Tradier Platform. Once a user has
+established an account with them access your API tokens and save them to your machine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">export</span> <span class="n">TRADIER_SANDBOX_TOKEN</span><span class="o">=&lt;</span><span class="n">YOUR_SANDBOX_TOKEN</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;</span><span class="n">export</span> <span class="n">LIVE_TRADIER_TOKEN</span><span class="o">=&lt;</span><span class="n">YOUR_LIVE_TOKEN</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Users can choose their own environment variable names, but all the modules use the <code class="docutils literal notranslate"><span class="pre">TRADIER_SANDBOX_TOKEN</span></code>
+key by default. To specific your own name just intialize client with :code: <cite>token=&lt;YOUR_ENV_NAME&gt;</cite>. To switch
+to live mode, also must pass :code: <cite>paper=False</cite>.</p>
+</div>
 </div>
 
 
@@ -186,7 +190,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="quickstart.html" class="btn btn-neutral float-right" title="QuickStart" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="PyTradier" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to PyTradier’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

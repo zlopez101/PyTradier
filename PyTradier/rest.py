@@ -23,7 +23,7 @@ class REST(BasePyTradier):
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def check_types(self, attr: str, *args) -> str:
+    def check_types(self, attr: str, *args, shouldBeDifferent: bool = False) -> str:
         """confirm all durations are the same, or use default, or use one specified by specific order
 
         :return: duration of order
@@ -38,9 +38,13 @@ class REST(BasePyTradier):
             if next(grouped, True) and not next(grouped, False):
                 return attributes[0]
             else:
-                raise RequiredError(
-                    f"All the attributes {attr} need to be the same for this type"
-                )
+                if shouldBeDifferent:
+                    # this field is required to be different so everything is ok
+                    pass
+                else:
+                    raise RequiredError(
+                        f"All the attributes {attr} need to be the same for this type of order."
+                    )
         elif getattr(self, attr, None):
             return getattr(self, attr, None)
         else:
@@ -74,7 +78,11 @@ class REST(BasePyTradier):
         :return: API response
         :rtype: dict
         """
-        return self._post(f"/v1/accounts/{self.account_id}/orders", params=params)
+        return self._post(
+            f"/v1/accounts/{self.account_id}/orders",
+            params=params,
+            dict_args=("order",),
+        )
 
     def equity(self, order: anyOrder) -> dict:
         """Place an order to trade an equity security.
@@ -133,14 +141,14 @@ class REST(BasePyTradier):
 
         # equity symbol check
         # check if they are both equity orders (no option_symbol attr) then run check_types
-        if not hasattr(order1, "option_symbol") and not hasattr(
+        if not getattr(order1, "option_symbol") and not getattr(
             order2, "option_symbol"
         ):
             self.check_types("symbol", order1, order2)
 
         # option symbol check
         # some code
-        if hasattr(order1, "option_symbol") and hasattr(order2, "option_symbol"):
+        if getattr(order1, "option_symbol") and getattr(order2, "option_symbol"):
             self.check_types("option_symbol", order1, order2)
 
         return self.place_order(params)
@@ -199,8 +207,8 @@ if __name__ == "__main__":
     rest = REST()
     response = rest.one_cancels_other(
         LimitOrder("AAPL", "buy", 1, 10, duration="gtc"),
-        StopOrder("AAPL", "buy", 1, 12.0),
+        StopOrder("AAPL", "buy", 1, 10),
     )
-
-    printer(response)
+    print(response)
+    # printer(response)
     # rest.one_cancels_other("asdf")

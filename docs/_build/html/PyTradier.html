@@ -473,6 +473,13 @@ Will not include order numbers</p>
 <div class="section" id="module-PyTradier.exceptions">
 <span id="pytradier-exceptions-module"></span><h2>PyTradier.exceptions module<a class="headerlink" href="#module-PyTradier.exceptions" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
+<dt id="PyTradier.exceptions.AuthError">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">AuthError</span></code><a class="headerlink" href="#PyTradier.exceptions.AuthError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Class for notifying user that some endpoints are for brokerage accounts only, must use live credentials</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt id="PyTradier.exceptions.MultiLegKeyWordError">
 <em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">MultiLegKeyWordError</span></code><a class="headerlink" href="#PyTradier.exceptions.MultiLegKeyWordError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
@@ -483,6 +490,7 @@ Will not include order numbers</p>
 <dt id="PyTradier.exceptions.OrderError">
 <em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.exceptions.</span></code><code class="sig-name descname"><span class="pre">OrderError</span></code><a class="headerlink" href="#PyTradier.exceptions.OrderError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>This class is raised when an order is submitted that does not have the proper formatting</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -512,38 +520,38 @@ Will not include order numbers</p>
 <dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
 <p>This API is presently in Beta. It is only available to Tradier Brokerage account holders and should only be used in production applications with caution</p>
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.CorporateActionInformation">
-<code class="sig-name descname"><span class="pre">CorporateActionInformation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.CorporateActionInformation" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.company_info">
+<code class="sig-name descname"><span class="pre">company_info</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.company_info" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.corporateCalendar">
-<code class="sig-name descname"><span class="pre">corporateCalendar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporateCalendar" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.corporate_actions">
+<code class="sig-name descname"><span class="pre">corporate_actions</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporate_actions" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.dividend">
-<code class="sig-name descname"><span class="pre">dividend</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.dividend" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.corporate_calendar">
+<code class="sig-name descname"><span class="pre">corporate_calendar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.corporate_calendar" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.financialInfo">
-<code class="sig-name descname"><span class="pre">financialInfo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialInfo" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.dividends">
+<code class="sig-name descname"><span class="pre">dividends</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.dividends" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.financialRatios">
-<code class="sig-name descname"><span class="pre">financialRatios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financialRatios" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.financial_reports">
+<code class="sig-name descname"><span class="pre">financial_reports</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.financial_reports" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.fundamentals">
-<code class="sig-name descname"><span class="pre">fundamentals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.fundamentals" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.price_statistics">
+<code class="sig-name descname"><span class="pre">price_statistics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.price_statistics" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.fundamental.FundamentalData.priceStatistics">
-<code class="sig-name descname"><span class="pre">priceStatistics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.priceStatistics" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.fundamental.FundamentalData.ratios">
+<code class="sig-name descname"><span class="pre">ratios</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.fundamental.FundamentalData.ratios" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -558,48 +566,54 @@ Will not include order numbers</p>
 <span id="pytradier-rest-module"></span><h2>PyTradier.rest module<a class="headerlink" href="#module-PyTradier.rest" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="PyTradier.rest.REST">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.rest.</span></code><code class="sig-name descname"><span class="pre">REST</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">PyTradier.rest.</span></code><code class="sig-name descname"><span class="pre">REST</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'TRADIER_SANDBOX_TOKEN'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paper</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#PyTradier.base.BasePyTradier" title="PyTradier.base.BasePyTradier"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyTradier.base.BasePyTradier</span></code></a></p>
-<p>Place equity and complex option trades including advanced orders.</p>
-<dl class="py attribute">
-<dt id="PyTradier.rest.REST.duration">
-<code class="sig-name descname"><span class="pre">duration</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['day',</span> <span class="pre">'gtc',</span> <span class="pre">'pre',</span> <span class="pre">'post']</span></em><a class="headerlink" href="#PyTradier.rest.REST.duration" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="PyTradier.rest.REST.equity">
-<code class="sig-name descname"><span class="pre">equity</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'_type':</span> <span class="pre">['market',</span> <span class="pre">'limit',</span> <span class="pre">'stop',</span> <span class="pre">'stop_limit'],</span> <span class="pre">'duration':</span> <span class="pre">['day',</span> <span class="pre">'gtc',</span> <span class="pre">'pre',</span> <span class="pre">'post'],</span> <span class="pre">'side':</span> <span class="pre">['buy',</span> <span class="pre">'buy_to_cover',</span> <span class="pre">'sell',</span> <span class="pre">'sell_to_cover']}</span></em><a class="headerlink" href="#PyTradier.rest.REST.equity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="PyTradier.rest.REST.multileg">
-<code class="sig-name descname"><span class="pre">multileg</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'_type':</span> <span class="pre">['market',</span> <span class="pre">'debit',</span> <span class="pre">'credit',</span> <span class="pre">'even'],</span> <span class="pre">'duration':</span> <span class="pre">['day',</span> <span class="pre">'gtc',</span> <span class="pre">'pre',</span> <span class="pre">'post'],</span> <span class="pre">'side':</span> <span class="pre">['buy_to_open',</span> <span class="pre">'buy_to_close',</span> <span class="pre">'sell_to_open',</span> <span class="pre">'sell_to_close']}</span></em><a class="headerlink" href="#PyTradier.rest.REST.multileg" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="PyTradier.rest.REST.option">
-<code class="sig-name descname"><span class="pre">option</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'_type':</span> <span class="pre">['market',</span> <span class="pre">'limit',</span> <span class="pre">'stop',</span> <span class="pre">'stop_limit'],</span> <span class="pre">'duration':</span> <span class="pre">['day',</span> <span class="pre">'gtc',</span> <span class="pre">'pre',</span> <span class="pre">'post'],</span> <span class="pre">'side':</span> <span class="pre">['buy_to_open',</span> <span class="pre">'buy_to_close',</span> <span class="pre">'sell_to_open',</span> <span class="pre">'sell_to_close']}</span></em><a class="headerlink" href="#PyTradier.rest.REST.option" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<p>Place equity and complex option trades including advanced orders. kwarg arguments passed to class initialization will define default values including preview, tag, and durations settings</p>
+<p>Order requirements are rather bespoke and I have no found a common pattern to unite them -&gt; self validation is difficult, respond and adjust to error message where they arise</p>
+<dl class="py method">
+<dt id="PyTradier.rest.REST.check_types">
+<code class="sig-name descname"><span class="pre">check_types</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attr</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shouldBeDifferent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#PyTradier.rest.REST.check_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>confirm all durations are the same, or use default, or use one specified by specific order</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>duration of order</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.rest.REST.place_equity_order">
-<code class="sig-name descname"><span class="pre">place_equity_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preview</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'true'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.place_equity_order" title="Permalink to this definition">¶</a></dt>
+<dt id="PyTradier.rest.REST.combo_order">
+<code class="sig-name descname"><span class="pre">combo_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">equity_order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">option_order</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">order</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST.combo_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.create_order_legs">
+<code class="sig-name descname"><span class="pre">create_order_legs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.create_order_legs" title="Permalink to this definition">¶</a></dt>
+<dd><p>create the order legs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[description]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.equity">
+<code class="sig-name descname"><span class="pre">equity</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.MarketOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.equity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Place an order to trade an equity security.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>symbol</strong> (<em>str</em>) – Security symbol to be traded</p></li>
-<li><p><strong>side</strong> (<em>str</em>) – the side of the order, One of [‘buy’, ‘buy_to_cover’, ‘sell’, ‘sell_to_cover’]</p></li>
-<li><p><strong>quantity</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>int</em><em>]</em>) – the number of shares ordered</p></li>
-<li><p><strong>_type</strong> (<em>str</em>) – the type of order to be placed, One of [‘market’, ‘limit’, ‘stop’, ‘stop_limit’]</p></li>
-<li><p><strong>duration</strong> (<em>str</em>) – [description]</p></li>
-<li><p><strong>price</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – [description], defaults to “”</p></li>
-<li><p><strong>stop</strong> (<em>Union</em><em>[</em><em>int</em><em>, </em><em>float</em><em>, </em><em>str</em><em>]</em><em>, </em><em>optional</em>) – [description], defaults to “”</p></li>
-<li><p><strong>tag</strong> (<em>str</em><em>, </em><em>optional</em>) – [description], defaults to “”</p></li>
-</ul>
+<dd class="field-odd"><p><strong>order</strong> (<em>MarketOrder</em><em>, </em><em>LimitOrder</em><em>, </em><em>StopOrder</em><em>, </em><em>StopLimitOrder</em>) – Order to place</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>[description]</p>
+<dd class="field-even"><p>Order Response dict</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>
@@ -608,15 +622,78 @@ Will not include order numbers</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="PyTradier.rest.REST.prepare_order">
-<code class="sig-name descname"><span class="pre">prepare_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.prepare_order" title="Permalink to this definition">¶</a></dt>
-<dd><p>Because the API requires the use of reserved python keywords, need to handle before API calls</p>
+<dt id="PyTradier.rest.REST.multileg_order">
+<code class="sig-name descname"><span class="pre">multileg_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">orders</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST.multileg_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a multileg order with up to 4 legs. This order type allows for simple and complex option strategies.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.one_cancels_other">
+<code class="sig-name descname"><span class="pre">one_cancels_other</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST.one_cancels_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-cancels-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.</p>
+<p>type must be different for both legs.
+If both orders are equities, the symbol must be the same.
+If both orders are options, the option_symbol must be the same.
+If sending duration per leg, both orders must have the same duration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.one_trigger_other">
+<code class="sig-name descname"><span class="pre">one_trigger_other</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triggered_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.MarketOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST.one_trigger_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-triggers-other order. This order type is composed of two separate orders sent simultaneously. The property keys of each order are indexed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.one_triggers_one_cancels_other">
+<code class="sig-name descname"><span class="pre">one_triggers_one_cancels_other</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">triggered_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cancelled_order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PyTradier.rest.REST.one_triggers_one_cancels_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed. duration</p>
+<p>If all equity orders, second and third orders must have the same symbol.
+If all option orders, second and third orders must have the same option_symbol.
+Second and third orders must always have a different type.
+If sending duration per leg, second and third orders must have the same duration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.option">
+<code class="sig-name descname"><span class="pre">option</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">PyTradier.order.MarketOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.LimitOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopOrder</span><span class="p"><span class="pre">,</span> </span><span class="pre">PyTradier.order.StopLimitOrder</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Place an order to trade an option security</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – parameters created by <cite>self.create_params</cite></p>
+<dd class="field-odd"><p><strong>order</strong> (<em>MarketOrder</em><em>, </em><em>LimitOrder</em><em>, </em><em>StopOrder</em><em>, </em><em>StopLimitOrder</em>) – Order to place</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>corrected parameters</p>
+<dd class="field-even"><p>order response dict</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.order_details">
+<code class="sig-name descname"><span class="pre">order_details</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.order_details" title="Permalink to this definition">¶</a></dt>
+<dd><p>create the order details dictionary based on supplied orders (args) and specified keywords (duration, tags)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>[description]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="PyTradier.rest.REST.place_order">
+<code class="sig-name descname"><span class="pre">place_order</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="headerlink" href="#PyTradier.rest.REST.place_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>base order method for all trades</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>params</strong> (<em>dict</em>) – parameters determining the class, types, sides, symbols etc of the other</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>API response</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>dict</p>

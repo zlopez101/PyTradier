@@ -3,6 +3,9 @@ class RequiredError(Exception):
 
 
 class OrderError(Exception):
+    """This class is raised when an order is submitted that does not have the proper formatting
+    """
+
     pass
 
 

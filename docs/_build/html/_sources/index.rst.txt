@@ -10,6 +10,8 @@ Welcome to PyTradier's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   quickstart
+
    modules
 
 Indices and tables
