@@ -80,13 +80,15 @@ class baseOrder:
         details["class"] = _class
         return details
 
-    def make_legs(self, index: int) -> dict:
+    def make_legs(self, index: int, exclude: str = "") -> dict:
         """[summary]
 
         don't include duration, tags, preview, 
 
         :param index: index of the order dictionary
         :type index: int
+        :param exclude: key to be excluded, used with combo/multileg orders
+        :type exclude: str
         :return: dictionary reference for the order
         :rtype: dict
         """
@@ -94,7 +96,7 @@ class baseOrder:
         for key, value in {
             key: value
             for key, value in self.__dict__.items()
-            if value and key != "duration"
+            if value and (key != "duration" and key != exclude)
         }.items():
             if key.startswith("_"):
                 leg[key[1:] + f"[{index}]"] = value
@@ -191,6 +193,10 @@ class MarketOrder(baseOrder):
             symbol, quantity, side, duration=duration, preview=preview, tag=tag
         )
         self.type = "market"
+
+
+class SpecOrder(baseOrder):
+    pass
 
 
 if __name__ == "__main__":

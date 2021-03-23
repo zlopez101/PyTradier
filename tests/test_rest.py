@@ -116,7 +116,7 @@ class TestRest:
         with pytest.raises(RequiredError) as excInfo:
             oco = self.rest.one_cancels_other(
                 LimitOrder(randomTicker[0], "buy", 1, 10.0, duration="gtc"),
-                MarketOrder(randomTicker[1], "buy", 1, duration="day"),
+                MarketOrder(randomTicker[0], "buy", 1, duration="day"),
             )
         assert "attributes duration need to be the same" in str(excInfo.value)
 
@@ -124,7 +124,7 @@ class TestRest:
         with pytest.raises(RequiredError) as excInfo:
             oco = self.rest.one_cancels_other(
                 LimitOrder(randomTicker[0], "buy", 1, 10.0),
-                MarketOrder(randomTicker[1], "buy", 1),
+                MarketOrder(randomTicker[0], "buy", 1),
             )
         assert "attribute duration was never specified" in str(excInfo.value)
 
@@ -261,12 +261,33 @@ class TestRest:
         """
         pass
 
-    def test_multileg_order(self, randomTicker, randomOption, post_return_parameters):
+    def test_multileg_order(
+        self, randomTicker, randomOption, randomOptionSide, post_return_parameters
+    ):
         """
         GIVEN a rest client with no defaults
         WHEN the user submits a properly formatted request
         THEN the correct order_details dictionary should be created
         """
+        params = self.rest.multileg_order(
+            SpecOrder(randomOption[0], 1, randomOptionSide[1]),
+            SpecOrder(randomOption[0], 10, randomOptionSide[0]),
+            SpecOrder(randomOption[0], 10, randomOptionSide[0]),
+            type="market",
+            duration="gtc",
+        )
+        assert (
+            params.get("symbol") == randomTicker[0]
+        ), "symbol should be the underlying symbol of the options"
+        assert not params.get("symbol[0]"), "symbols are not indexed"
+        assert not params.get("symbol[0]"), "symbols are not indexed"
+        assert params.get("option_symbol[1]") == randomOption[0], "option symbol"
+        assert params.get("side[2]") == randomOptionSide[0]
+        assert params.get("side[0]") == randomOptionSide[1]
+        assert params.get("type") == "market"
+        assert not params.get("type[0]"), "types are not indexed"
+        assert params.get('duration') == 'gtc'
+        assert not params.get('duration[1]'), 'durations are not indexed'
 
         """
         GIVEN a rest client with no defaults
@@ -286,3 +307,4 @@ class TestRest:
         THEN a useful error should be raised altering user of the issue 
         """
         pass
+

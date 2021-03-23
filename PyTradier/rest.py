@@ -3,7 +3,13 @@ from typing import Union
 from itertools import groupby
 from datetime import datetime
 from PyTradier.exceptions import RequiredError
-from PyTradier.order import LimitOrder, StopLimitOrder, StopOrder, MarketOrder
+from PyTradier.order import (
+    LimitOrder,
+    StopLimitOrder,
+    StopOrder,
+    MarketOrder,
+    SpecOrder,
+)
 
 
 anyOrder = Union[MarketOrder, LimitOrder, StopOrder, StopLimitOrder]
@@ -50,15 +56,31 @@ class REST(BasePyTradier):
         else:
             raise RequiredError(f"attribute {attr} was never specified")
 
-    def create_order_legs(self, *args) -> dict:
+    def all_equity(self, *args) -> bool:
+        """Returns True if all the orders are Equity orders (no order in args has value in key: "option_symbol")
+
+        :return: True or False
+        :rtype: bool
+        """
+        return not (all([getattr(order, "option_symbol") for order in args]))
+
+    def all_option(self, *args) -> bool:
+        """Returns True if all the orders are Option orders (all orders provided have value in key: "option_symbol")
+
+        :return: True or False
+        :rtype: bool
+        """
+        return all([getattr(order, "option_symbol") for order in args])
+
+    def create_order_legs(self, *args, exclude="") -> dict:
         """create the order legs
 
-        :return: [description]
+        :return: combined dict from each order's make_legs() method
         :rtype: dict
         """
         legs = {}
         for i, order in enumerate(args):
-            dct = order.make_legs(i)
+            dct = order.make_legs(i, exclude=exclude)
             legs = {**legs, **dct}
         return legs
 
@@ -128,29 +150,22 @@ class REST(BasePyTradier):
         """
         params = self.create_order_legs(order1, order2)
         params["class"] = "oco"
-        # duration check
-        params["duration"] = self.check_types("duration", order1, order2)
+
+        # types must be different for both legs
+        self.check_types("type", order1, order2, shouldBeDifferent=True)
 
         # equity symbol check
-        # check if they are both equity orders (no option_symbol attr) then run check_types
-
-        if not getattr(order1, "option_symbol") and not getattr(
-            order2, "option_symbol"
-        ):
+        if self.all_equity(order1, order2):
             self.check_types("symbol", order1, order2)
 
         # option symbol check
-        # some code
-        if getattr(order1, "option_symbol") and getattr(order2, "option_symbol"):
+        if self.all_option(order1, order2):
             self.check_types("option_symbol", order1, order2)
 
+        # duration check
+        params["duration"] = self.check_types("duration", order1, order2)
+
         return self.place_order(params)
-
-    def all_equity(self, *args):
-        return not (all([getattr(order, "option_symbol") for order in args]))
-
-    def all_option(self, *args):
-        return all([getattr(order, "option_symbol") for order in args])
 
     def one_triggers_one_cancels_other(
         self,
@@ -167,48 +182,59 @@ class REST(BasePyTradier):
         """
         params = self.create_order_legs(index_order, triggered_order, cancelled_order)
         params["class"] = "otoco"
+
+        # type check on second/third order
+        self.check_types(
+            "type", triggered_order, cancelled_order, shouldBeDifferent=True
+        )
+
+        # equity symbol check if all equity
+        if self.all_equity(index_order, triggered_order, cancelled_order):
+            self.check_types("symbol", index_order, triggered_order, cancelled_order)
+
+        # option symbol check
+        if self.all_option(index_order, triggered_order, cancelled_order):
+            self.check_types(
+                "option_symbol", index_order, triggered_order, cancelled_order
+            )
+
         # duration check
         params["duration"] = self.check_types(
             "duration", triggered_order, cancelled_order
         )
 
-        # type check
-        self.check_types(
-            "type", triggered_order, cancelled_order, shouldBeDifferent=True
-        )
-
-        # equity symbol check
-        if self.all_equity(triggered_order, cancelled_order):
-            self.check_types("symbol", triggered_order, cancelled_order)
-
-        # option symbol check
-        if self.all_option(triggered_order, cancelled_order):
-            self.check_types("option_symbol", triggered_order, cancelled_order)
-
         return self.place_order(params)
 
-    def combo_order(
-        self,
-        equity_order: limitOrder_stopOrder_stopLimitOrder,
-        option_order: limitOrder_stopOrder_stopLimitOrder,
-        *args,
-    ):
-        """Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies.
+    def combo_order(self, *orders, **kwargs):
+        """Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies. Pass the type, duration, and price as keywords
+
+        :param orders: Orders to be placed
+        :type orders: limitOrder_stopOrder_stopLimitOrder
+        :param type: The type of order, one of ['market', 'debit', 'credit', 'even']
+        :type type: str
+        :param duration: duration of order, one of ['day', 'gtc', 'pre', 'post']
+        :type duration: str
+        :param price: the limit price of the order, required for 'debit' and 'credit' orders
+        :type price: float
+        :return: API order response
+        :rtype: dict
         """
-        params = self.create_order_legs(equity_order, option_order, *arg)
+        params = self.create_order_legs(*orders, exclude="symbol")
+
+        params["symbol"] = self.check_types("symbol", *orders)
+        # need to remove the symbol[0], symbol[1], type[0], type[1], price[]
         params["class"] = "combo"
+        params = {**params, **kwargs}
 
-        params["duration"] = self.check_types(equity_order, option_order, *args)
         return self.place_order(params)
 
-    def multileg_order(self, *orders):
-        """Place a multileg order with up to 4 legs. This order type allows for simple and complex option strategies.      
+    def multileg_order(self, *orders, **kwargs):
+        """Place a multileg order with up to 4 legs. This order type allows for simple and complex option strategies.
         """
-        params = self.create_order_legs(orders)
+        params = self.create_order_legs(*orders, exclude="symbol")
+        params["symbol"] = self.check_types("symbol", *orders)
         params["class"] = "multileg"
-
-        params["duration"] = self.check_types(orders)
-
+        params = {**params, **kwargs}
         return self.place_order(params)
 
 
@@ -216,10 +242,12 @@ if __name__ == "__main__":
     from utils import printer
 
     rest = REST()
-    response = rest.one_cancels_other(
-        LimitOrder("AAPL", "buy", 1, 10, duration="gtc"),
-        StopOrder("AAPL", "buy", 1, 10),
+    print(
+        rest.combo_order(
+            SpecOrder("AAPL", 1, "buy"),
+            SpecOrder("AAPL201220C00400", 1, "buy_to_open"),
+            type="market",
+            duration="gtc",
+        )
     )
-    print(response)
-    # printer(response)
-    # rest.one_cancels_other("asdf")
+

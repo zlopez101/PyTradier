@@ -30,6 +30,34 @@ def randomOption(randomTicker):
 
 
 @pytest.fixture
+def randomEquitySide():
+    """pick some random equity sides
+
+    :raises for: [description]
+    :return: [description]
+    :rtype: [type]
+    :yield: [description]
+    :rtype: [type]
+    """
+    yield random.sample(["buy", "buy_to_cover", "sell", "sell_short"], 2)
+
+
+@pytest.fixture
+def randomOptionSide():
+    """pick some random option sides
+
+    :raises for: [description]
+    :return: [description]
+    :rtype: [type]
+    :yield: [description]
+    :rtype: [type]
+    """
+    yield random.sample(
+        ["buy_to_open", "buy_to_close", "sell_to_open", "sell_to_close"], 2
+    )
+
+
+@pytest.fixture
 def mockresponse():
     class MockResponse:
         def __init__(self, status, response_json_path):
