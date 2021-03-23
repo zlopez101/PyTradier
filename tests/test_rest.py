@@ -12,6 +12,25 @@ class TestRest:
     # create a rest with various defaults
     defaulted_rest = REST(duration="gtc", preview=True,)
 
+    def test_all_equity(self, randomTicker, randomOption):
+        """Test the utility function all_equity
+        """
+        order = LimitOrder(randomTicker[0], "buy", 1, 10)
+        assert order.option_symbol == None
+        res = self.rest.all_equity(
+            LimitOrder(randomTicker[0], "buy", 1, 10),
+            LimitOrder(randomTicker[0], "buy", 1, 10),
+            LimitOrder(randomTicker[0], "buy", 1, 10),
+        )
+        assert res == True, "all the orders are equity"
+
+        res = self.rest.all_option(
+            LimitOrder(randomOption[0], "buy_to_close", 1, 10),
+            LimitOrder(randomOption[0], "buy_to_close", 1, 10),
+            LimitOrder(randomOption[0], "buy_to_close", 1, 10),
+        )
+        assert res == True, "all these orders are option"
+
     def test_equity_order(self, randomTicker, randomOption, post_return_parameters):
         """
         GIVEN a rest client with no defaults
@@ -166,17 +185,43 @@ class TestRest:
         THEN the correct order_details dictionary should be created
         """
         otoco = self.rest.one_triggers_one_cancels_other(
-            LimitOrder("AAPL", "buy", 1, 10.0),
-            StopOrder("AAPL", "sell", 1, 10),
-            LimitOrder("AAPL", "sell_short", 1, 10, duration="day"),
+            LimitOrder(randomTicker[0], "buy", 1, 10.0),
+            StopOrder(randomTicker[0], "sell", 1, 10),
+            LimitOrder(randomTicker[0], "sell_short", 1, 10, duration="day"),
         )
+        assert otoco.get("symbol[0]") == otoco.get("symbol[2]")
+        assert otoco.get("symbol[1]") == randomTicker[0]
+        assert otoco.get("type[0]") == "limit"
+        assert otoco.get("stop[1]") == 10
+        assert otoco.get("side[2]") == "sell_short"
+
+        otoco = self.rest.one_triggers_one_cancels_other(
+            LimitOrder(randomOption[1], "buy_to_open", 1, 10.0),
+            StopOrder(randomOption[1], "sell_to_close", 1, 10),
+            LimitOrder(randomOption[1], "sell_to_open", 1, 10, duration="day"),
+        )
+        assert otoco.get("symbol[0]") == otoco.get("symbol[2]")
+        assert otoco.get("option_symbol[1]") == randomOption[1]
+        assert otoco.get("symbol[0]") == randomTicker[1]
+        assert otoco.get("type[0]") == "limit"
+        assert otoco.get("stop[1]") == 10
+        assert otoco.get("side[2]") == "sell_to_open"
 
         """
         GIVEN a rest client with no defaults
         WHEN the user submits improperly formatted request
         THEN a useful error should be raised altering user of the issue
         """
+        # different option symbols in the second/third leg
+        with pytest.raises(RequiredError) as excInfo:
+            otoco = self.rest.one_triggers_one_cancels_other(
+                LimitOrder(randomOption[1], "buy_to_open", 1, 10.0),
+                StopOrder(randomOption[0], "sell_to_close", 1, 10),
+                LimitOrder(randomOption[1], "sell_to_open", 1, 10, duration="day"),
+            )
+        assert "attributes option_symbol" in str(excInfo.value)
 
+        # different equity symbols in the second/third leg
         """
         GIVEN a rest client with some default settings
         WHEN the user submits a properly formatted request

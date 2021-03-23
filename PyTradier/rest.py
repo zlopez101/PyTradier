@@ -50,14 +50,6 @@ class REST(BasePyTradier):
         else:
             raise RequiredError(f"attribute {attr} was never specified")
 
-    def order_details(self, *args, **kwargs) -> dict:
-        """create the order details dictionary based on supplied orders (args) and specified keywords (duration, tags)
-
-        :return: [description]
-        :rtype: dict
-        """
-        pass
-
     def create_order_legs(self, *args) -> dict:
         """create the order legs
 
@@ -141,6 +133,7 @@ class REST(BasePyTradier):
 
         # equity symbol check
         # check if they are both equity orders (no option_symbol attr) then run check_types
+
         if not getattr(order1, "option_symbol") and not getattr(
             order2, "option_symbol"
         ):
@@ -153,13 +146,19 @@ class REST(BasePyTradier):
 
         return self.place_order(params)
 
+    def all_equity(self, *args):
+        return not (all([getattr(order, "option_symbol") for order in args]))
+
+    def all_option(self, *args):
+        return all([getattr(order, "option_symbol") for order in args])
+
     def one_triggers_one_cancels_other(
         self,
         index_order: limitOrder_stopOrder_stopLimitOrder,
         triggered_order: limitOrder_stopOrder_stopLimitOrder,
         cancelled_order: limitOrder_stopOrder_stopLimitOrder,
     ):
-        """Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed. duration
+        """Place a one-triggers-one-cancels-other order. This order type is composed of three separate orders sent simultaneously. The property keys of each order are indexed. Duration must be specifed on at least one order
 
         If all equity orders, second and third orders must have the same symbol.
         If all option orders, second and third orders must have the same option_symbol.
@@ -173,21 +172,33 @@ class REST(BasePyTradier):
             "duration", triggered_order, cancelled_order
         )
 
+        # type check
+        self.check_types(
+            "type", triggered_order, cancelled_order, shouldBeDifferent=True
+        )
+
         # equity symbol check
-        # some code
+        if self.all_equity(triggered_order, cancelled_order):
+            self.check_types("symbol", triggered_order, cancelled_order)
 
         # option symbol check
-        # some code
+        if self.all_option(triggered_order, cancelled_order):
+            self.check_types("option_symbol", triggered_order, cancelled_order)
 
         return self.place_order(params)
 
-    def combo_order(self, equity_order, option_order, *order):
+    def combo_order(
+        self,
+        equity_order: limitOrder_stopOrder_stopLimitOrder,
+        option_order: limitOrder_stopOrder_stopLimitOrder,
+        *args,
+    ):
         """Place a combo order. This is a specialized type of order consisting of one equity leg and one option leg. It can optionally include a second option leg, for some strategies.
         """
-        params = self.create_order_legs(equity_order, option_order)
+        params = self.create_order_legs(equity_order, option_order, *arg)
         params["class"] = "combo"
 
-        params["duration"] = self.check_types(equity_order, option_order)
+        params["duration"] = self.check_types(equity_order, option_order, *args)
         return self.place_order(params)
 
     def multileg_order(self, *orders):
