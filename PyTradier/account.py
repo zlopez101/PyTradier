@@ -5,42 +5,13 @@ from typing import Union
 from datetime import datetime
 
 
-def selectArgs(func):
-    @wraps(func)
-    def wrapper(self, *args):
-        result = func(self, *args)
-        try:
-            result.raise_for_status()
-            if args:
-                return {
-                    key: value for key, value in result.json().items() if key in args
-                }
-            else:
-                return result.json()
-        except requests.exceptions.HTTPError as requesterror:
-            print(
-                f"there was an {response.status_code} error handling this response: {response.text}"
-            )
-        except KeyError as keyerror:
-            print("key")
-            print(keyerror)
-        except TypeError as typerror:
-            print(
-                f"there was a TypeError handling this response, check function parameters {args[1:]} are compatible with {func.__annotations__}"
-            )
-
-    return wrapper
-
-
 class Account(BasePyTradier):
     """class for gathering all account related API calls
     """
 
-    def profile(self, *args) -> dict:
+    def profile(self) -> dict:
         """returns requested information about a user's account
 
-        :param keys: The keys to include in the response, defaults to ["profile", "id", "name"]
-        :type keys: list, optional
         :return: Information requested, either a string or dict
         :rtype: Union[dict, str]
         """
@@ -71,6 +42,9 @@ class Account(BasePyTradier):
 
     def orders(self) -> list:
         """Retrieve orders placed within an account. This API will return orders placed for the market session of the present calendar day.
+
+        :return: list of Order dictionaries
+        :rtype: list
         """
         return self._get(
             f"/v1/accounts/{self.account_id}/orders", dict_args=("orders", "order")

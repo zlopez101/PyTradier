@@ -18,7 +18,9 @@ class BasePyTradier:
         else:
             self.url = "https://api.tradier.com"
 
-        self.account_id = self._retrieve_account_id()
+        # on the airplane
+        self.account_id = os.environ.get("TRADIER_PAPERACCOUNTID")
+        # self.account_id = self._retrieve_account_id()
 
     def _symbol_prep(self, symbols: Union[str, list]) -> str:
         """allowing users to input either a str or list and automatically converting

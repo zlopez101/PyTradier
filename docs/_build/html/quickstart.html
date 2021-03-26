@@ -89,6 +89,23 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">QuickStart</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#disclaimer">Disclaimer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#account-information">Account Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trading">Trading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#concepts">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#equity-trading">Equity Trading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options-combo-orders-and-multileg-trades">Options, Combo Orders, and Multileg Trades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#order-objects">Order Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#order-response-object">Order Response Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ordering-errors">Ordering Errors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data">Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#market-data">Market Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fundamental-data">Fundamental Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#watchlists">Watchlists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#websocket">Websocket</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">PyTradier</a></li>
@@ -179,8 +196,109 @@ established an account with them access your API tokens and save them to your ma
 </pre></div>
 </div>
 <p>Users can choose their own environment variable names, but all the modules use the <code class="docutils literal notranslate"><span class="pre">TRADIER_SANDBOX_TOKEN</span></code>
-key by default. To specific your own name just intialize client with :code: <cite>token=&lt;YOUR_ENV_NAME&gt;</cite>. To switch
-to live mode, also must pass :code: <cite>paper=False</cite>.</p>
+key by default. To specific your own name just intialize client with <code class="docutils literal notranslate"><span class="pre">token=&lt;YOUR_ENV_NAME&gt;</span></code>. To switch
+to live mode, also must pass <code class="docutils literal notranslate"><span class="pre">paper=False</span></code>.</p>
+</div>
+<div class="section" id="account-information">
+<h2>Account Information<a class="headerlink" href="#account-information" title="Permalink to this headline">¶</a></h2>
+<p>Access all account related information using the Account Module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PyTradier</span> <span class="kn">import</span> <span class="n">Account</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">Account</span><span class="p">()</span> <span class="c1"># for live trading pass in paper=False, token=&lt;YOUR_TOKEN&gt;</span>
+</pre></div>
+</div>
+<p>All account methods return either a dictionary with information or a list of dictionaries with account information.
+3 methods take additional arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># order</span>
+<span class="n">specific_order</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">orderId</span><span class="p">)</span> <span class="c1"># return the status and info for a specific order</span>
+
+<span class="c1"># history</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">history</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c1"># gainloss</span>
+<span class="n">gainloss</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">gainloss</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="trading">
+<h2>Trading<a class="headerlink" href="#trading" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="concepts">
+<h3>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h3>
+<p>PyTradier imposes structure on the Tradier trading process. Orders are typically instantiated as their specific type within
+the <code class="docutils literal notranslate"><span class="pre">REST</span></code> object methods. These methods also specify the type of order being placed. The ordering methods take the information
+and place a <code class="docutils literal notranslate"><span class="pre">post</span></code> request to the Tradier API with the correct ordering parameters. They perform some minimal error checking to
+ensure that the order is properly composed (by raising some errors) but are not guaranteed to catch all errors. Any errors that aren’t
+caught (from the Tradier API) are recorded in the order response object under the key <code class="docutils literal notranslate"><span class="pre">&quot;error&quot;</span></code>.</p>
+<p>The instantiated rest object also configures some optional defaults for users. These defaults should be passed as keyword argument
+when the rest object is instantiated, as <code class="docutils literal notranslate"><span class="pre">preview=True</span></code>, <code class="docutils literal notranslate"><span class="pre">duration=&quot;gtc&quot;</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">tag=func</span></code>. Note the tag keyword should be a function that returns order tags when called.</p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">preview=True</span></code> to any order in a group of orders [like in a <code class="docutils literal notranslate"><span class="pre">one_triggers_one_cancels_other()</span></code> call] or as the default on the
+rest object will instruct the Tradier API to return the order preview object. Users can inspect this object to make sure trades are properly
+formatted.</p>
+</div>
+<div class="section" id="equity-trading">
+<h3>Equity Trading<a class="headerlink" href="#equity-trading" title="Permalink to this headline">¶</a></h3>
+<p>Placing trade orders with PyTradier is intuitive:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Pytradier.orders</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyTradier</span> <span class="kn">import</span> <span class="n">REST</span>
+
+<span class="n">rest</span> <span class="o">=</span> <span class="n">REST</span><span class="p">()</span> <span class="c1"># for live trading pass in paper=False, token=&lt;YOUR_TOKEN&gt;</span>
+
+<span class="n">rest</span><span class="o">.</span><span class="n">equity</span><span class="p">(</span><span class="n">MarketOrder</span><span class="p">(</span><span class="s2">&quot;AAPL&quot;</span><span class="p">,</span> <span class="s2">&quot;buy&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="s1">&#39;gtc&#39;</span><span class="p">))</span>
+
+<span class="c1"># first order is the index order, second and third are ones to be cancelled</span>
+<span class="c1"># these are fake orders so the may not make any sense</span>
+<span class="n">rest</span><span class="o">.</span><span class="n">one_triggers_one_cancels_other</span><span class="p">(</span>
+  <span class="n">LimitOrder</span><span class="p">(),</span>
+  <span class="n">StopOrder</span><span class="p">(),</span>
+  <span class="n">StopLimitOrder</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Placing an order will return the Tradier API order response object</p>
+</div>
+<div class="section" id="options-combo-orders-and-multileg-trades">
+<h3>Options, Combo Orders, and Multileg Trades<a class="headerlink" href="#options-combo-orders-and-multileg-trades" title="Permalink to this headline">¶</a></h3>
+<p>Interacting with options contracts is also simple with the PyTradier package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Pytradier.orders</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">PyTradier</span> <span class="kn">import</span> <span class="n">REST</span>
+
+<span class="n">rest</span> <span class="o">=</span> <span class="n">REST</span><span class="p">()</span> <span class="c1"># for live trading pass in paper=False, token=&lt;YOUR_TOKEN&gt;</span>
+
+<span class="n">rest</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="n">MarketOrder</span><span class="p">(</span><span class="s2">&quot;AAPL211205C00060000&quot;</span><span class="p">,</span> <span class="s1">&#39;buy_to_open&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">))</span> <span class="c1"># number of contracts to purchase</span>
+
+<span class="c1"># combo orders are 1 equity leg, and either 1 or 2 option legs for a max of 3 orders</span>
+<span class="n">rest</span><span class="o">.</span><span class="n">combo_order</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="order-objects">
+<h3>Order Objects<a class="headerlink" href="#order-objects" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="order-response-object">
+<h3>Order Response Object<a class="headerlink" href="#order-response-object" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ordering-errors">
+<h3>Ordering Errors<a class="headerlink" href="#ordering-errors" title="Permalink to this headline">¶</a></h3>
+<p>Taking a look at the tradier documentation, you can see that errors can be easily made when making even simple trades.
+PyTradier simplifies the ordering process</p>
+</div>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="market-data">
+<h3>Market Data<a class="headerlink" href="#market-data" title="Permalink to this headline">¶</a></h3>
+<p>Market Data is easily accessed through the data module.</p>
+</div>
+<div class="section" id="fundamental-data">
+<h3>Fundamental Data<a class="headerlink" href="#fundamental-data" title="Permalink to this headline">¶</a></h3>
+<p>Tradier’s fundamental data API is currently in a beta status. This package does support the current version, but per tradier
+these methods shouldn’t be relied in production</p>
+</div>
+</div>
+<div class="section" id="watchlists">
+<h2>Watchlists<a class="headerlink" href="#watchlists" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="websocket">
+<h2>Websocket<a class="headerlink" href="#websocket" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

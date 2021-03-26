@@ -2,8 +2,6 @@
 This module is trying to anticipate the more complex orders that will be placed in the future.
 Any algorithmic trading that occurs with this platform won't have time to preview each trade.
 The program ought to evaluate its own trades
-
-
 """
 
 

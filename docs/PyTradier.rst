@@ -44,6 +44,14 @@ PyTradier.fundamental module
    :undoc-members:
    :show-inheritance:
 
+PyTradier.order module
+----------------------
+
+.. automodule:: PyTradier.order
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 PyTradier.rest module
 ---------------------
 
@@ -56,6 +64,14 @@ PyTradier.utils module
 ----------------------
 
 .. automodule:: PyTradier.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+PyTradier.watchlist module
+--------------------------
+
+.. automodule:: PyTradier.watchlist
    :members:
    :undoc-members:
    :show-inheritance:
