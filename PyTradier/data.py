@@ -114,7 +114,7 @@ class MarketData(BasePyTradier):
         """
         return self._get(
             "/v1/markets/history",
-            params == self.create_params(locals()),
+            params=self.create_params(locals()),
             dict_args=("history",),
         )
 
