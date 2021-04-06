@@ -18,7 +18,11 @@ class MarketData(BasePyTradier):
         :rtype: dict
         """
         symbols = self._symbol_prep(symbols)
-        return self._get("/v1/markets/quotes", params=self.create_params(locals()))
+        return self._get(
+            "/v1/markets/quotes",
+            params=self.create_params(locals()),
+            dict_args=("quotes", "quotes"),
+        )
 
     def option_chain(
         self,
@@ -91,6 +95,28 @@ class MarketData(BasePyTradier):
             "/v1/markets/options/expirations", params=self.create_params(locals())
         )
         return response
+
+    def historic_quotes(
+        self, symbol: str, interval: str = "daily", start: str = None, end: str = None
+    ) -> list:
+        """Get historical pricing for a security. This data will usually cover the entire lifetime of the company if sending reasonable start/end times. You can fetch historical pricing for options by passing the OCC option symbol (ex. AAPL220617C00270000) as the symbol.
+
+        :param symbol: Symbol to query
+        :type symbol: str
+        :param interval: Interval of time per timesale. One of: daily, weekly, monthly, defaults to "daily"
+        :type interval: str, optional
+        :param start: Start date represented as YYYY-MM-DD, defaults to None
+        :type start: str, optional
+        :param end: End date represented as YYYY-MM-DD, defaults to None
+        :type end: str, optional
+        :return: [description]
+        :rtype: list
+        """
+        return self._get(
+            "/v1/markets/history",
+            params == self.create_params(locals()),
+            dict_args=("history",),
+        )
 
 
 if __name__ == "__main__":
