@@ -115,7 +115,31 @@ class MarketData(BasePyTradier):
         return self._get(
             "/v1/markets/history",
             params=self.create_params(locals()),
-            dict_args=("history",),
+            dict_args=("history", "day"),
+        )
+
+    def time_and_sales(
+        self, symbol: str, start: str, end: str, interval: str = "1min"
+    ) -> list:
+        """Time and Sales (timesales) is typically used for charting purposes. It captures pricing across a time slice at predefined intervals.
+
+        Tick data is also available through this endpoint. This results in a very large data set for high-volume symbols, so the time slice needs to be much smaller to keep downloads time reasonable.`
+
+        :param symbol: A single security symbol.
+        :type symbol: str
+        :param start: Start date/time for timesales range represented as YYYY-MM-DD HH:MM
+        :type start: str
+        :param end: Start date/time for timesales range represented as YYYY-MM-DD HH:MM
+        :type end: str
+        :param interval: Interval of time per timesale. One of: tick, 1min, 5min, 15min, defaults to "1min"
+        :type interval: str, optional
+        :return: list of dictionaries containing keys of ['time', 'timestamp', 'price', 'open', 'high', 'close', low', 'volume', 'vwap']
+        :rtype: list
+        """
+        return self._get(
+            "/v1/markets/timesales",
+            params=self.create_params(locals()),
+            dict_args=("series", "data"),
         )
 
 
