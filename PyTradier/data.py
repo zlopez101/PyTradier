@@ -42,7 +42,9 @@ class MarketData(BasePyTradier):
         :rtype: dict
         """
         return self._get(
-            "/v1/markets/options/chains", params=self.create_params(locals())
+            "/v1/markets/options/chains",
+            params=self.create_params(locals()),
+            dict_args=("options", "option"),
         )
 
     def option_strike(self, symbol: str, expiration: Union[str, datetime]) -> list:
